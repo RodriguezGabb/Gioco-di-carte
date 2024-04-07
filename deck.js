@@ -1,15 +1,26 @@
 const nomeAtk= ["affondo", "taglio"]
 const nomeDif= ["parata", "ceduta"]
-const volori= [1, 2]
+const valori= [1, 2]
 
 export default class Deck{
     constructor(carte=CreaDeck()){
         this.carte=carte;
     }
-    get contaCarte(){
-        return this.carte.length;
+    get retDeck(){
+        return this;
     }
-    mescola(){
+    get contaCarte(){//torna NaN è da sostituire poi in manoiniziale 
+        try {
+            return this.length;
+        } catch (error) {
+            console.log("contacarte esplode")
+        }
+        
+    }
+    get retCarte(){//non funziona torna undefined
+        return this.carte;
+    }
+    mescola(){//cambia posizione carte in deck
         for(let i=this.contaCarte -1;i>0;i--){
             const newIndex = Math.floor(Math.random()*(i+1));
             const oldValue = this.carte[newIndex];
@@ -47,8 +58,6 @@ function CreaDeck(){
         ret.push(CreaParata());
         ret.push(CreaFinta());      
     }
-    
-
     return ret;
 }
 

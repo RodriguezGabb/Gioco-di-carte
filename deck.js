@@ -11,9 +11,10 @@ export default class Deck{
     }
     get contaCarte(){//torna NaN è da sostituire poi in manoiniziale 
         try {
-            return this.length;
+            return this.carte.length;
+
         } catch (error) {
-            console.log("contacarte esplode")
+            console.log("contacarte esplode");
         }
         
     }
@@ -21,10 +22,10 @@ export default class Deck{
         return this.carte;
     }
     mescola(){//cambia posizione carte in deck
-        for(let i=this.contaCarte -1;i>0;i--){
+        for(let i=this.contaCarte-1;i>0;i--){
             const newIndex = Math.floor(Math.random()*(i+1));
             const oldValue = this.carte[newIndex];
-            this.carte[newIndex] = this.carte[i]
+            this.carte[newIndex] = this.carte[i];
             this.carte[i] = oldValue;
         }
     }

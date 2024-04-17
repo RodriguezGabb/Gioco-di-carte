@@ -7,6 +7,23 @@
     <script src="main.js" type="module"></script>
     <link rel="stylesheet" href="Style.css">
 
+    <style>
+        #bar {
+            width: 200px;
+            height: 20px;
+            background-color: lightgray;
+            position: relative;
+        }
+        #fill {
+            height: 100%;
+            background-color: rgb(183, 23, 42);
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 0.5s ease;
+        }
+    </style>
+
 </head>
 <body><!--https://www.w3schools.com/graphics/svg_text.asp info su carta-->
    
@@ -30,7 +47,14 @@
 
    <div class="colonna3"></div>
  
+   <!--energy bar-->
+    <div id="bar">
+        <div id="fill"></div>
+    </div>
+
+    <script src="energyManager.js"></script> <!-- il js per update -->
  
 
 </body>
 </html>
+<!--544321546123546121874524163541524136843214654646541651468546841321458465465-->

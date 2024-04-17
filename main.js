@@ -12,3 +12,7 @@ console.log("questa è la mano")
 console.log(manoGiocatore.carte);
 console.log("questa è mazzo dopo")
 console.log(mazzoGiocatore.carte);
+var a=-1
+var b=3
+b+=a
+console.log(b);

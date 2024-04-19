@@ -1,0 +1,57 @@
+<!--Questo è un HTML temporaneo per creare il board game-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game</title>
+    <link rel="stylesheet" href="StyleTavola.css">
+</head>
+<body>
+    <!--lato avversario-->
+    <div class="mano" id="manoAvversario">
+        <!-- Massiomo 5 carte in mano -->
+        <div class="carteManoAvversario">Card 1</div>
+        <div class="carteManoAvversario">Card 2</div>
+        <div class="carteManoAvversario">Card 3</div>
+        <div class="carteManoAvversario">Card 4</div>
+        <div class="carteManoAvversario" id="temporaryid">Card 5</div>
+    </div>
+    <div class="contenitoreMazzoAvversario" id="contenitoreMazzoAvversario">
+        <!-- Funzione per dire che resta una carta sola? -->
+        <div class="mazzo" id="mazzoAvversario">Mazzo avversario</div>
+        <div class="blocchetto"></div>
+        <div class="cimitero" id="cimiteroAvversario">Cimitero avversario</div>
+        
+    </div>
+
+    <table class="contenitoreCentrale">
+        <tr><!-- Board avversario -->
+            <td class="latoBoard" colspan="2"><div class="carta"></div></td>
+        </tr>
+        <tr><!-- Riga separatrice -->
+            <td class="contenitoreLineaCentrale"><hr class="lineaCentrale"></td> <!-- Linea centrale -->
+            <td class="contenitorePulsante" rowspan="3"><button class="pulsantePasso">Fine Turno</button></td> <!-- Pulsante fine turno -->
+        </tr>
+        <tr><!-- Board giocatore -->
+            <td class="latoBoard" colspan="2"><div class="carta"></div></td>
+        </tr>
+    </table>
+
+    
+    <div class="contenitoreMazzoGiocaotore" id="contenitoreMazzoGiocatore">
+        <!-- Funzione per dire che resta una carta sola? -->
+        <div class="cimitero" id="cimiteroGiocatore">Cimitero giocatore</div>
+        <div class="blocchetto"></div>
+        <div class="mazzo" id="mazzoGiocatore">Mazzo Giocatore</div>
+    </div>
+    <div class="mano" id="manoGiocatore">
+        <!-- Massiomo 5 carte in mano -->
+        <div class="carteManoGiocatore">Card 1</div>
+        <div class="carteManoGiocatore">Card 2</div>
+        <div class="carteManoGiocatore">Card 3</div>
+        <div class="carteManoGiocatore">Card 4</div>
+        <div class="carteManoGiocatore" id="temporaryid">Card 5</div>
+    </div>
+</body>
+</html>

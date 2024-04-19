@@ -11,7 +11,7 @@ function updateBar() {
 // Update the bar initially
 updateBar();
 
-/* Example: increase the variable value every second
+/*/Example: increase the variable value every second
 setInterval(() => {
     window.fullness += 1; // incremento della barra
     if (window.fullness > 10) window.fullness = 10; // upper limit

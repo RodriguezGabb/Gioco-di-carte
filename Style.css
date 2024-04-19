@@ -1,7 +1,7 @@
 *{
     box-sizing: border-box;
 }
-body{
+.body{
     margin: 0;
     display:grid;
     grid-template-columns: 30% 30% 30%;
@@ -30,7 +30,7 @@ body{
 }
 
 /*contenuto carte*/
-.carta1{
+.carta{
     height: 250px;
     width: 200px;
     border-radius: 20px;

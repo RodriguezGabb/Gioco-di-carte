@@ -1,7 +1,16 @@
 import Deck from "./deck.js";
 import Hand from "./hand.js";
 
-
+var manaCattivo=5;//lo metto globale NON VA MAI AGGIORNATO DIRETTAMENTE USA LA FUNZIONE SOTTO!!!
+function updManaCattivo(i){
+  if(!isNaN(i)){//se i è un numero
+    manaCattivo+=i;
+  }
+  else throw new exception("updManaCattivo ha ricevuto NaN")
+}
+function resetManaCattivo(){//funzione per il fine turno 
+  manaCattivo=5;
+}
 const mazzoGiocatore = new Deck();//creazione mazzo
 
 mazzoGiocatore.mescola();
@@ -12,13 +21,10 @@ console.log("questa è la mano")
 console.log(manoGiocatore.carte);
 console.log("questa è mazzo dopo")
 console.log(mazzoGiocatore.carte);
-var a=-1
-var b=3
-b+=a
-console.log(b);
 
 
-//Rivedere i vari getelementbyid perché si possono fare delle variabbili globali
+
+//Rivedere i vari getelementbyid perché si possono fare delle variabili globali
 
 document.getElementById("mazzoGiocatore").addEventListener("click",giocatorePesca);
 //Da risolvere
@@ -50,15 +56,15 @@ function giocatorePesca(){
     }//else
 }
 //Funzione di creazione della prima carta del mazzo
-//Questa funzione deve ancora essere realizata (vedi con andre come e cosa vogliamo fa)
-function creaCarta(i){
+//Questa funzione deve ancora essere realizata (vedi con andre come e cosa vogliamo fa[io voglio piagne]) 
+function creaCarta(i){//bisogna cambiare nome di funzione se è specifica per la mano gioc
   var carta=document.createElement("div");
   carta.className="carteManoGiocatore";
   carta.setAttribute("id", "carteManoGiocatore"+i);
   carta.innerHTML="Card "+i//cosa per debug
   var bottone=document.createElement("button");
-  bottone.className="bottoneGiocca";
-  bottone.setAttribute("id","bottoneGiocca"+i);
+  bottone.className="bottoneGioca";
+  bottone.setAttribute("id","bottoneGioca"+i);
   bottone.innerHTML="Gioca";
   carta.appendChild(bottone);
   return carta;
@@ -66,12 +72,63 @@ function creaCarta(i){
 
 //numero di carte rimanenti in cimitero
 // prendi elem
-const nCimA = document.getElementById('nCardCimitero');
+const numCim = document.getElementById('nCardCimitero');
 
 
-function updateNumber(number) {
-    nCimA.textContent = number;
+function updCimitero(number) {
+  numCim.textContent = number;
 }
 
 
-updateNumber(5); // se esce 68 non è partita
+updCimitero(5); // se esce 68 non funziona
+
+
+//ia section
+function DumbPlay(hand,cimitero){//aggiungere  caso in cui l avversario guadagni mana da una carta al momento non viene speso
+    var costi=[];
+    for(let i=0;i<hand.length();i++){//creo lista di costi
+      costi[i]=hand[i].costo;
+    }
+
+    //Dynamic Programming Approach
+      const nCarte = costi.length;//numero carte in mano
+      const matrice = Array.from({ length: nCarte + 1 }, () => Array(manaCattivo + 1).fill(false));//matrice x:costi,y:numeri da 0 a target
+  
+      // casella del mana speso=0 è vera perche io posso non lanciare carte per spendere 0 mana
+      for (let i = 0; i <= nCarte; i++) {
+        matrice[i][0] = true;
+      }
+  
+      // loops principali
+      for (let i = 1; i <= nCarte; i++) {//iterazione sugli stessi elementi della x della matrice
+          for (let j = 1; j <= manaCattivo; j++) {//iterazione sugli stessi elementi della y della matrice
+              if (j < costi[i - 1]) {
+                  // se numero>target ignoralo
+                  matrice[i][j] = matrice[i - 1][j];
+              } else {
+                  //  escludi o includi il numero in base a quale ha valore maggiore
+                  //non sommi per raggiungere il manaCattivo ma sottrai  da lui
+                  matrice[i][j] = matrice[i - 1][j] || matrice[i - 1][j - costi[i - 1]];
+              }
+          }
+      }
+  
+      // trovi sum che piu avvicina a target
+      let sum = manaCattivo;
+      for (let i = manaCattivo; i >= 0; i--) {
+          if (matrice[nCarte][i]) {//si ferma al primo true nella matrice
+              sum = i;
+              break;
+          }
+      }
+
+      for(let i=0;i<=nCarte;i++){
+        if(matrice[i][sum]){//se casella è vera il costo migliore ha giocato quella carta penso?
+          //enemygiocacarta(i)da controllare se giocare la carta dalla mano cambia la matrice o no ma non dovrebbe
+        }
+      }
+  
+      return sum;
+  //!??!?!?!?!?!?!?
+    
+}

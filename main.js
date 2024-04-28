@@ -1,17 +1,23 @@
 import Deck from "./deck.js";
 import Hand from "./hand.js";
 
-var manaCattivo=5;//lo metto globale NON VA MAI AGGIORNATO DIRETTAMENTE USA LA FUNZIONE SOTTO!!!
-function updManaCattivo(i){
-  if(!isNaN(i)){//se i è un numero
-    manaCattivo+=i;
+const manaCattivo=(function(){//cosi dovrebbe essere globale ma modificabile solo dalle mie funzioni
+  let value=5;
+  function getValue(){
+      return value;
+    }
+  function updManaCattivo(i){
+    if(!isNaN(i)){//se i è un numero
+      manaCattivo+=i;
+    }
+    else throw new exception("updManaCattivo ha ricevuto NaN")
   }
-  else throw new exception("updManaCattivo ha ricevuto NaN")
-}
-function resetManaCattivo(){//funzione per il fine turno 
-  manaCattivo=5;
-}
-const mazzoGiocatore = new Deck();//creazione mazzo
+  function resetManaCattivo(){//funzione per il fine turno 
+   manaCattivo=5;
+  }
+})();
+
+  const mazzoGiocatore = new Deck();//creazione mazzo
 
 mazzoGiocatore.mescola();
 console.log("questa è mazzo prima di pescare")//se li metto nella stessa riga non mi fa vedere specifiche di carte ma li vede solo come object
@@ -84,7 +90,7 @@ updCimitero(5); // se esce 68 non funziona
 
 
 //ia section
-function DumbPlay(hand,cimitero){//aggiungere  caso in cui l avversario guadagni mana da una carta al momento non viene speso
+function DumbPlay(hand){//aggiungere  caso in cui l avversario guadagni mana da una carta al momento non viene speso
     var costi=[];
     for(let i=0;i<hand.length();i++){//creo lista di costi
       costi[i]=hand[i].costo;
@@ -92,7 +98,7 @@ function DumbPlay(hand,cimitero){//aggiungere  caso in cui l avversario guadagni
 
     //Dynamic Programming Approach
       const nCarte = costi.length;//numero carte in mano
-      const matrice = Array.from({ length: nCarte + 1 }, () => Array(manaCattivo + 1).fill(false));//matrice x:costi,y:numeri da 0 a target
+      const matrice = Array.from({ length: nCarte + 1 }, () => Array(manaCattivo.getValue() + 1).fill(false));//matrice x:costi,y:numeri da 0 a target
   
       // casella del mana speso=0 è vera perche io posso non lanciare carte per spendere 0 mana
       for (let i = 0; i <= nCarte; i++) {
@@ -101,7 +107,7 @@ function DumbPlay(hand,cimitero){//aggiungere  caso in cui l avversario guadagni
   
       // loops principali
       for (let i = 1; i <= nCarte; i++) {//iterazione sugli stessi elementi della x della matrice
-          for (let j = 1; j <= manaCattivo; j++) {//iterazione sugli stessi elementi della y della matrice
+          for (let j = 1; j <= manaCattivo.getValue(); j++) {//iterazione sugli stessi elementi della y della matrice
               if (j < costi[i - 1]) {
                   // se numero>target ignoralo
                   matrice[i][j] = matrice[i - 1][j];
@@ -114,8 +120,8 @@ function DumbPlay(hand,cimitero){//aggiungere  caso in cui l avversario guadagni
       }
   
       // trovi sum che piu avvicina a target
-      let sum = manaCattivo;
-      for (let i = manaCattivo; i >= 0; i--) {
+      let sum = manaCattivo.getValue();
+      for (let i = manaCattivo.getValue(); i >= 0; i--) {
           if (matrice[nCarte][i]) {//si ferma al primo true nella matrice
               sum = i;
               break;
@@ -123,7 +129,7 @@ function DumbPlay(hand,cimitero){//aggiungere  caso in cui l avversario guadagni
       }
 
       for(let i=0;i<=nCarte;i++){
-        if(matrice[i][sum]){//se casella è vera il costo migliore ha giocato quella carta penso?
+        if(matrice[i][sum]){//se casella è vera il costo migliore ha giocato quella carta penso? se piu soluzioni per costo diventa non optimale
           //enemygiocacarta(i)da controllare se giocare la carta dalla mano cambia la matrice o no ma non dovrebbe
         }
       }

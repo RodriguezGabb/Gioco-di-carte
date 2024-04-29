@@ -17,6 +17,24 @@ const manaCattivo=(function(){//cosi dovrebbe essere globale ma modificabile sol
   }
 })();
 
+const manaBuono=(function(){//cosi dovrebbe essere globale ma modificabile solo dalle mie funzioni
+  let value=5;
+  function getValue(){
+      return value;
+    }
+  function updManaBuono(i){
+    if(!isNaN(i)){//se i è un numero
+      manaBuono+=i;
+      updManaBar(i);
+    }
+    else throw new exception("updManaBuono ha ricevuto NaN")
+  }
+  function resetManaBuono(){//funzione per il fine turno 
+   manaBuono=5;
+   resetManaBar();
+  }
+})();
+
   const mazzoGiocatore = new Deck();//creazione mazzo
 
 mazzoGiocatore.mescola();

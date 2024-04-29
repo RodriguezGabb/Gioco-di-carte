@@ -7,7 +7,31 @@
     <title>Card Game</title>
     <link rel="stylesheet" href="StyleTavola.css">
     <script src="main.js" type="module"></script>
+
+    <style><!--per manabar-->
+        #bar {
+            width: 200px;
+            height: 20px;
+            background-color: lightgray;
+            position: relative;
+        }
+        #fill {
+            height: 100%;
+            background-color: rgb(110, 135, 29);
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 0.5s ease;
+        }
+    </style>
 <body>
+    <!--energy bar-->
+    <div id="bar">
+        <div id="fill"></div>
+    </div>
+
+    <script src="energyManager.js"></script> <!-- il js per update va messo nel main js-->
+    
     <!--lato avversario-->
     <div class="mano" id="manoAvversario">
         <!-- Massiomo 5 carte in mano -->
@@ -40,6 +64,7 @@
             <td class="latoBoard" colspan="2" id="boardGiocatore"><div class="carta"></div></td>
         </tr>
     </table>
+    
 
     
     <div class="contenitoreMazzoGiocaotore" id="contenitoreMazzoGiocatore">
@@ -49,9 +74,17 @@
         </div>
         <div class="blocchetto"></div>
         <div class="mazzo" id="mazzoGiocatore">Mazzo Giocatore</div>
+        
     </div>
     <div class="mano" id="manoGiocatore">
         <!-- Massiomo 5 carte in mano -->
     </div>
+
+
+
+
+
+    
+    
 </body>
 </html>

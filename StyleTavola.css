@@ -27,7 +27,7 @@
     display: inline-block;
     cursor: pointer;
 }
-.bottoneGiocca{
+.bottoneGioca{
     background-color: crimson;
     display:none;
 }

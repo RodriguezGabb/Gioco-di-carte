@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="StyleTavola.css">
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <td class="cacca">1</td>
+            <td class="cacca">2</td>
+            <td rowspan="2" class="pupu">3</td>
+        </tr>
+        <tr>
+            <td class="cacca">4</td>
+            <td rowspan="2" class="pupu">5</td>
+        </tr>
+        <tr>
+            <td class="cacca">6</td>
+            <td class="cacca">7</td>
+        </tr>
+    </table>
+
+    <!-- SEPARATORE -->
+    <div class="separatore"></div>
+
+    <table class="table">
+        <tr><!-- parte del giocatore-->
+            <td class="blocco">1</td>
+            <td class="blocco">2</td>
+            <td rowspan="2" class="contenitoreMazzoGiocaotore" id="contenitoreMazzoGiocatore">
+                <!-- Funzione per dire che resta una carta sola? -->
+                <div class="cimitero" id="cimiteroGiocatore">Cimitero giocatore</div>
+                <div class="blocchetto"></div>
+                <div class="mazzo" id="mazzoGiocatore">Mazzo Giocatore</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="blocco">4</td>
+            <td rowspan="2" class="mano" id="manoGiocatore">
+                <!-- Massiomo 5 carte in mano -->
+                <div class="carteManoGiocatore" id="cartaGiocatore1">Card 1</div>
+                <div class="carteManoGiocatore" id="cartaGiocatore2">Card 2</div>
+                <div class="carteManoGiocatore" id="cartaGiocatore3">Card 3</div>
+                <div class="carteManoGiocatore" id="cartaGiocatore4">Card 4</div>
+                <!--<div class="carteManoGiocatore" id="cartaGiocatore5">Card 5</div>-->
+            </td>
+        </tr>
+        <tr>
+            <td class="blocco">5</td>
+            <td class="blocco">6</td>
+            
+        </tr>
+    </table>
+    <button class="button" id="button">Button</button>
+
+<!-- SEPARATORE -->
+<div class="separatore"></div>
+
+<div rowspan="2">
+    <div class="contenitoreMazzoGiocaotore" id="contenitoreMazzoGiocatore">
+        <!-- Funzione per dire che resta una carta sola? -->
+        <div class="carteManoGiocatore" id="cimiteroGiocatore">Cimitero giocatore</div>
+        <div class="blocchetto"></div>
+        <div class="carteManoGiocatore" id="mazzoGiocatore">Mazzo Giocatore</div>
+    </div>
+    
+</div>
+</body>
+</html>
+
+

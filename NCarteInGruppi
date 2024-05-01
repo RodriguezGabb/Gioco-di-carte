@@ -12,4 +12,3 @@ function updateNumber(number) {
 updateNumber(5); // se esce 68 non è partita
 
 
-  

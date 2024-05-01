@@ -1,9 +1,10 @@
-*{
+* {
     box-sizing: border-box;
 }
-.body{
+
+.body {
     margin: 0;
-    display:grid;
+    display: grid;
     grid-template-columns: 30% 30% 30%;
     grid-template-rows: 250px 250px;
     column-gap: 20px;
@@ -13,38 +14,41 @@
 
 }
 
-.colonna1{
+.colonna1 {
     height: 100%;
     width: 100%;
     border: 1px solid black;
 }
-.colonna2{
+
+.colonna2 {
     height: 100%;
     width: 100%;
     border: 1px solid black;
 }
-.colonna3{
+
+.colonna3 {
     height: 100%;
     width: 100%;
     border: 1px solid black;
 }
 
 /*contenuto carte*/
-.carta{
+.carta {
     height: 250px;
     width: 200px;
     border-radius: 20px;
     border: 3px solid black;
-    position:relative;
+    position: relative;
     background-color: rgb(150, 99, 68);
 
 
 }
-.titolo{
+
+.titolo {
     position: absolute;
     top: 5px;
     left: 2%;
-    
+
     text-align: center;
     height: 20px;
     width: 96%;
@@ -52,7 +56,8 @@
     border: 1px solid black;
     background-color: grey;
 }
-.manaBall{
+
+.manaBall {
     position: absolute;
     bottom: 5px;
     left: 5px;
@@ -65,7 +70,8 @@
     background-color: rgb(255, 255, 20);
     /*content: attr(valoreCosto);//per cambiare scritte al interno delle palleeeee*/
 }
-.valuable{
+
+.valuable {
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -76,7 +82,8 @@
     line-height: 37px;
     background-color: rgb(211, 44, 38);
 }
-.immagine{
+
+.immagine {
     position: absolute;
     top: 30px;
     left: 2%;
@@ -84,11 +91,12 @@
 
     content: url(https://ih1.redbubble.net/image.5041256106.9671/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg);
 }
-.descrizione{
+
+.descrizione {
     position: absolute;
     bottom: 45px;
     left: 2%;
-    
+
     text-align: center;
     height: 60px;
     width: 96%;

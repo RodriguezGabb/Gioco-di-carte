@@ -13,10 +13,10 @@ updateBar();
 
 
 
-function updManaBar(i){
-    if(typeof i != 'number'){throw new exception("tempo variato con NaN")}
-    window.fullness += i;    
+function updManaBar(i) {
+    if (typeof i != 'number') { throw new exception("tempo variato con NaN") }
+    window.fullness += i;
 }
-function resetManaBar(){
-    window.fullness=5;
+function resetManaBar() {
+    window.fullness = 5;
 }

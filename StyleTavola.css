@@ -27,9 +27,16 @@
     display: inline-block;
     cursor: pointer;
 }
+
+/*se vuoi cerchio aumenta altezza*/
 .bottoneGioca{
     background-color: crimson;
     display:none;
+    position: relative;
+    top: 25%;
+    left: 20%;
+    border-radius: 50%;
+    font-size: 20px;
 }
 /*mazzi*/
 .contenitoreMazzoAvversario{

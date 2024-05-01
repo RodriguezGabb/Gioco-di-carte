@@ -50,6 +50,9 @@ console.log(mazzoGiocatore.carte);
 
 document.getElementById("mazzoGiocatore").addEventListener("click",giocatorePesca);
 
+//potremmo sistemare questo codice spostando tutte le funzioni con carte nel file giusto(hand o deck)!!!!!!!!!!!!!!!!!!!!!
+
+
 // Funzione che fa comparire il pulsante dentro le carte
 function carteOnClick(id1){
         console.log("si? dica")
@@ -75,16 +78,8 @@ function giocatorePesca(){
     var nuovaCarta=creaCarta(nCarteGiocatore+1);
     manoGiocatore.appendChild(nuovaCarta);
   }//else
-}/* Devo fare copia incolla da giocatore ma bypassando il pulsante
-function avversarioPesca(){
-  var manoAvversario = document.getElementById("manoAvversario");
-  var nCarteInManoAvversario=manoGiocatore.querySelectorAll("div").length;
-  var nCarteAvversario=document.getElementsByClassName("carteManoGiocatore").length
-  if(nCarteInManoAvversario<5){//5 num max di carte in mano
-    var nuovaCarta=creaCarta(nCarteAvversario+1);
-    manoAvversario.appendChild(nuovaCarta);
-  }
-}*/
+}
+
 //Funzione di creazione della prima carta del mazzo
 //Questa funzione deve ancora essere realizata (vedi con andre come e cosa vogliamo fa)
 //i è il numero della carta (alla fine servirà solo per l'id)
@@ -109,12 +104,27 @@ function creaCarta(i){
   return carta;
 } 
 
+function avversarioPesca(){
+  var manoAvversario = document.getElementById("manoAvversario");
+  var nCarteInManoAvversario=manoAvversario.querySelectorAll("div").length;
+  var nCarteAvversario=document.getElementsByClassName("manoAvversario").length
+  if(nCarteInManoAvversario<5){//5 num max di carte in mano
+    var nuovaCarta=creaCartaAvv(nCarteAvversario+1);
+    manoAvversario.appendChild(nuovaCarta);
+  }
+}
 
-
-
-
-
-
+/*test per vedere se ho capito il tuo codice*/
+function creaCartaAvv(i){
+  var carta=document.createElement("div");
+  carta.className="carteManoAvv";
+  carta.setAttribute("id", "carteManoAvv"+i);
+  carta.innerHTML="Card "+i//cosa per debug
+  return carta;
+} 
+function giocaCartaAvv(carta){
+  giocaCarta(carta.id);
+}
 
 
 //numero di carte rimanenti in cimitero
@@ -130,50 +140,46 @@ function updateNumber(number) {
 updateNumber(5); // se esce 68 non è partita
 
 //ia section
-function DumbPlay(hand){//aggiungere  caso in cui l avversario guadagni mana da una carta al momento non viene speso
+function mydumbPlay(hand){
   var costi=[];
-  for(let i=0;i<hand.length();i++){//creo lista di costi
+  for(let i=0;i<hand.length;i++){//creo lista di costi
     costi[i]=hand[i].costo;
   }
+  const nCarte = costi.length;
+  console.log(nCarte);
+  var arrayFinale=[nCarte+1];//se carta usata ha nel suo slot true senno false
+  console.log(arrayFinale);
+  
+  arrayFinale[0]=999;//in primo slot metto spesa massima della combinazione
 
-  //Dynamic Programming Approach
-    const nCarte = costi.length;//numero carte in mano
-    const matrice = Array.from({ length: nCarte + 1 }, () => Array(manaCattivo.getValue() + 1).fill(false));//matrice x:costi,y:numeri da 0 a target
 
-    // casella del mana speso=0 è vera perche io posso non lanciare carte per spendere 0 mana
-    for (let i = 0; i <= nCarte; i++) {
-      matrice[i][0] = true;
-    }
+  var arrayTemp=[nCarte];//ci salvo bool delle varie carte in combinazione
+  var costoMax=manaCattivo.getManaCattivo();//costo della combinazione attuale
+  for(let cartaIni = 0; cartaIni <= nCarte-1; cartaIni++){
 
-    // loops principali
-    for (let i = 1; i <= nCarte; i++) {//iterazione sugli stessi elementi della x della matrice
-        for (let j = 1; j <= manaCattivo.getValue(); j++) {//iterazione sugli stessi elementi della y della matrice
-            if (j < costi[i - 1]) {
-                // se numero>target ignoralo
-                matrice[i][j] = matrice[i - 1][j];
-            } else {
-                //  escludi o includi il numero in base a quale ha valore maggiore
-                //non sommi per raggiungere il manaCattivo ma sottrai  da lui
-                matrice[i][j] = matrice[i - 1][j] || matrice[i - 1][j - costi[i - 1]];
-            }
-        }
-    }
-
-    // trovi sum che piu avvicina a target
-    let sum = manaCattivo.getValue();
-    for (let i = manaCattivo.getValue(); i >= 0; i--) {
-        if (matrice[nCarte][i]) {//si ferma al primo true nella matrice
-            sum = i;
-            break;
-        }
-    }
-
-    for(let i=0;i<=nCarte;i++){
-      if(matrice[i][sum]){//se casella è vera il costo migliore ha giocato quella carta penso? se piu soluzioni per costo diventa non optimale
-        //enemygiocacarta(i)da controllare se giocare la carta dalla mano cambia la matrice o no ma non dovrebbe
+    
+    for(let pos=0;pos<= nCarte-1; pos++){
+      var ciclo=(pos+cartaIni)%nCarte;
+      console.log("ciclo"+ciclo);
+      if(costi[ciclo]<=costoMax){
+        costoMax=costoMax-costi[ciclo];
+        arrayTemp[ciclo]=true;
       }
     }
+    console.log("-----");
+    
+    if(costoMax<arrayFinale[0]){
+      arrayFinale[0]=costoMax;
+      for(let i=0;i<nCarte;i++){//se trovo combinazione migliore aggiorno arrayFinale
+        arrayFinale[i+1]=arrayTemp[i];
+      }
+    }  
+    costoMax=manaCattivo.getManaCattivo()//quando vado a carta dopo resetto tutto
+    for(let i=0;i<nCarte;i++){//resetto anche l array
+      arrayTemp[i]=false;
+    }
+  }
+  return arrayFinale;
+  }
 
-    return sum;
-//!??!?!?!?!?!?!?
-}
+

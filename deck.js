@@ -1,8 +1,5 @@
-const nomeAtk = ["affondo", "taglio"]
-const nomeDif = ["parata", "ceduta"]
-const valori = [1, 2]
-
-export default class Deck {
+import carta from "./carta.js";
+class Deck {
     constructor(carte = CreaDeck()) {
         this.carte = carte;
     }
@@ -29,38 +26,33 @@ export default class Deck {
             this.carte[i] = oldValue;
         }
     }
-}
+    pup() {
+        this.carte.pop();
 
-class carta {
-    constructor(nome, tipo, immagine, costo) {//da fare imagine, aggiungere costo
-        this.nome = nome;
-        this.tipo = tipo;
-        this.immagine = 0;//dubbio se mettere assieme a nome o solo su html
-        this.costo = costo;
     }
-}
-
-// creazioni carte
-function CreaAffondo() {
-    return new carta("affondo", "attacco", 0, 1);
-}
-function CreaParata() {
-    return new carta("parata", "difesa", 0, 1);
-}
-function CreaFinta() {
-    return new carta("finta", "finta", 0, 1);
 }
 
 // creazione mazzo
 function CreaDeck() {
-    var ret = new Array();
+    var ret = [];
+    let idNum = 1;
     for (var i = 0; i < 5; i++) {
-        ret.push(CreaAffondo());
-        ret.push(CreaParata());
-        ret.push(CreaFinta());
+        ret.push(CreaAffondo(idNum));
+        ret.push(CreaParata(idNum));
+        ret.push(CreaFinta(idNum));
+        idNum += 1;
     }
     return ret;
 }
+// creazioni carte sono funzioni di mazzo non di carte non confondere
+function CreaAffondo(idNum) {
+    return new carta("affondo", "attacco", 0, 1, idNum);
+}
+function CreaParata(idNum) {
+    return new carta("parata", "difesa", 0, 1, idNum);
+}
+function CreaFinta(idNum) {
+    return new carta("finta", "finta", 0, 1, idNum);
+}
 
-
-
+export default Deck;

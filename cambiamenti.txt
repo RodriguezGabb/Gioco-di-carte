@@ -1,0 +1,8 @@
+Gabbi:
+    Si mi dimentico di cosa cambio quidni creo sto file cosi in caso lo leggi
+Gabbi 02/05/24:
+    1) 2 opzioni per il costruttore di mano, o con il mazzo o sensza
+    2) La classe carta ora ha un campo in più ovvero id, cosi da poter collegare la parte grafica alla parte logica
+    3) Ho messo che gli id si creano nella parte della logica, andrebbe rivisto (in relatà tutta la creazione del mazzo è discutibile ma con calma)
+    4) Problema dal main non riesco ad accedere alle carte.
+    5)L'idea è usare lid sia nella parte graficca che logica e usarlo come punto di colegamento ma sono stanco e smetto(sono 5 h che combatto)

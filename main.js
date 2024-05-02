@@ -1,5 +1,23 @@
 import Deck from "./deck.js";
 import Hand from "./hand.js";
+import carta from "./carta.js";
+//buono/cattivo parte logica
+//Giocatore/avversario parte grafica
+
+//zona debug
+//document.getElementById(manoAvversario);
+document.getElementById("BottonePesca").addEventListener("click", avversarioPesca);
+//document.getElementById(AvvGioca).addEventListener("click", mydumbPlay);
+document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);//da qui **
+function cancellamiplz() {//sta funzione non serve a nulla era per capire getId se funziona, spoiler no
+  const coco = mazzoCattivo.pup();
+  var you = coco.getId();//non capisce che coco è una carta non capisco perchè
+  console.log(coco);
+  console.log(you);
+  //manoCattivo.rimuoviCarta("carteManoAvversario4")
+
+}
+//** fino a qui ignora tutto che devo finirlo
 
 const manaCattivo = (function () {//cosi dovrebbe essere globale ma modificabile solo dalle mie funzioni
   let value = 5;
@@ -38,18 +56,29 @@ const manaBuono = (function () {//cosi dovrebbe essere globale ma modificabile s
     manaBuono = 5;
     resetManaBar();
   }
+  return {//cosi si possono accedere da altre funzioni
+    getValue: getValue,
+    updManaBuono: updManaBuono,
+    resetManaBuono: resetManaBuono
+  }
 })();
 
-const mazzoGiocatore = new Deck();//creazione mazzo
+const mazzoBuono = new Deck();//creazione mazzo
+const mazzoCattivo = new Deck();
+mazzoBuono.mescola();
+mazzoCattivo.mescola();
 
-mazzoGiocatore.mescola();
 console.log("questa è mazzo prima di pescare")//se li metto nella stessa riga non mi fa vedere specifiche di carte ma li vede solo come object
-console.log(mazzoGiocatore.carte);
-const manoGiocatore = new Hand(mazzoGiocatore);//creazione mano
+console.log(mazzoBuono.carte);
+const manoBuono = new Hand(mazzoBuono);//creazione mano
+const manoCattivo = new Hand(mazzoCattivo);
 console.log("questa è la mano")
-console.log(manoGiocatore.carte);
+console.log(manoBuono.carte);
 console.log("questa è mazzo dopo")
-console.log(mazzoGiocatore.carte);
+console.log(mazzoBuono.carte);
+
+
+
 
 //Rivedere i vari getelementbyid perché si possono fare delle variabbili globali
 
@@ -69,10 +98,10 @@ function carteOnClick(id1) {
   }
 }
 // Funzione che fa giocare la carta
-function giocaCarta(id1) {
-  var div1 = document.getElementById(id1);//prende la carta con l'id e lo mette sulla board
-  var div2 = document.getElementById("boardGiocatore");//Vorrei aggiungere un limite sulla board ma ne dobbiamo parlare  
-  div2.appendChild(div1);
+function giocaCartaGiocartore(idCarta) {
+  var carta = document.getElementById(idCarta);//prende la carta con l'id e lo mette sulla board
+  var board = document.getElementById("boardGiocatore");//Vorrei aggiungere un limite sulla board ma ne dobbiamo parlare  
+  board.appendChild(carta);
 }
 //funzione per far pescare il giocatore
 function giocatorePesca() {
@@ -86,62 +115,69 @@ function giocatorePesca() {
 }
 
 //Funzione di creazione della prima carta del mazzo
-//Questa funzione deve ancora essere realizata (vedi con andre come e cosa vogliamo fa)
 //i è il numero della carta (alla fine servirà solo per l'id)
-function creaCarta(i) {
+function creaCarta(i) {//i è l'id della carta creata
   var carta = document.createElement("div");
-  carta.className = "carteManoGiocatore";
+  carta.className = "carteManoGiocatore";//Class serve per lo stile
   carta.setAttribute("id", "carteManoGiocatore" + i);
   carta.innerHTML = "Card " + i//cosa per debug
   var bottone = document.createElement("button");
   bottone.className = "bottoneGioca";
-  bottone.setAttribute("id", "bottoneGioca" + i); console.log("bottoneGioca" + i);
+  bottone.setAttribute("id", "bottoneGioca" + i);
   bottone.innerHTML = "Gioca";
   carta.appendChild(bottone);
   bottone.style.display = "none";
+  //event listener dei componenti
   carta.addEventListener("click", function () {
     carteOnClick(bottone.id);
   });
 
   bottone.addEventListener("click", function () {
-    giocaCarta(carta.id);
+    giocaCartaGiocartore(carta.id);
   });
   return carta;
 }
-
+//Funzioni avversario
 function avversarioPesca() {
+  /*-----------parte logica-----------*/// la separazione così non è funzionale tbh ma per i test è meglio(ad esmpio posso pescare più carte di quelle del mazzo)
+  //manoCattivo.pesca(1);//pesca solo una carta//opzione 1
+  manoCattivo.pesca(mazzoCattivo, 1)//Il mazzo da cui pescare + quante carte pescare // opzione 2
+
+  /*-----------parte grafica-----------*/
   var manoAvversario = document.getElementById("manoAvversario");
   var nCarteInManoAvversario = manoAvversario.querySelectorAll("div").length;
   var nCarteAvversario = document.getElementsByClassName("manoAvversario").length
   if (nCarteInManoAvversario < 5) {//5 num max di carte in mano
-    var nuovaCarta = creaCartaAvv(nCarteAvversario + 1);
+    var nuovaCarta = creaCartaAvversario(nCarteAvversario + 1);
     manoAvversario.appendChild(nuovaCarta);
   }
 }
-
 /*test per vedere se ho capito il tuo codice*/
-function creaCartaAvv(i) {
+function creaCartaAvversario(i) { //è l'id della carta creata
   var carta = document.createElement("div");
-  carta.className = "carteManoAvv";
-  carta.setAttribute("id", "carteManoAvv" + i);
+  carta.className = "carteManoAvversario";
+  carta.setAttribute("id", "carteManoAvversario" + i);
   carta.innerHTML = "Card " + i//cosa per debug
   return carta;
 }
-function giocaCartaAvv(carta) {
-  giocaCarta(carta.id);
+function giocaCartaAvversario(idCarta) {
+  var carta = document.getElementById(idCarta);
+  var boardAvversario = document.getElementById(boardAvversario);
+  boardAvversario.appendChild(carta);
 }
 
 
-//numero di carte rimanenti in cimitero prendi elem
+//numero di carte rimanenti in cimitero
+// prendi elem
 const nCimA = document.getElementById('nCardCimitero');
 
 
-function updateNumberCimi(number) {
+function updateNumber(number) {
   nCimA.textContent = number;
 }
 
 
-updateNumberCimi(5); // se esce 68 non è partita
+updateNumber(5); // se esce 68 non è partita
 
 //ia section
 function mydumbPlay(hand) {
@@ -151,7 +187,10 @@ function mydumbPlay(hand) {
   }
   const nCarte = costi.length;
   var arrayFinale = [nCarte + 1];//se carta usata ha nel suo slot true senno false
+
   arrayFinale[0] = 999;//in primo slot metto spesa massima della combinazione
+
+
   var arrayTemp = [nCarte];//ci salvo bool delle varie carte in combinazione
   var costoMax = manaCattivo.getManaCattivo();//costo della combinazione attuale
   for (let cartaIni = 0; cartaIni <= nCarte - 1; cartaIni++) {
@@ -175,3 +214,5 @@ function mydumbPlay(hand) {
   }
   return arrayFinale;
 }
+
+

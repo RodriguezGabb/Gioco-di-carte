@@ -27,6 +27,10 @@
     </style>
 
 <body>
+    <!--Debug-->
+    <button id="BottonePesca">BottonePesca</button>
+    <button id="AvvGioca">AvvGioca</button>
+    <button id="Rimuovi">Rimuovi</button>
     <!--energy bar-->
     <div id="bar">
         <div id="fill"></div>
@@ -34,12 +38,8 @@
 
     <script src="energyManager.js"></script> <!-- il js per update va messo nel main js-->
     <!--lato avversario-->
-    <div class="mano" id="manoAvversario">uwu
+    <div class="mano" id="manoAvversario">
         <!-- Massiomo 5 carte in mano -->
-        <div class="carteManoAvversario">Card 1</div>
-        <div class="carteManoAvversario">Card 2</div>
-        <div class="carteManoAvversario">Card 3</div>
-        <div class="carteManoAvversario">Card 4</div>
     </div>
     <div class="contenitoreMazzoAvversario" id="contenitoreMazzoAvversario">
         <!-- Funzione per dire che resta una carta sola? -->
@@ -51,7 +51,7 @@
 
     <table class="contenitoreCentrale">
         <tr><!-- Board avversario -->
-            <td class="latoBoard" colspan="2">
+            <td class="latoBoard" id="boardAvversario" colspan="2">
                 <div class="carta">
                 </div>
             </td>

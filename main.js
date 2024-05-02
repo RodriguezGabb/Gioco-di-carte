@@ -3,7 +3,7 @@ import Hand from "./hand.js";
 
 const manaCattivo = (function () {//cosi dovrebbe essere globale ma modificabile solo dalle mie funzioni
   let value = 5;
-  function getValue() {
+  function getManaCattivo() {
     return value;
   }
   function updManaCattivo(i) {
@@ -14,6 +14,11 @@ const manaCattivo = (function () {//cosi dovrebbe essere globale ma modificabile
   }
   function resetManaCattivo() {//funzione per il fine turno 
     manaCattivo = 5;
+  }
+  return {//cosi si possono accedere da altre funzioni
+    getManaCattivo: getManaCattivo,
+    updManaCattivo: updManaCattivo,
+    resetManaCattivo: resetManaCattivo
   }
 })();
 
@@ -127,17 +132,16 @@ function giocaCartaAvv(carta) {
 }
 
 
-//numero di carte rimanenti in cimitero
-// prendi elem
+//numero di carte rimanenti in cimitero prendi elem
 const nCimA = document.getElementById('nCardCimitero');
 
 
-function updateNumber(number) {
+function updateNumberCimi(number) {
   nCimA.textContent = number;
 }
 
 
-updateNumber(5); // se esce 68 non è partita
+updateNumberCimi(5); // se esce 68 non è partita
 
 //ia section
 function mydumbPlay(hand) {
@@ -147,10 +151,7 @@ function mydumbPlay(hand) {
   }
   const nCarte = costi.length;
   var arrayFinale = [nCarte + 1];//se carta usata ha nel suo slot true senno false
-
   arrayFinale[0] = 999;//in primo slot metto spesa massima della combinazione
-
-
   var arrayTemp = [nCarte];//ci salvo bool delle varie carte in combinazione
   var costoMax = manaCattivo.getManaCattivo();//costo della combinazione attuale
   for (let cartaIni = 0; cartaIni <= nCarte - 1; cartaIni++) {
@@ -174,5 +175,3 @@ function mydumbPlay(hand) {
   }
   return arrayFinale;
 }
-
-

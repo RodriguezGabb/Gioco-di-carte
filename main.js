@@ -10,11 +10,8 @@ document.getElementById("BottonePesca").addEventListener("click", avversarioPesc
 //document.getElementById(AvvGioca).addEventListener("click", mydumbPlay);
 document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);//da qui **
 function cancellamiplz() {//sta funzione non serve a nulla era per capire getId se funziona, spoiler no
-  const coco = mazzoCattivo.pup();
-  //var you = coco.getId();//non capisce che coco è una carta non capisco perchè
-  console.log(coco);
-  console.log(you);
-  //manoCattivo.rimuoviCarta("carteManoAvversario4")
+  let bello = mydumbPlay(manoCattivo);
+  console.log(bello);
 
 }
 //** fino a qui ignora tutto che devo finirlo
@@ -139,24 +136,23 @@ function creaCarta(i) {//i è l'id della carta creata
 }
 //Funzioni avversario
 function avversarioPesca() {
-  /*-----------parte logica-----------*/// la separazione così non è funzionale tbh ma per i test è meglio(ad esmpio posso pescare più carte di quelle del mazzo)
-  manoCattivo.pesca(mazzoCattivo, 1)//Il mazzo da cui pescare + quante carte pescare // opzione 2
-
   /*-----------parte grafica-----------*/
   var manoAvversario = document.getElementById("manoAvversario");
   var nCarteInManoAvversario = manoAvversario.querySelectorAll("div").length;
-  var nCarteAvversario = document.getElementsByClassName("manoAvversario").length
   if (nCarteInManoAvversario < 5) {//5 num max di carte in mano
-    var nuovaCarta = creaCartaAvversario(nCarteAvversario + 1);
+    /*-----------parte logica-----------*/// la separazione così non è funzionale tbh ma per i test è meglio(ad esmpio posso pescare più carte di quelle del mazzo)
+    var idCarta = manoCattivo.pesca(mazzoCattivo, 1)//Il mazzo da cui pescare + quante carte pescare // opzione 2
+    /*-----------parte grafica-----------*/
+    var nuovaCarta = creaCartaAvversario(idCarta);
     manoAvversario.appendChild(nuovaCarta);
   }
 }
 /*test per vedere se ho capito il tuo codice*/
-function creaCartaAvversario(i) { //è l'id della carta creata
+function creaCartaAvversario(idCarta) { //è l'id della carta creata
   var carta = document.createElement("div");
-  carta.className = "carteManoAvversario";
-  carta.setAttribute("id", "carteManoAvversario" + i);
-  carta.innerHTML = "Card " + i//cosa per debug
+  carta.className = "carteManoAvversario";//devo mettere id-numero al posto di catre avversario
+  carta.setAttribute("id", idCarta);
+  carta.innerHTML = idCarta;//cosa per debug
   return carta;
 }
 function giocaCartaAvversario(idCarta) {
@@ -211,7 +207,15 @@ function mydumbPlay(hand) {
       arrayTemp[i] = false;
     }
   }
-  return arrayFinale;
+  var carteDaPescare = [];
+  var posiz = 0;
+  for (let i = 1; i < arrayFinale.length; i++) {//ignora elem 1
+    if (arrayFinale[i] == true) {
+      carteDaPescare[posiz] = hand[i - 1].id;
+      posiz += 1;
+    }
+  }
+  return carteDaPescare;
 }
 
 

@@ -6,8 +6,5 @@ class carta {
         this.costo = costo;
         this.id = nome + idNum;
     }
-    getId() {
-        return this.id;
-    }
 }
 export default carta;

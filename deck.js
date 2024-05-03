@@ -26,10 +26,6 @@ class Deck {
             this.carte[i] = oldValue;
         }
     }
-    pup() {
-        this.carte.pop();
-
-    }
 }
 
 // creazione mazzo

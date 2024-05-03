@@ -49,7 +49,7 @@ function CreaAffondo(idNum) {
     return new carta("affondo", "attacco", 0, 2, 5, idNum);//danno medio parabile
 }
 function CreaTaglio(idNum) {//valore off piu alto ma parata del avversario vale di piu?
-    return new carta("taglio", "attacco", 0, 2, 7, idNum);
+    return new carta("taglio", "attacco", 0, 1, 3, idNum);
 }
 //lv2
 function CreaBattuta(idNum) {

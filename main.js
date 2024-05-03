@@ -11,8 +11,8 @@ document.getElementById("BottonePesca").addEventListener("click", avversarioPesc
 document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);//da qui **
 function cancellamiplz() {//sta funzione non serve a nulla era per capire getId se funziona, spoiler no
   let bello = mydumbPlay(manoCattivo);
+  console.log("output dumbplay");
   console.log(bello);
-
 }
 //** fino a qui ignora tutto che devo finirlo
 
@@ -166,19 +166,17 @@ function giocaCartaAvversario(idCarta) {
 // prendi elem
 const nCimA = document.getElementById('nCardCimitero');
 
-
-function updateNumber(number) {
-  nCimA.textContent = number;
+function updateCarteInCimi(numeroCarteInCimitero) {
+  nCimA.textContent = numeroCarteInCimitero;
 }
 
-
-updateNumber(5); // se esce 68 non è partita
+updateCarteInCimi(5); // se esce 68 non è partita
 
 //ia section
 function mydumbPlay(hand) {
   var costi = [];
-  for (let i = 0; i < hand.length; i++) {//creo lista di costi
-    costi[i] = hand[i].costo;
+  for (let i = 0; i < hand.carte.length; i++) {//creo lista di costi
+    costi[i] = hand.carte[i].costo;
   }
   const nCarte = costi.length;
   var arrayFinale = [nCarte + 1];//se carta usata ha nel suo slot true senno false
@@ -207,15 +205,14 @@ function mydumbPlay(hand) {
       arrayTemp[i] = false;
     }
   }
-  var carteDaPescare = [];
+  var IDDaGiocare = [];
   var posiz = 0;
   for (let i = 1; i < arrayFinale.length; i++) {//ignora elem 1
     if (arrayFinale[i] == true) {
-      carteDaPescare[posiz] = hand[i - 1].id;
-      posiz += 1;
+      IDDaGiocare.push(hand.carte[i - 1].id);
     }
   }
-  return carteDaPescare;
+  return IDDaGiocare;
 }
 
 

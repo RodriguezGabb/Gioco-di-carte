@@ -6,7 +6,7 @@ export default class Hand {
     pesca(mazzo) {
         let card = mazzo.carte.pop();
         let id = card.id;
-        this.carte.shift(card);//shift = pop solo che lo mette al inizio
+        this.carte.push(card);//shift = pop solo che lo mette al inizio
         return id;
     }
     rimuoviCarta(idCarta) {//non funge

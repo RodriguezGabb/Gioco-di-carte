@@ -42,10 +42,10 @@ function CreaDeck() {
 }
 // creazioni carte sono funzioni di mazzo non di carte non confondere
 function CreaAffondo(idNum) {
-    return new carta("affondo", "attacco", 0, 1, idNum);
+    return new carta("affondo", "attacco", 0, 3, idNum);
 }
 function CreaParata(idNum) {
-    return new carta("parata", "difesa", 0, 1, idNum);
+    return new carta("parata", "difesa", 0, 2, idNum);
 }
 function CreaFinta(idNum) {
     return new carta("finta", "finta", 0, 1, idNum);

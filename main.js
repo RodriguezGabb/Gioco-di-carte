@@ -11,7 +11,7 @@ document.getElementById("BottonePesca").addEventListener("click", avversarioPesc
 document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);//da qui **
 function cancellamiplz() {//sta funzione non serve a nulla era per capire getId se funziona, spoiler no
   const coco = mazzoCattivo.pup();
-  var you = coco.getId();//non capisce che coco è una carta non capisco perchè
+  //var you = coco.getId();//non capisce che coco è una carta non capisco perchè
   console.log(coco);
   console.log(you);
   //manoCattivo.rimuoviCarta("carteManoAvversario4")
@@ -70,8 +70,8 @@ mazzoCattivo.mescola();
 
 console.log("questa è mazzo prima di pescare")//se li metto nella stessa riga non mi fa vedere specifiche di carte ma li vede solo come object
 console.log(mazzoBuono.carte);
-const manoBuono = new Hand(mazzoBuono);//creazione mano
-const manoCattivo = new Hand(mazzoCattivo);
+const manoBuono = new Hand();//creazione mano
+const manoCattivo = new Hand();
 console.log("questa è la mano")
 console.log(manoBuono.carte);
 console.log("questa è mazzo dopo")
@@ -140,7 +140,6 @@ function creaCarta(i) {//i è l'id della carta creata
 //Funzioni avversario
 function avversarioPesca() {
   /*-----------parte logica-----------*/// la separazione così non è funzionale tbh ma per i test è meglio(ad esmpio posso pescare più carte di quelle del mazzo)
-  //manoCattivo.pesca(1);//pesca solo una carta//opzione 1
   manoCattivo.pesca(mazzoCattivo, 1)//Il mazzo da cui pescare + quante carte pescare // opzione 2
 
   /*-----------parte grafica-----------*/

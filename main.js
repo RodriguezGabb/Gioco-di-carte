@@ -239,9 +239,18 @@ function mydumbPlay(hand) {
   }
   return IDDaGiocare;
 }
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 function shopCards() {
-  let percAgi = greenBall;
-  let percStr = redBall;
-  let percInt = blueBall
+  let agi = agiValue;
+  let str = strValue;
+  let int = intValue;
+  str = str + agi;
+  int = str + int;
+  let random = getRandomNumber(1, int + 1);//max non incluso
+  if (random < agi) { }
+  if else (agi < random && random < str){ }
+  else
 }

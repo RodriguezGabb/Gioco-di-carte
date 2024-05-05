@@ -176,7 +176,7 @@ function updateCarteInCimi(numeroCarteInCimitero) {
   nCimA.textContent = numeroCarteInCimitero;
 }
 
-updateCarteInCimi(5); // se esce 68 non è partita
+updateCarteInCimi(5);
 
 //palle shop
 const strValue = document.getElementById('tokenStr');

@@ -115,7 +115,7 @@
 
 .nCardCimitero {
     /*n carte che sono in cimitero*/
-    content: attr(carteMorte);
+    /*content: attr(carteMorte);*/
     /* Get the number from the 'carteMorte' attribute */
     position: absolute;
     top: 50%;
@@ -214,26 +214,40 @@
     column-gap: 10px;
 }
 
-.shopRisorsaAtt {
-
+.tokenStr {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: red;
+    background-color: #6b4444;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
 }
 
-.shopRisorsaDeff {
+.tokenInt {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: blue;
+    background-color: #28439d;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
 }
 
-.shopRisorsaAgil {
+.tokenAgi {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: greenyellow;
+    background-color: #419236;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
 }
 
 /*classi da cancellare*/

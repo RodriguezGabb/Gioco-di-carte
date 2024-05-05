@@ -178,6 +178,26 @@ function updateCarteInCimi(numeroCarteInCimitero) {
 
 updateCarteInCimi(5); // se esce 68 non è partita
 
+//palle shop
+const strValue = document.getElementById('tokenStr');
+
+function updStrValue(str) {
+  strValue.textContent = str;
+}
+const intValue = document.getElementById('tokenInt');
+
+function updIntValue(int) {
+  intValue.textContent = int;
+}
+const agiValue = document.getElementById('tokenAgi');
+
+function updAgiValue(agi) {
+  agiValue.textContent = agi;
+}
+
+updAgiValue(8);
+
+
 //ia section
 function mydumbPlay(hand) {
   var costi = [];
@@ -186,10 +206,7 @@ function mydumbPlay(hand) {
   }
   const nCarte = costi.length;
   var arrayFinale = [nCarte + 1];//se carta usata ha nel suo slot true senno false
-
   arrayFinale[0] = 999;//in primo slot metto spesa massima della combinazione
-
-
   var arrayTemp = [nCarte];//ci salvo bool delle varie carte in combinazione
   var costoMax = manaCattivo.getManaCattivo();//costo della combinazione attuale
   for (let cartaIni = 0; cartaIni <= nCarte - 1; cartaIni++) {
@@ -221,4 +238,8 @@ function mydumbPlay(hand) {
   return IDDaGiocare;
 }
 
-
+function shopCards() {
+  let percAgi = greenBall;
+  let percStr = redBall;
+  let percInt = blueBall
+}

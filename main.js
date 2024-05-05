@@ -111,8 +111,10 @@ function giocatorePesca() {
     /*-----------parte logica-----------*/
     var card = manoBuono.pesca(mazzoBuono, 1);//uno perchè pesca solo una carta possiamo mettere una variabbile per decidere quante carte pesca direttamente quando usaimo la funzione
     /*-----------parte grafica-----------*/
-    var nuovaCarta = creaCartaGiocatore(card);
-    manoGiocatore.appendChild(nuovaCarta);
+    if (card != -1) {
+      var nuovaCarta = creaCartaGiocatore(card);
+      manoGiocatore.appendChild(nuovaCarta);
+    }
   }
   else {
     window.alert("Hai gia 5 carte in mano");
@@ -120,7 +122,6 @@ function giocatorePesca() {
 }
 
 //Funzione di creazione della prima carta del mazzo
-//i è il numero della carta (alla fine servirà solo per l'id)
 function creaCartaGiocatore(card) {//card è un instanza della classe carta(è la carta logica da creare grafficamente)
   var carta = document.createElement("div");
   carta.className = card.tipo;//Class serve per lo stile
@@ -239,18 +240,9 @@ function mydumbPlay(hand) {
   }
   return IDDaGiocare;
 }
-function getRandomNumber(min, max) {
-  return Math.random() * (max - min) + min;
-}
 
 function shopCards() {
-  let agi = agiValue;
-  let str = strValue;
-  let int = intValue;
-  str = str + agi;
-  int = str + int;
-  let random = getRandomNumber(1, int + 1);//max non incluso
-  if (random < agi) { }
-  if else (agi < random && random < str){ }
-  else
+  let percAgi = greenBall;
+  let percStr = redBall;
+  let percInt = blueBall
 }

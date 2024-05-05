@@ -27,4 +27,5 @@ Gabbi 05/05/24:
     6)va fatto meglio il pulsante gioca perchè non dovrebbe comparire quando sta sul board.
     7) tocca cancella i file di troppo su git fatto
     8) spostare barra mana
-     
+    9) Contatore di turni 
+        dopo x turni o schiatti direttamente o l'avversario si poweruppa un bel po (per evitare che la gente abbusi dei primi avversari)

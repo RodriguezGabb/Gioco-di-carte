@@ -4,9 +4,15 @@ export default class Hand {
         this.carte = [];
     }
     pesca(mazzo) {//pesca una carta dal mazzo passato la mette nella mano e restituisce la carta.
-        let card = mazzo.carte.pop();
-        this.carte.push(card);
-        return card;
+        if (mazzo.carte.length != 0) {
+            let card = mazzo.carte.pop();
+            this.carte.push(card);
+            return card;
+        }
+        else {
+            console.log("hai finito le carte nel mazzo brotha");//debug
+            return -1;
+        }
     }
     rimuoviCarta(idCarta) {//non funge per ora dammi un attimo
         for (let i = 0; i < this.carte.length; i++) {

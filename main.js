@@ -86,7 +86,6 @@ document.getElementById("mazzoGiocatore").addEventListener("click", giocatorePes
 
 // Funzione che fa comparire il pulsante dentro le carte
 function carteOnClick(id1) {
-  console.log("si? dica")
   var button = document.getElementById(id1);
   if (button.style.display === "none") {//Se il bottone è non è visibile lo rende visibile altrimenti il contrario 
     button.style.display = "block";
@@ -102,25 +101,32 @@ function giocaCartaGiocartore(idCarta) {
 }
 //funzione per far pescare il giocatore
 function giocatorePesca() {
+  /*-----------parte grafica-----------*/
   var manoGiocatore = document.getElementById("manoGiocatore");
   var nCarteInManoGiocatore = manoGiocatore.querySelectorAll("div").length;
-  var nCarteGiocatore = document.getElementsByClassName("carteManoGiocatore").length
   if (nCarteInManoGiocatore < 5) {//5 num max di carte in mano
-    var nuovaCarta = creaCarta(nCarteGiocatore + 1);
+    /*-----------parte logica-----------*/
+    var card = manoBuono.pesca(mazzoBuono, 1);//uno perchè pesca solo una carta possiamo mettere una variabbile per decidere quante carte pesca direttamente quando usaimo la funzione
+    /*-----------parte grafica-----------*/
+    var nuovaCarta = creaCartaGiocatore(card);
     manoGiocatore.appendChild(nuovaCarta);
-  }//else
+  }
+  else {
+    window.alert("Hai gia 5 carte in mano");
+  }
 }
 
 //Funzione di creazione della prima carta del mazzo
 //i è il numero della carta (alla fine servirà solo per l'id)
-function creaCarta(i) {//i è l'id della carta creata
+function creaCartaGiocatore(card) {//card è un instanza della classe carta(è la carta logica da creare grafficamente)
   var carta = document.createElement("div");
-  carta.className = "carteManoGiocatore";//Class serve per lo stile
-  carta.setAttribute("id", "carteManoGiocatore" + i);
-  carta.innerHTML = "Card " + i//cosa per debug
+  carta.className = card.tipo;//Class serve per lo stile
+  carta.setAttribute("id", card.id);
+  carta.innerHTML = card.nome;//cosa per debug
   var bottone = document.createElement("button");
   bottone.className = "bottoneGioca";
-  bottone.setAttribute("id", "bottoneGioca" + i);
+  bottone.setAttribute("id", "bottoneGiocaDi" + card.id);
+  window.alert(card.id);
   bottone.innerHTML = "Gioca";
   carta.appendChild(bottone);
   bottone.style.display = "none";
@@ -140,19 +146,19 @@ function avversarioPesca() {
   var manoAvversario = document.getElementById("manoAvversario");
   var nCarteInManoAvversario = manoAvversario.querySelectorAll("div").length;
   if (nCarteInManoAvversario < 5) {//5 num max di carte in mano
-    /*-----------parte logica-----------*/// la separazione così non è funzionale tbh ma per i test è meglio(ad esmpio posso pescare più carte di quelle del mazzo)
-    var idCarta = manoCattivo.pesca(mazzoCattivo, 1)//Il mazzo da cui pescare + quante carte pescare // opzione 2
+    /*-----------parte logica-----------*/
+    var card = manoCattivo.pesca(mazzoCattivo, 1)//Il mazzo da cui pescare + quante carte pescare // opzione 2
     /*-----------parte grafica-----------*/
-    var nuovaCarta = creaCartaAvversario(idCarta);
+    var nuovaCarta = creaCartaAvversario(card);
     manoAvversario.appendChild(nuovaCarta);
   }
 }
 /*test per vedere se ho capito il tuo codice*/
-function creaCartaAvversario(idCarta) { //è l'id della carta creata
+function creaCartaAvversario(card) { //card è un instanza della classe carta(è la carta logica da creare grafficamente)
   var carta = document.createElement("div");
-  carta.className = "carteManoAvversario";//devo mettere id-numero al posto di catre avversario
-  carta.setAttribute("id", idCarta);
-  carta.innerHTML = idCarta;//cosa per debug
+  carta.className = "carteManoAvversario";//te posso di che tanto le carte del avv sono di dorso quindi va bene cosi
+  carta.setAttribute("id", card.id);
+  carta.innerHTML = card.nome;//mette il nome della carta come testo
   return carta;
 }
 function giocaCartaAvversario(idCarta) {

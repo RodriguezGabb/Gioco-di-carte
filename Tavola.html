@@ -50,10 +50,36 @@
     </div>
 
     <table class="contenitoreCentrale">
-        <tr><!-- Board avversario -->
-            <td class="latoBoard" id="boardAvversario" colspan="2">
-                <div class="carta">
-                </div>
+        <tr>
+            <td class="shop" rowspan="3"><!--Shop-->
+                <table>
+                    <tr>
+                        <td class="shopScritta">SHOP</td>
+                    </tr>
+                    <tr><!--prima riga dello shop-->
+                        <td class="shopZonaCarte">
+                            <div class="carteShop"></div>
+                            <div class="carteShop"></div>
+                            <div class="carteShop"></div>
+                        </td>
+                    </tr>
+                    <tr><!--seconda riga dello shop-->
+                        <td class="shopZonaCarte">
+                            <div class="carteShop">d</div>
+                            <div class="carteShop"></div>
+                            <div class="carteShop"></div>
+                        </td>
+                    </tr>
+                    <tr><!--Risorse per aquistare-->
+                        <td class="shopZonaRisorse">
+                            <div class="shopRisorsaAtt"></div>
+                            <div class="shopRisorsaDeff"></div>
+                            <div class="shopRisorsaAgil"></div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="latoBoard" id="boardAvversario" colspan="2"><!-- Board avversario -->
             </td>
         </tr>
         <tr><!-- Riga separatrice -->
@@ -64,7 +90,7 @@
             <!-- Pulsante fine turno -->
         </tr>
         <tr><!-- Board giocatore -->
-            <td class="latoBoard" colspan="2" id="boardGiocatore"><!--div class="carta"></div--></td>
+            <td class="latoBoard" colspan="2" id="boardGiocatore"></td>
         </tr>
     </table>
 

@@ -3,13 +3,12 @@ export default class Hand {
     constructor() {
         this.carte = [];
     }
-    pesca(mazzo) {
+    pesca(mazzo) {//pesca una carta dal mazzo passato la mette nella mano e restituisce la carta.
         let card = mazzo.carte.pop();
-        let id = card.id;
-        this.carte.push(card);//shift = pop solo che lo mette al inizio
-        return id;
+        this.carte.push(card);
+        return card;
     }
-    rimuoviCarta(idCarta) {//non funge
+    rimuoviCarta(idCarta) {//non funge per ora dammi un attimo
         for (let i = 0; i < this.carte.length; i++) {
             if (carte[i].id == idCarta) {
                 this.carte.splice(x, 1);

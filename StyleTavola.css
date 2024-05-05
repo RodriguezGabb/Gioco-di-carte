@@ -21,17 +21,50 @@
 }
 
 .carteManoGiocatore {
+    /*per le carte senza tipo*/
     width: 120px;
     height: 150px;
     border: 1px solid black;
     border-radius: 10px;
-    /*robba sotto da cambiare*/
     background-color: white;
     display: inline-block;
     cursor: pointer;
 }
 
+/*tipi di carte*/
+.attacco {
+    width: 120px;
+    height: 150px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: red;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.penetrante {
+    width: 120px;
+    height: 150px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: greenyellow;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.difesa {
+    width: 120px;
+    height: 150px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: blue;
+    display: inline-block;
+    cursor: pointer;
+}
+
+
 /*se vuoi cerchio aumenta altezza*/
+/*bottone per giocare le carte come giocatore*/
 .bottoneGioca {
     background-color: crimson;
     display: none;
@@ -146,6 +179,61 @@
     position: relative;
     background-color: rgb(150, 99, 68);
     display: inline-block;
+}
+
+/*shop*/
+.shopScritta {
+    text-align: center;
+}
+
+.shop {
+    width: 300px;
+    height: 100%;
+
+}
+
+.shopZonaCarte {
+    display: flex;
+    justify-content: center;
+    border: 1px solid blue;
+}
+
+.carteShop {
+    width: 90px;
+    /*75% di una carta normale*/
+    height: 112px;
+    border-radius: 20px;
+    border: 3px solid black;
+    background-color: rgb(150, 99, 68);
+    display: inline-block;
+}
+
+.shopZonaRisorse {
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+}
+
+.shopRisorsaAtt {
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.shopRisorsaDeff {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: blue;
+}
+
+.shopRisorsaAgil {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: greenyellow;
 }
 
 /*classi da cancellare*/

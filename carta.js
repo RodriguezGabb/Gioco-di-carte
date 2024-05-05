@@ -1,8 +1,8 @@
-class carta {
+class carta {//id num serve per differenziare le carte dello stesso tipo con un numero che aumenta di uno, es: affondo1 affondo2 affondo3
     constructor(nome, tipo, immagine, costo, idNum) {//da fare imagine, aggiungere costo
         this.nome = nome;
         this.tipo = tipo;
-        this.immagine = 0;//dubbio se mettere assieme a nome o solo su html
+        this.immagine = 0;
         this.costo = costo;
         this.id = nome + idNum;
     }

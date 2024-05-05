@@ -85,19 +85,22 @@ document.getElementById("mazzoGiocatore").addEventListener("click", giocatorePes
 
 
 // Funzione che fa comparire il pulsante dentro le carte
-function carteOnClick(id1) {
-  var button = document.getElementById(id1);
-  if (button.style.display === "none") {//Se il bottone è non è visibile lo rende visibile altrimenti il contrario 
+function carteOnClick(idBottone) {
+  var button = document.getElementById(idBottone);
+  if (button.style.display === "none" && button.className == "bottoneGioca") {//Se il bottone è non è visibile lo rende visibile altrimenti il contrario 
     button.style.display = "block";
   } else {
     button.style.display = "none";
   }
 }
 // Funzione che fa giocare la carta
-function giocaCartaGiocartore(idCarta) {
+function bottoneOnClick(idCarta, idBottone) {
   var carta = document.getElementById(idCarta);//prende la carta con l'id e lo mette sulla board
-  var board = document.getElementById("boardGiocatore");//Vorrei aggiungere un limite sulla board ma ne dobbiamo parlare  
+  var board = document.getElementById("boardGiocatore");
+  var bottone = document.getElementById(idBottone);
   board.appendChild(carta);
+  bottone.className = "bottoneInvisibile";
+  bottone.display = "none";
 }
 //funzione per far pescare il giocatore
 function giocatorePesca() {
@@ -126,7 +129,6 @@ function creaCartaGiocatore(card) {//card è un instanza della classe carta(è l
   var bottone = document.createElement("button");
   bottone.className = "bottoneGioca";
   bottone.setAttribute("id", "bottoneGiocaDi" + card.id);
-  window.alert(card.id);
   bottone.innerHTML = "Gioca";
   carta.appendChild(bottone);
   bottone.style.display = "none";
@@ -136,7 +138,7 @@ function creaCartaGiocatore(card) {//card è un instanza della classe carta(è l
   });
 
   bottone.addEventListener("click", function () {
-    giocaCartaGiocartore(carta.id);
+    bottoneOnClick(carta.id, bottone.id);
   });
   return carta;
 }

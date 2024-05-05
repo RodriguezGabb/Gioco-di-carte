@@ -17,7 +17,7 @@ Compiti:
     aggiorna la parte dove unsci logica a grafica
 
 Gabbi 05/05/24:
-    1) Secondo me sarebbe meglio fare le carte dello shop più piccole.
+    1) Secondo me sarebbe meglio fare le caete dello shop più piccole.
     2) più che un cambiamento ho notato che la sfera delle carte morte andrebbe rivista con la logica(cioè il numero può essere aggiornato con lutilizzo di javascript secondo me)
         sta cosa l'ho notata facendo le sfere dello shop
     3)Shop è stato fatto ma la board non è più centrata
@@ -25,4 +25,6 @@ Gabbi 05/05/24:
         domanda ma perchè le carte ora non sono più finta ma penetrante ?
     5)cè un problema nel id num perchè ho più carte con lo stesso id
     6)va fatto meglio il pulsante gioca perchè non dovrebbe comparire quando sta sul board.
-    7) tocca cancella i file di troppo su git
+    7) tocca cancella i file di troppo su git fatto
+    8) spostare barra mana
+     

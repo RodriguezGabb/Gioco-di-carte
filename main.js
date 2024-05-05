@@ -8,12 +8,14 @@ import carta from "./carta.js";
 //document.getElementById(manoAvversario);
 document.getElementById("BottonePesca").addEventListener("click", avversarioPesca);
 //document.getElementById(AvvGioca).addEventListener("click", mydumbPlay);
-document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);//da qui **
+document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);
+//da qui **
 function cancellamiplz() {//sta funzione non serve a nulla era per capire getId se funziona, spoiler no
-  let bello = mydumbPlay(manoCattivo);
-  console.log("output dumbplay");
-  console.log(bello);
+  var nomeCarta = cartaPerShop();
+  creaCartaDaNome(nomeCarta);
 }
+
+
 //** fino a qui ignora tutto che devo finirlo
 
 const manaCattivo = (function () {//cosi dovrebbe essere globale ma modificabile solo dalle mie funzioni
@@ -65,7 +67,6 @@ const mazzoCattivo = new Deck();
 mazzoBuono.mescola();
 mazzoCattivo.mescola();
 
-console.log("questa è mazzo prima di pescare")//se li metto nella stessa riga non mi fa vedere specifiche di carte ma li vede solo come object
 console.log(mazzoBuono.carte);
 const manoBuono = new Hand();//creazione mano
 const manoCattivo = new Hand();
@@ -241,69 +242,3 @@ function mydumbPlay(hand) {
   return IDDaGiocare;
 }
 
-//shop section
-
-const strAgiInt = (function () {//dice numero di carte diviso per tipo in possesso del giocatore
-  var strAgiInt = [5, 5, 5];//al inizio ha 5 carte str, 5 agi,5int
-  function getStr() {
-    return strAgiInt[0];
-  }
-  function getAgi() {
-    return strAgiInt[1];
-  }
-  function getInt() {
-    return strAgiInt[2];
-  }
-  function compraStr() {//se compra una carta di questo tipo counter giusto sale
-    strAgiInt[0] = strAgiInt[0] + 1;
-  }
-  function compraAgi() {
-    strAgiInt[1] = strAgiInt[1] + 1;
-  }
-  function compraInt() {
-    strAgiInt[2] = strAgiInt[2] + 1;
-  }
-  function bruciaStr() {//se brucia carta il counter adatto scende
-    strAgiInt[0] = strAgiInt[0] - 1;
-  }
-  function bruciaAgi() {
-    strAgiInt[1] = strAgiInt[1] - 1;
-  }
-  function bruciaInt() {
-    strAgiInt[2] = strAgiInt[2] - 1;
-  }
-  return {
-    getStr: getStr,
-    getAgi: getAgi,
-    getInt: getInt,
-    compraStr: compraStr,
-    compraAgi: compraAgi,
-    compraInt: compraInt,
-    bruciaStr: bruciaStr,
-    bruciaAgi: bruciaAgi,
-    bruciaInt: bruciaInt
-  }
-})();
-var metriceIdCartePerTipo = [
-  ["taglio", "Toccata", "battuta", "parata di picco", "disarmo"],//forza
-  ["cavazione", "parata di contro", "filo", "ricavazione", "inquartata"],//agi
-  ["affondo", "parata di tasto", "finta", "stoccata in tempo", "parata di ceduta"]//int
-];
-function cartaPerShop() {
-  let agi = getAgi;
-  let str = getStr;
-  let int = getInt;
-  str = str + agi;
-  int = str + int;
-  let randomTipo = getRandomNumber(1, int + 1);//max non incluso
-  let randomCarta = getRandomNumber(0, 5);
-  if (randomTipo < agi) {//pesca agi
-    return metriceIdCartePerTipo[0][randomCarta];
-  }
-  else if (agi < randomTipo && randomTipo < str) {//pesca str
-    return metriceIdCartePerTipo[1][randomCarta];
-  }
-  else {//pesca int
-    return metriceIdCartePerTipo[2][randomCarta];
-  }
-}

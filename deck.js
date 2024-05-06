@@ -26,6 +26,15 @@ class Deck {
             this.carte[i] = oldValue;
         }
     }
+    controllo(cimitero) {
+        if (this.carte.length() == 0) {
+            while (cimitero.carte.length != 0) {
+                let card = cimitero.carte.pop();
+                this.carte.push(card);
+            }
+            this.mescola();
+        }
+    }
     svuota() {
         this.carte = [];
     }

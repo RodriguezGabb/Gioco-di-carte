@@ -14,13 +14,73 @@ document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);
 function cancellamiplz() {//sta funzione non serve a nulla era per capire getId se funziona, spoiler no
   aggiornaShop();
 }
+var nturni = 0;
 //Fine turno
+const pulsFine = document.getElementById("pulsanteFineTurno");
+pulsFine.addEventListener(fineTurno);
+function fineTurno() {
+  manaCattivo.resetManaCattivo();
+  manaBuono.resetManaBuono();
+  manoBuono.rimuoviCarta(cimiteroBuono);
+  manoCattivo.rimuoviCarta(cimiteroCattivo);
+
+  for (let i = 0; i < 5; i++) {
+    if (mazzoBuono.carte.length != 0) {
+
+    }
+    else {
+      mazzo.controllo();
+      mazzo.mescola();
+      let card = mazzo.carte.pop();
+      this.carte.push(card);
+      return card;
+    }
+  }
 
 
+  mazzoBuono.controllo(cimiteroBuono);
+  mazzoCattivo.controllo(cimiteroCattivo);
+  aggiornaShop();//resetShop
+  nturni++;
+  mydumbPlay(manoCattivo);
+}
 
 //shop
+//palle shop
+const strValue = document.getElementById('tokenStr');
+
+function updStrValue(str) {
+  const valOra = parseInt(strValue.textContent);
+  const newValue = valOra + str;
+  strValue.textContent = newValue;
+}
+function resetStrValue() {
+  strValue = 0;
+  strValue.textContent = 0;
+}
+const intValue = document.getElementById('tokenInt');
+
+function updIntValue(int) {
+  const valOra = parseInt(intValue.textContent);
+  const newValue = valOra + int;
+  intValue.textContent = newValue;
+}
+function resetIntValue() {
+  intValue = 0;
+  intValue.textContent = 0;
+}
+const agiValue = document.getElementById('tokenAgi');
+
+function updAgiValue(agi) {
+  const valOra = parseInt(agiValue.textContent);
+  const newValue = valOra + agi;
+  agiValue.textContent = newValue;
+}
+function resetAgiValue() {
+  agiValue = 0;
+  agiValue.textContent = 0;
+}
 function aggiornaShop() {
-  const shopx = new shop();//l'oggetto ba spostato e non lo posso chiamare shop :'(
   //Creazione della carta nello shop;
   var nomeCarta1 = shopx.cartaPerShop("str");
   var nomeCarta2 = shopx.cartaPerShop("agi");
@@ -39,6 +99,11 @@ function aggiornaShop() {
   creaCartaShop(c3, "cartaShop3");
   creaCartaShop(c4, "cartaShop4");
   creaCartaShop(c5, "cartaShop5");
+
+  //reset valuePalle 
+  resetStrValue();
+  resetAgiValue();
+  resetIntValue();
 }
 function creaCartaShop(card, id) {
   var carta = document.getElementById(id);
@@ -165,6 +230,7 @@ cimiteroBuono.svuota();
 cimiteroCattivo.svuota();
 mazzoBuono.mescola();
 mazzoCattivo.mescola();
+const shopx = new shop();
 
 console.log("mazzo buono:")
 console.log(mazzoBuono.carte);
@@ -288,28 +354,7 @@ function updateCarteInCimi() {
 
 updateCarteInCimi(5);
 
-//palle shop
-const strValue = document.getElementById('tokenStr');
 
-function updStrValue(str) {
-  const valOra = parseInt(strValue.textContent);
-  const newValue = valOra + str;
-  strValue.textContent = newValue;
-}
-const intValue = document.getElementById('tokenInt');
-
-function updIntValue(int) {
-  const valOra = parseInt(intValue.textContent);
-  const newValue = valOra + int;
-  intValue.textContent = newValue;
-}
-const agiValue = document.getElementById('tokenAgi');
-
-function updAgiValue(agi) {
-  const valOra = parseInt(agiValue.textContent);
-  const newValue = valOra + agi;
-  agiValue.textContent = newValue;
-}
 
 
 

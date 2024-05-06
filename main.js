@@ -58,20 +58,20 @@ function aggiornaShop() {
 
 
 
-  creaCartaPerShop(c1, "cartaShop1");
+  creaCartaShop(c1, "cartaShop1");
 
-  creaCartaPerShop(c2, "cartaShop2");
+  creaCartaShop(c2, "cartaShop2");
 
-  creaCartaPerShop(c3, "cartaShop3");
+  creaCartaShop(c3, "cartaShop3");
 
-  creaCartaPerShop(c4, "cartaShop4");
+  creaCartaShop(c4, "cartaShop4");
 
-  creaCartaPerShop(c5, "cartaShop5");
+  creaCartaShop(c5, "cartaShop5");
 
 }
-function creaCartaPerShop(card, id) {
+function creaCartaShop(card, id) {
   var carta = document.getElementById(id);
-  carta.className = card.tipo + "Shop";//Class serve per lo stile
+  carta.className = card.elemento + "Shop";//Class serve per lo stile
   carta.innerHTML = card.nome;//cosa per debug
   //dimensioni carta
 
@@ -217,21 +217,24 @@ function carteOnClick(idBottone) {
   }
 }
 // Funzione che fa giocare la carta
-function bottoneOnClick(Carta, idBottone) {
-  var carta = document.getElementById(Carta.id);//prende la carta con l'id e lo mette sulla board
+function bottoneOnClick(card, idBottone) {
+  var carta = document.getElementById(card.id);//prende la carta con l'id e lo mette sulla board
   var board = document.getElementById("boardGiocatore");
   var bottone = document.getElementById(idBottone);
   board.appendChild(carta);
   bottone.className = "bottoneInvisibile";
   bottone.display = "none";
-  if (carta.elemento == "agi") {
-    updAgiValue(carta.livello);
+  console.log(card);
+  console.log(carta.elemento);
+  console.log(carta.livello);
+  if (card.elemento == "agi") {
+    updAgiValue(card.livello);
   }
-  else if (carta.elemento == "str") {
-    updStrValue(carta.livello);
+  else if (card.elemento == "str") {
+    updStrValue(card.livello);
   }
-  else if (carta.elemento == "int") {
-    updIntValue(carta.livello);
+  else if (card.elemento == "int") {
+    updIntValue(card.livello);
   }
 }
 //funzione per far pescare il giocatore
@@ -256,7 +259,7 @@ function giocatorePesca() {
 //Funzione di creazione della prima carta del mazzo
 function creaCartaGiocatore(card) {//card è un instanza della classe carta(è la carta logica da creare grafficamente)
   var carta = document.createElement("div");
-  carta.className = card.tipo;//Class serve per lo stile
+  carta.className = card.elemento;//Class serve per lo stile
   carta.setAttribute("id", card.id);
   carta.innerHTML = card.nome;//cosa per debug
   var bottone = document.createElement("button");
@@ -271,7 +274,7 @@ function creaCartaGiocatore(card) {//card è un instanza della classe carta(è l
   });
 
   bottone.addEventListener("click", function () {
-    bottoneOnClick(carta, bottone.id);
+    bottoneOnClick(card, bottone.id);
   });
   return carta;
 }

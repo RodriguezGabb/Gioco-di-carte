@@ -32,7 +32,7 @@
 }
 
 /*tipi di carte*/
-.attacco {
+.str {
     width: 120px;
     height: 150px;
     border: 1px solid black;
@@ -42,17 +42,17 @@
     cursor: pointer;
 }
 
-.penetrante {
+.agi {
     width: 120px;
     height: 150px;
     border: 1px solid black;
     border-radius: 10px;
-    background-color: greenyellow;
+    background-color: rgb(39, 141, 56);
     display: inline-block;
     cursor: pointer;
 }
 
-.difesa {
+.int {
     width: 120px;
     height: 150px;
     border: 1px solid black;
@@ -63,7 +63,7 @@
 }
 
 
-.attaccoShop {
+.strShop {
     width: 90px;
     height: 112px;
     border: 1px solid black;
@@ -73,18 +73,18 @@
     cursor: pointer;
 }
 
-.penetranteShop {
+.agiShop {
     width: 90px;
     height: 112px;
 
     border: 1px solid black;
     border-radius: 10px;
-    background-color: greenyellow;
+    background-color: rgb(39, 141, 56);
     display: inline-block;
     cursor: pointer;
 }
 
-.difesaShop {
+.intShop {
     width: 90px;
     height: 112px;
     border: 1px solid black;

@@ -217,13 +217,22 @@ function carteOnClick(idBottone) {
   }
 }
 // Funzione che fa giocare la carta
-function bottoneOnClick(idCarta, idBottone) {
-  var carta = document.getElementById(idCarta);//prende la carta con l'id e lo mette sulla board
+function bottoneOnClick(Carta, idBottone) {
+  var carta = document.getElementById(Carta.id);//prende la carta con l'id e lo mette sulla board
   var board = document.getElementById("boardGiocatore");
   var bottone = document.getElementById(idBottone);
   board.appendChild(carta);
   bottone.className = "bottoneInvisibile";
   bottone.display = "none";
+  if (carta.elemento == "agi") {
+    updAgiValue(carta.livello);
+  }
+  else if (carta.elemento = "str") {
+    updStrValue(carta.livello);
+  }
+  else if (carta.elemento = "int") {
+    updIntValue(carta.livello);
+  }
 }
 //funzione per far pescare il giocatore
 function giocatorePesca() {
@@ -262,7 +271,7 @@ function creaCartaGiocatore(card) {//card è un instanza della classe carta(è l
   });
 
   bottone.addEventListener("click", function () {
-    bottoneOnClick(carta.id, bottone.id);
+    bottoneOnClick(carta, bottone.id);
   });
   return carta;
 }
@@ -308,20 +317,26 @@ updateCarteInCimi(5);
 const strValue = document.getElementById('tokenStr');
 
 function updStrValue(str) {
-  strValue.textContent = str;
+  const valOra = parseInt(strValue.textContent);
+  const newValue = valOra + str;
+  strValue.textContent = newValue;
 }
 const intValue = document.getElementById('tokenInt');
 
 function updIntValue(int) {
-  intValue.textContent = int;
+  const valOra = parseInt(intValue.textContent);
+  const newValue = valOra + int;
+  intValue.textContent = newValue;
 }
 const agiValue = document.getElementById('tokenAgi');
 
 function updAgiValue(agi) {
-  agiValue.textContent = agi;
+  const valOra = parseInt(agiValue.textContent);
+  const newValue = valOra + agi;
+  agiValue.textContent = newValue;
 }
 
-updAgiValue(8);
+
 
 
 //ia section

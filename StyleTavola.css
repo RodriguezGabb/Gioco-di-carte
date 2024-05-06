@@ -62,7 +62,35 @@
     cursor: pointer;
 }
 
+.attaccoShop {
+    width: 90px;
+    height: 112px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: red;
+    display: inline-block;
+    cursor: pointer;
+}
 
+.penetranteShop {
+    width: 90px;
+    height: 112px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: greenyellow;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.difesaShop {
+    width: 90px;
+    height: 112px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: blue;
+    display: inline-block;
+    cursor: pointer;
+}
 /*se vuoi cerchio aumenta altezza*/
 /*bottone per giocare le carte come giocatore*/
 .bottoneGioca {
@@ -206,8 +234,8 @@
     width: 90px;
     /*75% di una carta normale*/
     height: 112px;
-    border-radius: 20px;
-    border: 3px solid black;
+    border-radius: 10px;
+    border: 1px solid black;
     background-color: rgb(150, 99, 68);
     display: inline-block;
 }

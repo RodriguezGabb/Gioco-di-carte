@@ -1,18 +1,46 @@
+import carta from "./carta.js";
 class shop {
-    constructor() {//(x,y,z){
+    constructor() {/*(x,y,z){ gli potremo mettere anche un array con le carte nello.shop? è un idea dimmi te*/
         this.strAgiInt = [5, 5, 5];
     }
-
-    getStr() {
-        return this.strAgiInt[0];
+    cartaPerShop(tipo) {
+    let agi = getAgi(this);//gli serve un riferimento al oggetto
+    let str = getStr(this);
+    let int = getInt(this);
+    str = str + agi;
+    int = str + int;
+    let randomTipo;
+    console.log("tipo");
+    console.log(tipo);    
+    if (tipo == "str") {
+        console.log("sono in str");
+        randomTipo = 0;
     }
-    getAgi() {
-        return this.strAgiInt[1];
+    else if (tipo == "int") {
+        console.log("sono in int");
+        randomTipo = 1;
     }
-    getInt() {
-        return this.strAgiInt[2];
+    else if (tipo == "agi") {
+        console.log("sono in agi");
+        randomTipo = 2;
     }
-
+    else {
+        console.log("sono in else");
+        randomTipo = getRandomNumber(1, int);
+    }
+    console.log("randomTipo");
+    console.log(randomTipo);    
+    let randomCarta = getRandomNumber(0, 4);
+    if (randomTipo < agi) {//pesca agi
+        return metriceIdCartePerTipo[0][randomCarta];
+    }
+    else if (agi < randomTipo && randomTipo < str) {//pesca str
+        return metriceIdCartePerTipo[1][randomCarta];
+    }
+    else {//pesca int
+        return metriceIdCartePerTipo[2][randomCarta];
+    }
+}    
 }
 
 const metriceIdCartePerTipo = [
@@ -20,10 +48,24 @@ const metriceIdCartePerTipo = [
     ["cavazione", "parata di contro", "filo", "ricavazione", "inquartata"],//agi
     ["affondo", "parata di tasto", "finta", "stoccata in tempo", "parata di ceduta"]//int
 ];
+    
+function getStr(strAgiInt) {
+    return strAgiInt[0];
+}
+function getAgi(strAgiInt) {
+    
+    return strAgiInt[1];
+}
+function getInt(strAgiInt) {
+    return strAgiInt[2];
+}    
 
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+    
+//le compra e le brucia forse sono meglio come metodi mo ci penso    
+    
 function compraStr() {//se compra una carta di questo tipo counter giusto sale
     this.strAgiInt[0] = this.strAgiInt[0] + 1;
 }
@@ -42,92 +84,9 @@ function bruciaAgi() {
 function bruciaInt() {
     this.strAgiInt[2] = this.strAgiInt[2] - 1;
 }
-
+    
 /*
-cartaPerShop(tipo) {
-    let agi = this.strAgiInt.getAgi();
-    let str = this.strAgiInt.getStr();
-    let int = this.strAgiInt.getInt();
-    str = str + agi;
-    int = str + int;
-    let randomTipo;
 
-    if (tipo == "str") {
-        randomTipo = 0;
-    }
-    else if (tipo == "int") {
-        randomTipo = 1;
-    }
-    else if (tipo == "agi") {
-        randomTipo = 2;
-    }
-    else {
-        randomTipo = getRandomNumber(1, int);
-    }
-    let randomCarta = getRandomNumber(0, 4);
-    if (randomTipo < agi) {//pesca agi
-        return metriceIdCartePerTipo[0][randomCarta];
-    }
-    else if (agi < randomTipo && randomTipo < str) {//pesca str
-        return metriceIdCartePerTipo[1][randomCarta];
-    }
-    else {//pesca int
-        return metriceIdCartePerTipo[2][randomCarta];
-    }
-}
-
-
-function creaCartaDaNome(nomeCarta) {
-    var cartaShop;
-    if (nomeCarta == "taglio") {
-        cartaShop = new carta();
-        cartaShop.crea
-    }
-    else if (nomeCarta == "toccata") {
-
-    }
-    else if (nomeCarta == "battuta") {
-
-    }
-    else if (nomeCarta == "parata di picco") {
-
-    }
-    else if (nomeCarta == "disarmo") {
-
-    }
-    else if (nomeCarta == "cavazione") {
-
-    }
-    else if (nomeCarta == "parata di contro") {
-
-    }
-    else if (nomeCarta == "filo") {
-
-    }
-    else if (nomeCarta == "ricavazione") {
-
-    }
-    else if (nomeCarta == "inquartata") {
-
-    }
-    else if (nomeCarta == "affondo") {
-
-    }
-    else if (nomeCarta == "parata di tasto") {
-
-    }
-    else if (nomeCarta == "finta") {
-
-    }
-    else if (nomeCarta == "stoccata in tempo") {
-
-    }
-    else if (nomeCarta == "parata di ceduta") {
-
-    }
-    return cartaShop;
-}
-/*
 //forza
 //lv1
 function CreaTaglio(idNum) {//valore off piu alto ma parata del avversario vale di piu?
@@ -185,3 +144,5 @@ function CreaStoccataInTempo(idNum) {
 function CreaCeduta(idNum) {
     return new carta("parata di ceduta", "difesa", 0, 3, 15, idNum);//+5 danni al taglio successivo?
 }*/
+    
+export default shop;    

@@ -62,7 +62,7 @@ class carta {//id num serve per differenziare le carte dello stesso tipo con un 
         this.generaCarta("stoccata in tempo", "difesa", 0, 1, 3, idNum);//fa anche danno
     }
     //lv3
-    CreaCeduta(idNum) {
+    CreaParataDiCeduta(idNum) {
         this.generaCarta("parata di ceduta", "difesa", 0, 3, 15, idNum);//+5 danni al taglio successivo?
     }
     generaCarta(nome, tipo, immagine, costo, value, idNum) {//da fare imagine, aggiungere costo

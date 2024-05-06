@@ -227,10 +227,10 @@ function bottoneOnClick(Carta, idBottone) {
   if (carta.elemento == "agi") {
     updAgiValue(carta.livello);
   }
-  else if (carta.elemento = "str") {
+  else if (carta.elemento == "str") {
     updStrValue(carta.livello);
   }
-  else if (carta.elemento = "int") {
+  else if (carta.elemento == "int") {
     updIntValue(carta.livello);
   }
 }

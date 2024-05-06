@@ -6,7 +6,7 @@ class Deck {
     get retDeck() {
         return this;
     }
-    get contaCarte() {//torna NaN è da sostituire poi in manoiniziale 
+    get contaCarte() {
         try {
             return this.carte.length;
 

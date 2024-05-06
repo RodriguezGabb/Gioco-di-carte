@@ -62,7 +62,8 @@
     cursor: pointer;
 }
 
-.attaccoShop {
+
+.attaccoShop {
     width: 90px;
     height: 112px;
     border: 1px solid black;
@@ -74,7 +75,8 @@
 
 .penetranteShop {
     width: 90px;
-    height: 112px;
+    height: 112px;
+
     border: 1px solid black;
     border-radius: 10px;
     background-color: greenyellow;
@@ -91,6 +93,7 @@
     display: inline-block;
     cursor: pointer;
 }
+
 /*se vuoi cerchio aumenta altezza*/
 /*bottone per giocare le carte come giocatore*/
 .bottoneGioca {

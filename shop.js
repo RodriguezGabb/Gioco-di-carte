@@ -1,46 +1,56 @@
 import carta from "./carta.js";
 class shop {
-    constructor() {/*(x,y,z){ gli potremo mettere anche un array con le carte nello.shop? è un idea dimmi te*/
+    constructor() {/*(x,y,z){
+ gli potremo mettere anche un array con le carte nello.shop? è un idea dimmi te*/
         this.strAgiInt = [5, 5, 5];
     }
     cartaPerShop(tipo) {
-    let agi = getAgi(this);//gli serve un riferimento al oggetto
-    let str = getStr(this);
-    let int = getInt(this);
-    str = str + agi;
-    int = str + int;
-    let randomTipo;
-    console.log("tipo");
-    console.log(tipo);    
-    if (tipo == "str") {
-        console.log("sono in str");
-        randomTipo = 0;
+        console.log("-------------------");
+        let agi = getAgi(this.strAgiInt);//gli serve un riferimento al oggetto
+        let str = getStr(this.strAgiInt);
+        let int = getInt(this.strAgiInt);
+        str = str + agi;
+        int = str + int;
+        let randomTipo;
+        console.log("tipo");
+        console.log(tipo);
+        if (tipo == "str") {
+            console.log("sono in str");
+            randomTipo = str;
+        }
+        else if (tipo == "agi") {
+            console.log("sono in agi");
+            randomTipo = agi;
+        }
+        else if (tipo == "int") {
+            console.log("sono in int");
+            randomTipo = int;
+        }
+        else if (tipo == "random") {
+            console.log("random");
+            randomTipo = getRandomNumber(1, int);
+        }
+        let randomCarta = getRandomNumber(0, 4);
+        if (agi < randomTipo && randomTipo <= str) {//pesca str
+            console.log("array str");
+            console.log(randomCarta);
+            console.log(metriceIdCartePerTipo[0][randomCarta]);
+            return metriceIdCartePerTipo[0][randomCarta];
+        }
+        else if (randomTipo <= agi) {//pesca agi
+            console.log("array agi");
+            console.log(randomCarta);
+            console.log(metriceIdCartePerTipo[1][randomCarta]);
+            return metriceIdCartePerTipo[1][randomCarta];
+        }
+        else {//pesca int
+            console.log("array int");
+            console.log(randomCarta);
+            console.log(metriceIdCartePerTipo[2][randomCarta]);
+            return metriceIdCartePerTipo[2][randomCarta];
+        }
     }
-    else if (tipo == "int") {
-        console.log("sono in int");
-        randomTipo = 1;
-    }
-    else if (tipo == "agi") {
-        console.log("sono in agi");
-        randomTipo = 2;
-    }
-    else {
-        console.log("sono in else");
-        randomTipo = getRandomNumber(1, int);
-    }
-    console.log("randomTipo");
-    console.log(randomTipo);    
-    let randomCarta = getRandomNumber(0, 4);
-    if (randomTipo < agi) {//pesca agi
-        return metriceIdCartePerTipo[0][randomCarta];
-    }
-    else if (agi < randomTipo && randomTipo < str) {//pesca str
-        return metriceIdCartePerTipo[1][randomCarta];
-    }
-    else {//pesca int
-        return metriceIdCartePerTipo[2][randomCarta];
-    }
-}    
+
 }
 
 const metriceIdCartePerTipo = [
@@ -48,24 +58,25 @@ const metriceIdCartePerTipo = [
     ["cavazione", "parata di contro", "filo", "ricavazione", "inquartata"],//agi
     ["affondo", "parata di tasto", "finta", "stoccata in tempo", "parata di ceduta"]//int
 ];
-    
+
 function getStr(strAgiInt) {
     return strAgiInt[0];
 }
 function getAgi(strAgiInt) {
-    
+
     return strAgiInt[1];
 }
 function getInt(strAgiInt) {
     return strAgiInt[2];
-}    
+}
+
 
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-    
+
 //le compra e le brucia forse sono meglio come metodi mo ci penso    
-    
+
 function compraStr() {//se compra una carta di questo tipo counter giusto sale
     this.strAgiInt[0] = this.strAgiInt[0] + 1;
 }
@@ -84,7 +95,7 @@ function bruciaAgi() {
 function bruciaInt() {
     this.strAgiInt[2] = this.strAgiInt[2] - 1;
 }
-    
+
 /*
 
 //forza
@@ -144,5 +155,5 @@ function CreaStoccataInTempo(idNum) {
 function CreaCeduta(idNum) {
     return new carta("parata di ceduta", "difesa", 0, 3, 15, idNum);//+5 danni al taglio successivo?
 }*/
-    
-export default shop;    
+
+export default shop;

@@ -13,91 +13,128 @@ document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);
 //da qui **
 function cancellamiplz() {//sta funzione non serve a nulla era per capire getId se funziona, spoiler no
   aggiornaShop();
-  
+
 }
-function aggiornaShop(){
-    const shopx=new shop();//loggetto ba spostato e non lo posso chiamare shop :'(
-    
-    var cartaShop1 = document.getElementById("cartaShop1");
-    var cartaShop2 = document.getElementById("cartaShop2");
-    var cartaShop3 = document.getElementById("cartaShop3");
-    var cartaShop4 = document.getElementById("cartaShop4");
-    var cartaShop5 = document.getElementById("cartaShop5");
-    
-    var nomeCarta1 = shopx.cartaPerShop("str");
-    var nomeCarta2 = shopx.cartaPerShop("int");
-    var nomeCarta3 = shopx.cartaPerShop("agi");
-    var nomeCarta4 = shopx.cartaPerShop();
-    var nomeCarta5 = shopx.cartaPerShop();
-    //questo sara cambiato quandonabbiamo le immaggini
-    var c1=creaCartaDaNome(nomeCarta1);
-    var c2=creaCartaDaNome(nomeCarta2);
-    var c3=creaCartaDaNome(nomeCarta3);
-    var c4=creaCartaDaNome(nomeCarta4);
-    var c5=creaCartaDaNome(nomeCarta5);
-    
-    creaCartaPerShop(c1,"cartaShop1");
-    creaCartaPerShop(c2,"cartaShop2");
-    creaCartaPerShop(c3,"cartaShop3");
-    creaCartaPerShop(c4,"cartaShop4");
-    creaCartaPerShop(c5,"cartaShop5");
-}
-function creaCartaPerShop(card, id){
-    var carta = document.getElementById(id);
-    carta.className = card.tipo + "Shop";//Class serve per lo stile
-    carta.innerHTML = card.nome;//cosa per debug
-    //dimensioni carta
-    
+
+function aggiornaShop() {
+
+  const shopx = new shop();//loggetto ba spostato e non lo posso chiamare shop :'(
+
+
+
+  var cartaShop1 = document.getElementById("cartaShop1");
+
+  var cartaShop2 = document.getElementById("cartaShop2");
+
+  var cartaShop3 = document.getElementById("cartaShop3");
+
+  var cartaShop4 = document.getElementById("cartaShop4");
+
+  var cartaShop5 = document.getElementById("cartaShop5");
+
+
+
+  var nomeCarta1 = shopx.cartaPerShop("str");
+
+  var nomeCarta2 = shopx.cartaPerShop("agi");
+
+  var nomeCarta3 = shopx.cartaPerShop("int");
+
+  var nomeCarta4 = shopx.cartaPerShop("random");
+
+  var nomeCarta5 = shopx.cartaPerShop("random");
+
+  //questo sara cambiato quandonabbiamo le immaggini
+
+  var c1 = creaCartaDaNome(nomeCarta1);
+
+  var c2 = creaCartaDaNome(nomeCarta2);
+
+  var c3 = creaCartaDaNome(nomeCarta3);
+
+  var c4 = creaCartaDaNome(nomeCarta4);
+
+  var c5 = creaCartaDaNome(nomeCarta5);
+
+
+
+  creaCartaPerShop(c1, "cartaShop1");
+
+  creaCartaPerShop(c2, "cartaShop2");
+
+  creaCartaPerShop(c3, "cartaShop3");
+
+  creaCartaPerShop(c4, "cartaShop4");
+
+  creaCartaPerShop(c5, "cartaShop5");
+
 }
-function creaCartaDaNome(nomeCarta){//possiamo aggiungere dove va messo graficamente forse
-    var c=new carta();
-    if (nomeCarta == "taglio") {
-        c.CreaTaglio();
-    }
-    else if (nomeCarta == "toccata") {
-        c.CreaToccata();
-    }
-    else if (nomeCarta == "battuta") {
-        c.CreaBattuta();
-    }
-    else if (nomeCarta == "parata di picco") {
-        c.CreaParataDiPicco();
-    }
-    else if (nomeCarta == "disarmo") {
-        c.CreaDisarmo();
-    }
-    else if (nomeCarta == "cavazione") {
-        c.CreaCavazione();
-    }
-    else if (nomeCarta == "parata di contro") {
-        c.Crea
-    }
-    else if (nomeCarta == "filo") {
-        c.CreaFilo();
-    }
-    else if (nomeCarta == "ricavazione") {
-        c.CreaRicavazione();
-    }
-    else if (nomeCarta == "inquartata") {
-        c.CreaInquartata();
-    }
-    else if (nomeCarta == "affondo") {
-        c.CreaAffondo();
-    }
-    else if (nomeCarta == "parata di tasto") {
-        c.CreaParataDiTasto();
-    }
-    else if (nomeCarta == "finta") {
-        c.CreaFinta();
-    }
-    else if (nomeCarta == "stoccata in tempo") {
-        c.CreaStoccataInTempo();
-    }
-    else if (nomeCarta == "parata di ceduta") {
-        c.CreaParataDiCeduta();
-    }
-    return c;
-}    
+function creaCartaPerShop(card, id) {
+  var carta = document.getElementById(id);
+  carta.className = card.tipo + "Shop";//Class serve per lo stile
+  carta.innerHTML = card.nome;//cosa per debug
+  //dimensioni carta
+
+}
+function creaCartaDaNome(nomeCarta) {//possiamo aggiungere dove va messo graficamente forse
+  var c = new carta();
+  if (nomeCarta == "taglio") {
+    c.CreaTaglio();
+  }
+  else if (nomeCarta == "toccata") {
+    c.CreaToccata();
+  }
+  else if (nomeCarta == "battuta") {
+    c.CreaBattuta();
+  }
+  else if (nomeCarta == "parata di picco") {
+    c.CreaParataDiPicco();
+  }
+  else if (nomeCarta == "disarmo") {
+    c.CreaDisarmo();
+  }
+  else if (nomeCarta == "cavazione") {
+    c.CreaCavazione();
+  }
+  else if (nomeCarta == "parata di contro") {
+
+    c.Crea
+  }
+  else if (nomeCarta == "filo") {
+
+    c.CreaFilo();
+  }
+  else if (nomeCarta == "ricavazione") {
+
+    c.CreaRicavazione();
+  }
+  else if (nomeCarta == "inquartata") {
+
+    c.CreaInquartata();
+  }
+  else if (nomeCarta == "affondo") {
+
+    c.CreaAffondo();
+  }
+  else if (nomeCarta == "parata di tasto") {
+
+    c.CreaParataDiTasto();
+  }
+  else if (nomeCarta == "finta") {
+
+    c.CreaFinta();
+  }
+  else if (nomeCarta == "stoccata in tempo") {
+
+    c.CreaStoccataInTempo();
+  }
+  else if (nomeCarta == "parata di ceduta") {
+
+    c.CreaParataDiCeduta();
+  }
+  return c;
+}
+
 
 
 //fino a qui ignora tutto **
@@ -150,7 +187,8 @@ const mazzoBuono = new Deck();//creazione mazzo
 const mazzoCattivo = new Deck();
 mazzoBuono.mescola();
 mazzoCattivo.mescola();
-console.log("mazzo buono:")
+
+console.log("mazzo buono:")
 console.log(mazzoBuono.carte);
 const manoBuono = new Hand();//creazione mano
 const manoCattivo = new Hand();

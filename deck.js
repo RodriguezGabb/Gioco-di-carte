@@ -26,6 +26,12 @@ class Deck {
             this.carte[i] = oldValue;
         }
     }
+    svuota() {
+        this.carte = [];
+    }
+    aggiungiCarta(card) {
+        this.carte.push(card);
+    }
 }
 
 // creazione mazzo

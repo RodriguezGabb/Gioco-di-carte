@@ -13,68 +13,46 @@ document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);
 //da qui **
 function cancellamiplz() {//sta funzione non serve a nulla era per capire getId se funziona, spoiler no
   aggiornaShop();
-
 }
+//Fine turno
 
+
+
+//shop
 function aggiornaShop() {
-
-  const shopx = new shop();//loggetto ba spostato e non lo posso chiamare shop :'(
-
-
-
-  var cartaShop1 = document.getElementById("cartaShop1");
-
-  var cartaShop2 = document.getElementById("cartaShop2");
-
-  var cartaShop3 = document.getElementById("cartaShop3");
-
-  var cartaShop4 = document.getElementById("cartaShop4");
-
-  var cartaShop5 = document.getElementById("cartaShop5");
-
-
-
+  const shopx = new shop();//l'oggetto ba spostato e non lo posso chiamare shop :'(
+  //Creazione della carta nello shop;
   var nomeCarta1 = shopx.cartaPerShop("str");
-
   var nomeCarta2 = shopx.cartaPerShop("agi");
-
   var nomeCarta3 = shopx.cartaPerShop("int");
-
   var nomeCarta4 = shopx.cartaPerShop("random");
-
   var nomeCarta5 = shopx.cartaPerShop("random");
-
   //questo sara cambiato quandonabbiamo le immaggini
-
   var c1 = creaCartaDaNome(nomeCarta1);
-
   var c2 = creaCartaDaNome(nomeCarta2);
-
   var c3 = creaCartaDaNome(nomeCarta3);
-
   var c4 = creaCartaDaNome(nomeCarta4);
-
   var c5 = creaCartaDaNome(nomeCarta5);
 
-
-
   creaCartaShop(c1, "cartaShop1");
-
   creaCartaShop(c2, "cartaShop2");
-
   creaCartaShop(c3, "cartaShop3");
-
   creaCartaShop(c4, "cartaShop4");
-
   creaCartaShop(c5, "cartaShop5");
-
 }
 function creaCartaShop(card, id) {
   var carta = document.getElementById(id);
   carta.className = card.elemento + "Shop";//Class serve per lo stile
   carta.innerHTML = card.nome;//cosa per debug
-  //dimensioni carta
-
+  card.id = id;
+  //bottone compra
+  var bottoneCompra = document.createElement("button");
+  bottoneCompra.className = "bottoneCompra";
+  bottoneCompra.setAttribute("id", "bottone" + id);
+  bottoneCompra.innerHTML = "Compra";
+  bottoneCompra.style.display = "block";
+  carta.appendChild(bottoneCompra);
+  //dobbiamo fare l'event listener
 }
 function creaCartaDaNome(nomeCarta) {//possiamo aggiungere dove va messo graficamente forse
   var c = new carta();
@@ -97,8 +75,7 @@ function creaCartaDaNome(nomeCarta) {//possiamo aggiungere dove va messo grafica
     c.CreaCavazione();
   }
   else if (nomeCarta == "parata di contro") {
-
-    c.Crea
+    c.CreaParataDiContro();
   }
   else if (nomeCarta == "filo") {
 
@@ -135,10 +112,7 @@ function creaCartaDaNome(nomeCarta) {//possiamo aggiungere dove va messo grafica
   return c;
 }
 
-
-
-//fino a qui ignora tutto **
-
+//mana
 const manaCattivo = (function () {//cosi dovrebbe essere globale ma modificabile solo dalle mie funzioni
   let value = 5;
   function getManaCattivo() {
@@ -185,6 +159,10 @@ const manaBuono = (function () {//cosi dovrebbe essere globale ma modificabile s
 
 const mazzoBuono = new Deck();//creazione mazzo
 const mazzoCattivo = new Deck();
+const cimiteroBuono = new Deck();
+const cimiteroCattivo = new Deck();
+cimiteroBuono.svuota();
+cimiteroCattivo.svuota();
 mazzoBuono.mescola();
 mazzoCattivo.mescola();
 
@@ -192,10 +170,7 @@ console.log("mazzo buono:")
 console.log(mazzoBuono.carte);
 const manoBuono = new Hand();//creazione mano
 const manoCattivo = new Hand();
-console.log("questa è la mano")
-console.log(manoBuono.carte);
-console.log("questa è mazzo dopo")
-console.log(mazzoBuono.carte);
+
 
 
 
@@ -224,9 +199,6 @@ function bottoneOnClick(card, idBottone) {
   board.appendChild(carta);
   bottone.className = "bottoneInvisibile";
   bottone.display = "none";
-  console.log(card);
-  console.log(carta.elemento);
-  console.log(carta.livello);
   if (card.elemento == "agi") {
     updAgiValue(card.livello);
   }
@@ -310,8 +282,8 @@ function giocaCartaAvversario(idCarta) {
 // prendi elem
 const nCimA = document.getElementById('nCardCimitero');
 
-function updateCarteInCimi(numeroCarteInCimitero) {
-  nCimA.textContent = numeroCarteInCimitero;
+function updateCarteInCimi() {
+  nCimA.textContent = cimiteroBuono.carte.length;
 }
 
 updateCarteInCimi(5);

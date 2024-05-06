@@ -34,7 +34,7 @@ class carta {//id num serve per differenziare le carte dello stesso tipo con un 
     CreaCavazione(idNum) {
         this.generaCarta("cavazione", "penetrante", "agi", 1, 0, 2, 3, idNum);//danno basso non parabile
     }
-    CreaParataDicontro(idNum) {
+    CreaParataDiContro(idNum) {
         this.generaCarta("parata di contro", "difesa", "agi", 1, 0, 0, 3, idNum);// e peschi?
     }
     //lv2

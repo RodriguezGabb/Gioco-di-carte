@@ -5,48 +5,32 @@ class shop {
         this.strAgiInt = [5, 5, 5];
     }
     cartaPerShop(tipo) {
-        console.log("-------------------");
         let agi = getAgi(this.strAgiInt);//gli serve un riferimento al oggetto
         let str = getStr(this.strAgiInt);
         let int = getInt(this.strAgiInt);
         str = str + agi;
         int = str + int;
         let randomTipo;
-        console.log("tipo");
-        console.log(tipo);
         if (tipo == "str") {
-            console.log("sono in str");
             randomTipo = str;
         }
         else if (tipo == "agi") {
-            console.log("sono in agi");
             randomTipo = agi;
         }
         else if (tipo == "int") {
-            console.log("sono in int");
             randomTipo = int;
         }
         else if (tipo == "random") {
-            console.log("random");
             randomTipo = getRandomNumber(1, int);
         }
         let randomCarta = getRandomNumber(0, 4);
         if (agi < randomTipo && randomTipo <= str) {//pesca str
-            console.log("array str");
-            console.log(randomCarta);
-            console.log(metriceIdCartePerTipo[0][randomCarta]);
             return metriceIdCartePerTipo[0][randomCarta];
         }
         else if (randomTipo <= agi) {//pesca agi
-            console.log("array agi");
-            console.log(randomCarta);
-            console.log(metriceIdCartePerTipo[1][randomCarta]);
             return metriceIdCartePerTipo[1][randomCarta];
         }
         else {//pesca int
-            console.log("array int");
-            console.log(randomCarta);
-            console.log(metriceIdCartePerTipo[2][randomCarta]);
             return metriceIdCartePerTipo[2][randomCarta];
         }
     }
@@ -54,7 +38,7 @@ class shop {
 }
 
 const metriceIdCartePerTipo = [
-    ["taglio", "Toccata", "battuta", "parata di picco", "disarmo"],//forza
+    ["taglio", "toccata", "battuta", "parata di picco", "disarmo"],//forza
     ["cavazione", "parata di contro", "filo", "ricavazione", "inquartata"],//agi
     ["affondo", "parata di tasto", "finta", "stoccata in tempo", "parata di ceduta"]//int
 ];

@@ -29,3 +29,7 @@ Gabbi 05/05/24:
     8) spostare barra mana
     9) Contatore di turni 
         dopo x turni o schiatti direttamente o l'avversario si poweruppa un bel po (per evitare che la gente abbusi dei primi avversari)
+
+Gabbi 06/05/24:
+    avversario gioca deve scalare il mana, e le carte giocate devono avere una grafica
+    

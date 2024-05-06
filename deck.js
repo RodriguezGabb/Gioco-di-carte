@@ -27,7 +27,7 @@ class Deck {
         }
     }
     controllo(cimitero) {
-        if (this.carte.length() == 0) {
+        if (this.carte.length == 0) {
             while (cimitero.carte.length != 0) {
                 let card = cimitero.carte.pop();
                 this.carte.push(card);
@@ -48,6 +48,7 @@ function CreaDeck() {
     var ret = [];
     let idNum = 1;
     for (var i = 0; i < 5; i++) {
+
         var parata = new carta();
         parata.CreaParataDiTasto(idNum);
         var cavazione = new carta();

@@ -8,14 +8,17 @@ import shop from "./shop.js";
 //zona debug
 //document.getElementById(manoAvversario);
 document.getElementById("BottonePesca").addEventListener("click", avversarioPesca);
-//document.getElementById(AvvGioca).addEventListener("click", mydumbPlay);
+document.getElementById("debug").addEventListener("click", debug);
 document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);
 //da qui **
 function cancellamiplz() {//sta funzione non serve a nulla era per capire getId se funziona, spoiler no
-  var bob = mydumbPlay(manoCattivo);
-  bob.forEach(avversarioGioca);
-  console.log("mana ");
-  console.log(manaCattivo);
+  for (let i = 0; i < 5; i++) {
+    giocatorePesca(mazzoBuono);
+  }
+}
+function debug() {
+  console.log(manoBuono);
+  console.log(manoBuono.carte.length);
 }
 var nturni = 0;
 //Fine turno
@@ -23,38 +26,49 @@ const pulsFine = document.getElementById("pulsanteFineTurno");
 pulsFine.addEventListener("click", fineTurno);
 
 function fineTurno() {
+  //rimposta a 5 il mana del giocatore e del avversario
   manaCattivo = 5;
   manaBuono = 5;
-
-  for (let i = 0; i < manoBuono.carte.length - 1; i++) {
-    var c = manoBuono.rimuoviCarta(cimiteroBuono);
+  //rimupve le carte dalle mani
+  while (manoBuono.carte.length != 0) {
+    let c = manoBuono.rimuoviCarta(cimiteroBuono);
     document.getElementById(c.id).remove();
   }
-  for (let i = 0; i < manoCattivo.carte.length - 1; i++) {
+  while (manoCattivo.carte.length != 0) {
     c = manoCattivo.rimuoviCarta(cimiteroCattivo);
     document.getElementById(c.id).remove();
   }
+  /*while (boardBuono.length != 0) { //Sono stanco capo smetto qui per ora
+    c = boardBuono.pop;
+    document.getElementById(c.id).remove();
+  }
+  while (boardCattivo.length != 0) {
+    c = boardCattivo.pop;
+    document.getElementById(c.id).remove();
+  }*/
+  //pesca una nuova mano e in caso rimescola il mazzo
   for (let i = 0; i < 5; i++) {
     if (mazzoBuono.carte.length != 0) {
-      giocatorePesca();
+      giocatorePesca(mazzoBuono);
     }
     else {
       mazzoBuono.controllo(cimiteroBuono);
-      giocatorePesca();
+      giocatorePesca(mazzoBuono);
     }
     if (mazzoCattivo.carte.length != 0) {
-      avversarioPesca();
+      avversarioPesca(mazzoCattivo);
     }
     else {
       mazzoCattivo.controllo(cimiteroCattivo);
-      avversarioPesca();
+      avversarioPesca(mazzoCattivo);
     }
   }
 
+  updateCarteInCimi();
   aggiornaShop();//resetShop
-  nturni++;
-  console.log(manaCattivo);
-  mydumbPlay(manoCattivo);
+  nturni++;//counter di turni
+  var carteDaGiocare = mydumbPlay(manoCattivo);
+  carteDaGiocare.forEach(avversarioGioca);
 }
 
 //shop
@@ -207,6 +221,8 @@ console.log("mazzo buono:")
 console.log(mazzoBuono.carte);
 const manoBuono = new Hand();//creazione mano
 const manoCattivo = new Hand();
+const boardBuono = [];//servono per tenere gli oggetti carta da qualche parte quando sono in gioco.
+const boardCattivo = [];
 
 
 
@@ -234,6 +250,7 @@ function bottoneOnClick(card, idBottone) {
   var board = document.getElementById("boardGiocatore");
   var bottone = document.getElementById(idBottone);
   board.appendChild(carta);
+  boardBuono.push(card);
   bottone.className = "bottoneInvisibile";
   bottone.display = "none";
   if (card.elemento == "agi") {
@@ -308,10 +325,13 @@ function creaCartaAvversario(card) { //card è un instanza della classe carta(è
   carta.innerHTML = card.nome;//mette il nome della carta come testo
   return carta;
 }
-function avversarioGioca(idCarta) {
-  var carta = document.getElementById(idCarta);
+function avversarioGioca(card) {
+  var carta = document.getElementById(card.id);
   var boardAvversario = document.getElementById("boardAvversario");
+  manaCattivo -= card.costo;
+  carta.className = card.elemento;
   boardAvversario.appendChild(carta);
+  boardCattivo.push(card);
 }
 
 
@@ -360,13 +380,12 @@ function mydumbPlay(hand) {
       arrayTemp[i] = false;
     }
   }
-  var IDDaGiocare = [];
-  var posiz = 0;
+  var carteDaGiocare = [];
   for (let i = 1; i < arrayFinale.length; i++) {//ignora elem 1
     if (arrayFinale[i] == true) {
-      IDDaGiocare.push(hand.carte[i - 1].id);
+      carteDaGiocare.push(hand.carte[i - 1]);
     }
   }
-  return IDDaGiocare;
+  return carteDaGiocare;
 }
 

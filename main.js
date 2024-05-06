@@ -12,36 +12,48 @@ document.getElementById("BottonePesca").addEventListener("click", avversarioPesc
 document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);
 //da qui **
 function cancellamiplz() {//sta funzione non serve a nulla era per capire getId se funziona, spoiler no
-  aggiornaShop();
+  var bob = mydumbPlay(manoCattivo);
+  bob.forEach(avversarioGioca);
+  console.log("mana ");
+  console.log(manaCattivo);
 }
 var nturni = 0;
 //Fine turno
 const pulsFine = document.getElementById("pulsanteFineTurno");
-pulsFine.addEventListener(fineTurno);
-function fineTurno() {
-  manaCattivo.resetManaCattivo();
-  manaBuono.resetManaBuono();
-  manoBuono.rimuoviCarta(cimiteroBuono);
-  manoCattivo.rimuoviCarta(cimiteroCattivo);
+pulsFine.addEventListener("click", fineTurno);
 
+function fineTurno() {
+  manaCattivo = 5;
+  manaBuono = 5;
+
+  for (let i = 0; i < manoBuono.carte.length - 1; i++) {
+    var c = manoBuono.rimuoviCarta(cimiteroBuono);
+    document.getElementById(c.id).remove();
+  }
+  for (let i = 0; i < manoCattivo.carte.length - 1; i++) {
+    c = manoCattivo.rimuoviCarta(cimiteroCattivo);
+    document.getElementById(c.id).remove();
+  }
   for (let i = 0; i < 5; i++) {
     if (mazzoBuono.carte.length != 0) {
-
+      giocatorePesca();
     }
     else {
-      mazzo.controllo();
-      mazzo.mescola();
-      let card = mazzo.carte.pop();
-      this.carte.push(card);
-      return card;
+      mazzoBuono.controllo(cimiteroBuono);
+      giocatorePesca();
+    }
+    if (mazzoCattivo.carte.length != 0) {
+      avversarioPesca();
+    }
+    else {
+      mazzoCattivo.controllo(cimiteroCattivo);
+      avversarioPesca();
     }
   }
 
-
-  mazzoBuono.controllo(cimiteroBuono);
-  mazzoCattivo.controllo(cimiteroCattivo);
   aggiornaShop();//resetShop
   nturni++;
+  console.log(manaCattivo);
   mydumbPlay(manoCattivo);
 }
 
@@ -55,7 +67,7 @@ function updStrValue(str) {
   strValue.textContent = newValue;
 }
 function resetStrValue() {
-  strValue = 0;
+  //strValue = 0;
   strValue.textContent = 0;
 }
 const intValue = document.getElementById('tokenInt');
@@ -66,7 +78,7 @@ function updIntValue(int) {
   intValue.textContent = newValue;
 }
 function resetIntValue() {
-  intValue = 0;
+  //intValue = 0;
   intValue.textContent = 0;
 }
 const agiValue = document.getElementById('tokenAgi');
@@ -77,7 +89,7 @@ function updAgiValue(agi) {
   agiValue.textContent = newValue;
 }
 function resetAgiValue() {
-  agiValue = 0;
+  //agiValue = 0;
   agiValue.textContent = 0;
 }
 function aggiornaShop() {
@@ -178,49 +190,8 @@ function creaCartaDaNome(nomeCarta) {//possiamo aggiungere dove va messo grafica
 }
 
 //mana
-const manaCattivo = (function () {//cosi dovrebbe essere globale ma modificabile solo dalle mie funzioni
-  let value = 5;
-  function getManaCattivo() {
-    return value;
-  }
-  function updManaCattivo(i) {
-    if (!isNaN(i)) {//se i è un numero
-      manaCattivo += i;
-    }
-    else throw new exception("updManaCattivo ha ricevuto NaN")
-  }
-  function resetManaCattivo() {//funzione per il fine turno 
-    manaCattivo = 5;
-  }
-  return {//cosi si possono accedere da altre funzioni
-    getManaCattivo: getManaCattivo,
-    updManaCattivo: updManaCattivo,
-    resetManaCattivo: resetManaCattivo
-  }
-})();
-
-const manaBuono = (function () {//cosi dovrebbe essere globale ma modificabile solo dalle mie funzioni
-  let value = 5;
-  function getValue() {
-    return value;
-  }
-  function updManaBuono(i) {
-    if (!isNaN(i)) {//se i è un numero
-      manaBuono += i;
-      updManaBar(i);
-    }
-    else throw new exception("updManaBuono ha ricevuto NaN")
-  }
-  function resetManaBuono() {//funzione per il fine turno 
-    manaBuono = 5;
-    resetManaBar();
-  }
-  return {//cosi si possono accedere da altre funzioni
-    getValue: getValue,
-    updManaBuono: updManaBuono,
-    resetManaBuono: resetManaBuono
-  }
-})();
+var manaCattivo = 5;
+var manaBuono = 5;
 
 const mazzoBuono = new Deck();//creazione mazzo
 const mazzoCattivo = new Deck();
@@ -337,9 +308,9 @@ function creaCartaAvversario(card) { //card è un instanza della classe carta(è
   carta.innerHTML = card.nome;//mette il nome della carta come testo
   return carta;
 }
-function giocaCartaAvversario(idCarta) {
+function avversarioGioca(idCarta) {
   var carta = document.getElementById(idCarta);
-  var boardAvversario = document.getElementById(boardAvversario);
+  var boardAvversario = document.getElementById("boardAvversario");
   boardAvversario.appendChild(carta);
 }
 
@@ -369,7 +340,7 @@ function mydumbPlay(hand) {
   var arrayFinale = [nCarte + 1];//se carta usata ha nel suo slot true senno false
   arrayFinale[0] = 999;//in primo slot metto spesa massima della combinazione
   var arrayTemp = [nCarte];//ci salvo bool delle varie carte in combinazione
-  var costoMax = manaCattivo.getManaCattivo();//costo della combinazione attuale
+  var costoMax = manaCattivo;//costo della combinazione attuale
   for (let cartaIni = 0; cartaIni <= nCarte - 1; cartaIni++) {
     for (let pos = 0; pos <= nCarte - 1; pos++) {
       var ciclo = (pos + cartaIni) % nCarte;//ti cicla per tutte le carte ma inizi da un altro punto es 2,3,0,1
@@ -384,7 +355,7 @@ function mydumbPlay(hand) {
         arrayFinale[i + 1] = arrayTemp[i];
       }
     }
-    costoMax = manaCattivo.getManaCattivo()//quando vado a carta dopo resetto tutto
+    costoMax = manaCattivo//quando vado a carta dopo resetto tutto
     for (let i = 0; i < nCarte; i++) {//resetto anche l array
       arrayTemp[i] = false;
     }

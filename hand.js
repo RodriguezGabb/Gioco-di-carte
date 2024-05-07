@@ -15,9 +15,13 @@ class Hand {
         }
     }
     rimuoviCarta(cimitero) {
-        var c = this.carte.pop();
+        let c = this.carte.pop();
         cimitero.carte.push(c);
         return c;
+    }
+    togliCartaSpecifica(card) {
+        let x = this.carte.indexOf(card);
+        this.carte.splice(x, 1);
     }
 }
 export default Hand;

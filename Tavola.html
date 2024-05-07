@@ -8,23 +8,6 @@
     <title>Card Game</title>
     <link rel="stylesheet" href="StyleTavola.css">
     <script src="main.js" type="module"></script>
-    <style>
-        #bar {
-            width: 200px;
-            height: 20px;
-            background-color: lightgray;
-            position: relative;
-        }
-
-        #fill {
-            height: 100%;
-            background-color: rgb(110, 135, 29);
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: width 0.5s ease;
-        }
-    </style>
 
 <body>
     <!--Debug-->
@@ -42,9 +25,26 @@
         <!-- Massiomo 5 carte in mano -->
     </div>
     <div class="contenitoreMazzoAvversario" id="contenitoreMazzoAvversario">
+        <table>
+            <tr>
+                <!-- Hp bar-->
+                <td class="hpBar" id="hpBarAvversario">
+                    <div class="hpBarFill" id="hpFillAvversario"></div>
+                </td>
+            </tr>
+            <tr>
+                <!-- mana bar-->
+                <td class="manaBar" id="manaBarAvversario">
+                    <div class="manaBarFill" id="manaFillAvversario"></div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
         <!-- Funzione per dire che resta una carta sola? -->
-        <div class="mazzo" id="mazzoAvversario">Mazzo avversario
-        </div>
+        <div class="mazzo" id="mazzoAvversario">Mazzo avversario</div>
         <div class="blocchetto"></div>
         <div class="cimitero" id="cimiteroAvversario">Cimitero avversario</div>
     </div>
@@ -97,7 +97,24 @@
 
 
     <div class="contenitoreMazzoGiocaotore" id="contenitoreMazzoGiocatore">
-        <!-- Funzione per dire che resta una carta sola? -->
+        <table>
+            <tr>
+                <!-- Hp bar-->
+                <td class="hpBar" id="hpBarGiocatore">
+                    <div class="hpBarFill" id="hpFillGiocatore"></div>
+                </td>
+            </tr>
+            <tr>
+                <!-- mana bar-->
+                <td class="manaBar" id="manaBarGiocatore">
+                    <div class="manaBarFill" id="manaFillGiocatore"></div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
         <div class="cimitero" id="cimiteroGiocatore">Cimitero giocatore
             <div class="nCardCimitero" id="nCardCimitero">0</div>
         </div>

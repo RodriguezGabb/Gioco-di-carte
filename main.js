@@ -29,23 +29,29 @@ function fineTurno() {
   //rimposta a 5 il mana del giocatore e del avversario
   manaCattivo = 5;
   manaBuono = 5;
+  //rimuove le crte dalla board
+  while (boardBuono.length != 0) {
+    let c = boardBuono.pop();
+    document.getElementById(c.id).remove();
+    cimiteroBuono.carte.push(c);
+
+  }
+  while (boardCattivo.length != 0) {
+    let c = boardCattivo.pop();
+    document.getElementById(c.id).remove();
+    cimiteroCattivo.carte.push(c);
+
+  }
   //rimupve le carte dalle mani
   while (manoBuono.carte.length != 0) {
     let c = manoBuono.rimuoviCarta(cimiteroBuono);
     document.getElementById(c.id).remove();
   }
   while (manoCattivo.carte.length != 0) {
-    c = manoCattivo.rimuoviCarta(cimiteroCattivo);
+    let c = manoCattivo.rimuoviCarta(cimiteroCattivo);
     document.getElementById(c.id).remove();
   }
-  /*while (boardBuono.length != 0) { //Sono stanco capo smetto qui per ora
-    c = boardBuono.pop;
-    document.getElementById(c.id).remove();
-  }
-  while (boardCattivo.length != 0) {
-    c = boardCattivo.pop;
-    document.getElementById(c.id).remove();
-  }*/
+
   //pesca una nuova mano e in caso rimescola il mazzo
   for (let i = 0; i < 5; i++) {
     if (mazzoBuono.carte.length != 0) {
@@ -249,6 +255,7 @@ function bottoneOnClick(card, idBottone) {
   var carta = document.getElementById(card.id);//prende la carta con l'id e lo mette sulla board
   var board = document.getElementById("boardGiocatore");
   var bottone = document.getElementById(idBottone);
+  manoBuono.togliCartaSpecifica(card);
   board.appendChild(carta);
   boardBuono.push(card);
   bottone.className = "bottoneInvisibile";
@@ -330,6 +337,7 @@ function avversarioGioca(card) {
   var boardAvversario = document.getElementById("boardAvversario");
   manaCattivo -= card.costo;
   carta.className = card.elemento;
+  manoCattivo.togliCartaSpecifica(card);
   boardAvversario.appendChild(carta);
   boardCattivo.push(card);
 }

@@ -214,8 +214,6 @@
     display: inline-block;
 }
 
-
-
 /*shop*/
 .shopScritta {
     text-align: center;
@@ -297,6 +295,39 @@
     font-size: 20px;
 }
 
+/* barre */
+.manaBar {
+    width: 200px;
+    height: 20px;
+    background-color: rgba(211, 211, 211, 0.959);
+    position: relative;
+}
+
+.manaBarFill {
+    height: 100%;
+    background-color: rgb(110, 135, 29);
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transition: width 0.5s ease;
+}
+
+.hpBar {
+    width: 200px;
+    height: 20px;
+    background-color: pink;
+    position: relative;
+}
+
+.hpBarBarFill {
+    height: 100%;
+    background-color: red;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transition: width 0.5s ease;
+}
+
 /*classi da cancellare*/
 .table {
     border: 1px solid red;
@@ -309,7 +340,6 @@
 }
 
 .pupu {
-    height: 40px;
     border: 1px solid blue;
 }
 
@@ -319,5 +349,5 @@
 
 .blocco {
     border: 1px solid greenyellow;
-
+    height: 5px;
 }

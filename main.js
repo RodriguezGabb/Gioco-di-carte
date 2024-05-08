@@ -29,7 +29,7 @@ function fineTurno() {
   //rimposta a 5 il mana del giocatore e del avversario
   manaCattivo = 5;
   manaBuono = 5;
-  //rimuove le crte dalla board
+  //rimuove le carte dalla board
   while (boardBuono.length != 0) {
     let c = boardBuono.pop();
     document.getElementById(c.id).remove();
@@ -75,6 +75,7 @@ function fineTurno() {
   nturni++;//counter di turni
   var carteDaGiocare = mydumbPlay(manoCattivo);
   carteDaGiocare.forEach(avversarioGioca);
+  resetManaBar();
 }
 
 //shop
@@ -252,6 +253,11 @@ function carteOnClick(idBottone) {
 }
 // Funzione che fa giocare la carta
 function bottoneOnClick(card, idBottone) {
+  if (card.costo > window.GoodManafullness) {
+    alert("non hai abbastanza energia");
+    return;
+  }
+  updGoodManaBar(-card.costo);
   var carta = document.getElementById(card.id);//prende la carta con l'id e lo mette sulla board
   var board = document.getElementById("boardGiocatore");
   var bottone = document.getElementById(idBottone);
@@ -260,6 +266,7 @@ function bottoneOnClick(card, idBottone) {
   boardBuono.push(card);
   bottone.className = "bottoneInvisibile";
   bottone.display = "none";
+  //shop
   if (card.elemento == "agi") {
     updAgiValue(card.livello);
   }
@@ -269,6 +276,19 @@ function bottoneOnClick(card, idBottone) {
   else if (card.elemento == "int") {
     updIntValue(card.livello);
   }
+  //effetti standard carte
+  if (card.tipo == "penetrante") {
+    console.log("pen");
+    updEvilLifeBar(-card.value);
+  }
+  else if (card.tipo == "attacco") {
+    let danno = updEvilArmour(-card.value);
+    updEvilLifeBar(-danno);
+  }
+  else if (card.tipo == "difesa") {
+    let danno = updGoodArmour(card.value);
+  }
+
 }
 //funzione per far pescare il giocatore
 function giocatorePesca() {

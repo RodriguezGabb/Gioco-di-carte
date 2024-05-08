@@ -296,14 +296,15 @@
 }
 
 /* barre */
-.manaBar {
+/*mana*/
+#manaBarAvversario {
     width: 200px;
     height: 20px;
     background-color: rgba(211, 211, 211, 0.959);
     position: relative;
 }
 
-.manaBarFill {
+#fillEvilMana {
     height: 100%;
     background-color: rgb(110, 135, 29);
     position: absolute;
@@ -312,16 +313,83 @@
     transition: width 0.5s ease;
 }
 
-.hpBar {
+#manaBarGiocatore {
+    width: 200px;
+    height: 20px;
+    background-color: rgba(211, 211, 211, 0.959);
+    position: relative;
+}
+
+#fillGoodMana {
+    height: 100%;
+    background-color: rgb(110, 135, 29);
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transition: width 0.5s ease;
+}
+
+/*vita*/
+
+#hpBarAvversario {
     width: 200px;
     height: 20px;
     background-color: pink;
     position: relative;
 }
 
-.hpBarBarFill {
+#fillEvilLife {
     height: 100%;
     background-color: red;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transition: width 0.5s ease;
+}
+
+#hpBarGiocatore {
+    width: 200px;
+    height: 20px;
+    background-color: pink;
+    position: relative;
+}
+
+#fillGoodLife {
+    height: 100%;
+    background-color: red;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transition: width 0.5s ease;
+}
+
+/*armatura*/
+#armourBarAvversario {
+    width: 200px;
+    height: 20px;
+    background-color: rgb(164, 160, 160);
+    position: relative;
+}
+
+#fillEvilarmour {
+    height: 100%;
+    background-color: rgba(1, 1, 1, 0.429);
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transition: width 0.5s ease;
+}
+
+#armourBarGiocatore {
+    width: 200px;
+    height: 20px;
+    background-color: rgb(164, 160, 160);
+    position: relative;
+}
+
+#fillGoodarmour {
+    height: 100%;
+    background-color: rgba(1, 1, 1, 0.429);
     position: absolute;
     top: 0%;
     left: 0%;

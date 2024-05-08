@@ -14,12 +14,8 @@
     <button id="BottonePesca">BottonePesca</button>
     <button id="debug">debug</button>
     <button id="Rimuovi">Rimuovi</button>
-    <!--energy bar-->
-    <div id="bar">
-        <div id="fill"></div>
-    </div>
 
-    <script src="energyManager.js"></script> <!-- il js per update va messo nel main js-->
+
     <!--lato avversario-->
     <div class="mano" id="manoAvversario">
         <!-- Massiomo 5 carte in mano -->
@@ -28,14 +24,20 @@
         <table>
             <tr>
                 <!-- Hp bar-->
-                <td class="hpBar" id="hpBarAvversario">
-                    <div class="hpBarFill" id="hpFillAvversario"></div>
+                <td class="hpBarAvversario" id="hpBarAvversario">
+                    <div class="fillEvilLife" id="fillEvilLife"></div>
                 </td>
             </tr>
             <tr>
                 <!-- mana bar-->
-                <td class="manaBar" id="manaBarAvversario">
-                    <div class="manaBarFill" id="manaFillAvversario"></div>
+                <td class="manaBarAvversario" id="manaBarAvversario">
+                    <div class="fillEvilMana" id="fillEvilMana"></div>
+                </td>
+            </tr>
+            <tr>
+                <!-- armour bar-->
+                <td class="armourBarAvversario" id="armourBarAvversario">
+                    <div class="fillEvilarmour" id="fillEvilarmour"></div>
                 </td>
             </tr>
             <tr>
@@ -100,14 +102,20 @@
         <table>
             <tr>
                 <!-- Hp bar-->
-                <td class="hpBar" id="hpBarGiocatore">
-                    <div class="hpBarFill" id="hpFillGiocatore"></div>
+                <td class="hpBarGiocatore" id="hpBarGiocatore">
+                    <div class="fillGoodLife" id="fillGoodLife"></div>
                 </td>
             </tr>
             <tr>
                 <!-- mana bar-->
-                <td class="manaBar" id="manaBarGiocatore">
-                    <div class="manaBarFill" id="manaFillGiocatore"></div>
+                <td class="manaBarGiocatore" id="manaBarGiocatore">
+                    <div class="fillGoodMana" id="fillGoodMana"></div>
+                </td>
+            </tr>
+            <tr>
+                <!-- armour bar-->
+                <td class="armourBarGiocatore" id="armourBarGiocatore">
+                    <div class="fillGoodarmour" id="fillGoodarmour"></div>
                 </td>
             </tr>
             <tr>
@@ -124,6 +132,8 @@
     <div class="mano" id="manoGiocatore">
         <!-- Massiomo 5 carte in mano -->
     </div>
+    <script src="energyManager.js"></script> <!-- se li metti prima crasha tutto-->
+    <script src="lifeManager.js"></script>
 </body>
 
 </html>

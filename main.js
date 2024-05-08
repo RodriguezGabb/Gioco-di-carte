@@ -73,9 +73,11 @@ function fineTurno() {
   updateCarteInCimi();
   aggiornaShop();//resetShop
   nturni++;//counter di turni
+  resetEvilArmour();//reset armatura avversario quando è il suo turno;
   var carteDaGiocare = mydumbPlay(manoCattivo);
   carteDaGiocare.forEach(avversarioGioca);
-  resetManaBar();
+  resetGoodManaBar();
+  resetGoodArmour();//resetto armatura quando riè turno giocatore
 }
 
 //shop
@@ -278,7 +280,6 @@ function bottoneOnClick(card, idBottone) {
   }
   //effetti standard carte
   if (card.tipo == "penetrante") {
-    console.log("pen");
     updEvilLifeBar(-card.value);
   }
   else if (card.tipo == "attacco") {
@@ -357,6 +358,19 @@ function avversarioGioca(card) {
   var boardAvversario = document.getElementById("boardAvversario");
   manaCattivo -= card.costo;
   carta.className = card.elemento;
+
+  //effetti standard carte
+  if (card.tipo == "penetrante") {
+    updGoodLifeBar(-card.value);
+  }
+  else if (card.tipo == "attacco") {
+    let danno = updGoodArmour(-card.value);
+    updGoodLifeBar(-danno);
+  }
+  else if (card.tipo == "difesa") {
+    let danno = updEvilArmour(card.value);
+  }
+
   manoCattivo.togliCartaSpecifica(card);
   boardAvversario.appendChild(carta);
   boardCattivo.push(card);

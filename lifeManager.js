@@ -46,10 +46,9 @@ function updGoodArmour(i) {
 }
 function updEvilArmour(i) {
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
-    if (i < 0) {//se danno
-        i = -i;
+    if (i < 0) {//se danno, è numero positivo!!!!
         if (i <= window.EvilarmourFullness) {//danno<=armatura
-            window.EvilarmourFullness += i;
+            window.EvilarmourFullness = window.EvilarmourFullness - i;
             setEvilarmourBar();
             return 0;
         }
@@ -58,18 +57,32 @@ function updEvilArmour(i) {
         setEvilarmourBar();
         return temp;//cosi sappiamo danno extra da infliggere
     }
-    //se armatura
+    //se è più armatura
     window.EvilarmourFullness += i;
     setEvilarmourBar();
     return 0;
 }
+function resetGoodArmour() {
+    window.GoodarmourFullness = 0;
+    setGoodarmourBar();
+}
+function resetEvilArmour() {
+    window.EvilarmourFullness = 0;
+    setEvilarmourBar();
+}
 function updGoodLifeBar(i) {
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
+    if (i < 0 && i > window.GoodLifeFullness) {
+        alert("hai perso")
+    }
     window.GoodLifeFullness += i;
     setGoodLifeBar();
 }
 function updEvilLifeBar(i) {
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
+    if (i < 0 && i > window.EvilLifeFullness) {
+        alert("hai vinto")
+    }
     window.EvilLifeFullness += i;
     setEvilLifeBar();
 }

@@ -220,11 +220,13 @@ const mazzoBuono = new Deck();//creazione mazzo
 const mazzoCattivo = new Deck();
 const cimiteroBuono = new Deck();
 const cimiteroCattivo = new Deck();
-cimiteroBuono.svuota();
-cimiteroCattivo.svuota();
+mazzoBuono.CreaDeckBuono();
+mazzoCattivo.CreaDeckCattivo();
 mazzoBuono.mescola();
 mazzoCattivo.mescola();
 const shopx = new shop();
+console.log("mazzo Cattivo:")
+console.log(mazzoCattivo.carte);
 
 console.log("mazzo buono:")
 console.log(mazzoBuono.carte);
@@ -254,7 +256,7 @@ function carteOnClick(idBottone) {
   }
 }
 // Funzione che fa giocare la carta
-function bottoneOnClick(card, idBottone) {
+function bottoneOnClick(card, idBottone) {//Giocatore gioca
   if (card.costo > window.GoodManafullness) {
     alert("non hai abbastanza energia");
     return;
@@ -263,11 +265,12 @@ function bottoneOnClick(card, idBottone) {
   var carta = document.getElementById(card.id);//prende la carta con l'id e lo mette sulla board
   var board = document.getElementById("boardGiocatore");
   var bottone = document.getElementById(idBottone);
-  manoBuono.togliCartaSpecifica(card);
   board.appendChild(carta);
+  manoBuono.togliCartaSpecifica(card);
   boardBuono.push(card);
   bottone.className = "bottoneInvisibile";
   bottone.display = "none";
+  carta.style.cursor = "default";
   //shop
   if (card.elemento == "agi") {
     updAgiValue(card.livello);

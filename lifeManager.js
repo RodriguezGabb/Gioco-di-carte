@@ -30,7 +30,7 @@ function updGoodArmour(i) {
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
     if (i < 0) {//se danno
         if (i <= window.GoodarmourFullness) {//danno<=armatura
-            window.GoodarmourFullness += i;
+            window.GoodarmourFullness = window.GoodarmourFullness + i;
             setGoodarmourBar();
             return 0;
         }
@@ -46,9 +46,9 @@ function updGoodArmour(i) {
 }
 function updEvilArmour(i) {
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
-    if (i < 0) {//se danno, è numero positivo!!!!
+    if (i < 0) {//se danno
         if (i <= window.EvilarmourFullness) {//danno<=armatura
-            window.EvilarmourFullness = window.EvilarmourFullness - i;
+            window.EvilarmourFullness = window.EvilarmourFullness + i;
             setEvilarmourBar();
             return 0;
         }

@@ -5,12 +5,12 @@ window.EvilManafullness = 0;
 // Function to update the bar based on the variable value
 function setGoodManaBar() {
     const fillGoodMana = document.getElementById('fillGoodMana');
-    const GoodmanaPercentage = (window.GoodManafullness / 10) * 100; // da 0 a 10 ma standard è 5
+    const GoodmanaPercentage = (window.GoodManafullness / 5) * 100; // da 0 a 10 ma standard è 5
     fillGoodMana.style.width = GoodmanaPercentage + '%';
 }
 function setEvilManaBar() {
     const fillEvilMana = document.getElementById('fillEvilMana');
-    const EvilmanaPercentage = (window.EvilManafullness / 10) * 100; // da 0 a 10 ma standard è 5
+    const EvilmanaPercentage = (window.EvilManafullness / 5) * 100; // da 0 a 10 ma standard è 5
     fillEvilMana.style.width = EvilmanaPercentage + '%';
 }
 

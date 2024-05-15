@@ -153,7 +153,29 @@ function creaCartaShop(card, id) {
   bottoneCompra.style.display = "block";
   carta.appendChild(bottoneCompra);
   //dobbiamo fare l'event listener
+  bottoneCompra.addEventListener("click", function () {
+    bottoneCompra(card, bottone.id);
+  });
 }
+function bottoneCompra(card, idBottone) {//compra carta
+  if (card.costoShop >= agiValue && card.elemento == "agi") {//se è agi e ho abbastanza punti nella sfera giusta
+    //in qualche modo compare in cimitero
+    updAgiValue(-card.costoShop);//valore sfera viene ridotto
+    return;
+  }
+  else if (card.costoShop >= strValue && card.elemento == "str") {
+    //in qualche modo compare in cimitero
+    updStrValue(-card.costoShop);
+    return;
+  }
+  else if (card.costoShop >= intValue && card.elemento == "int") {
+    //in qualche modo compare in cimitero
+    updIntValue(-card.costoShop);
+    return;
+  }
+}
+
+
 function creaCartaDaNome(nomeCarta) {//possiamo aggiungere dove va messo graficamente forse
   var c = new carta();
   if (nomeCarta == "taglio") {

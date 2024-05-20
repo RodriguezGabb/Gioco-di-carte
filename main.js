@@ -142,6 +142,7 @@ function aggiornaShop() {
 }
 function creaCartaShop(card, id) {
   var carta = document.getElementById(id);
+  carta.style.display = "block";
   carta.className = card.elemento + "Shop";//Class serve per lo stile
   carta.innerHTML = card.nome;//cosa per debug
   card.id = id;
@@ -158,23 +159,35 @@ function creaCartaShop(card, id) {
   });
 }
 function bottoneCompraAct(card, idBottone) {//compra carta
-  if (card.costoShop >= agiValue.textContent && card.elemento == "agi") {//se è agi e ho abbastanza punti nella sfera giusta
-    //in qualche modo compare in cimitero
+  if (card.costoShop <= agiValue.textContent && card.elemento == "agi") {//se è agi e ho abbastanza punti nella sfera giusta
+    shopToCimitero(card, idBottone);
     updAgiValue(-card.costoShop);//valore sfera viene ridotto
     return;
   }
-  else if (card.costoShop >= strValue.textContent && card.elemento == "str") {
-    //in qualche modo compare in cimitero
+  else if (card.costoShop <= strValue.textContent && card.elemento == "str") {
+    shopToCimitero(card, idBottone);
     updStrValue(-card.costoShop);
     return;
   }
-  else if (card.costoShop >= intValue.textContent && card.elemento == "int") {
-    //in qualche modo compare in cimitero
+  else if (card.costoShop <= intValue.textContent && card.elemento == "int") {
+    shopToCimitero(card, idBottone);
     updIntValue(-card.costoShop);
     return;
   }
 }
-
+var shopNumeroId = 0;
+function shopToCimitero(card, idBottone) {
+  let bottone = document.getElementById(idBottone);
+  bottone.remove();
+  let carta = document.getElementById(card.id);
+  card.id = card.nome + shopNumeroId;
+  shopNumeroId++;
+  console.log(cimiteroBuono);
+  cimiteroBuono.carte.push(card);
+  console.log(cimiteroBuono);
+  carta.style.display = "none";
+  updateCarteInCimi();
+}
 
 function creaCartaDaNome(nomeCarta) {//possiamo aggiungere dove va messo graficamente forse
   var c = new carta();
@@ -410,13 +423,6 @@ function updateCarteInCimi() {
   nCimA.textContent = cimiteroBuono.carte.length;
 }
 
-updateCarteInCimi(5);
-
-
-
-
-
-
 //ia section
 function mydumbPlay(hand) {
   var costi = [];
@@ -456,3 +462,18 @@ function mydumbPlay(hand) {
   return carteDaGiocare;
 }
 
+
+/*inizioPartita();
+function inizioPartita() {
+  manaCattivo = 5;
+  manaBuono = 5;
+  nturni = 0;
+  mazzoBuono.svuota();
+  mazzoCattivo.svuota();
+  mazzoBuono.CreaDeckBuono();
+  mazzoCattivo.CreaDeckCattivo();
+  mazzoBuono.mescola();
+  mazzoCattivo.mescola();
+
+  fineTurno();
+}*/

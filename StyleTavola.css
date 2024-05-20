@@ -625,27 +625,22 @@
     }
 }
 
+/*Dafare*/
+/*Numeri vicino barre*/
+/*buono*/
+.LifeNumber {
+    height: 20px;
+    border: solid 1px black;
+}
+
+.ManaNumber {
+    height: 20px;
+    border: solid 1px black;
+}
+
+.ArmourNumber {
+    height: 20px;
+    border: solid 1px black;
+}
+
 /*classi da cancellare*/
-.table {
-    border: 1px solid red;
-    width: 100%;
-}
-
-
-.cacca {
-    height: 75px;
-    border: 1px solid greenyellow;
-}
-
-.pupu {
-    border: 1px solid blue;
-}
-
-.separatore {
-    height: 200px;
-}
-
-.blocco {
-    border: 1px solid greenyellow;
-    height: 5px;
-}

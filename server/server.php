@@ -8,8 +8,7 @@
 <body>
     <?php
     // Attempt database connection
-    $dbconn = pg_connect("host=localhost port=5433 dbname=EsempioConnessionePHP user=postgres password=password")
-        or die('Could not connect: ' . pg_last_error());
+    $dbconn = pg_connect("host=localhost port=5433 dbname=ltw user=postgres password=serverGod162");
 
     // Attempt query execution
     $query = 'SELECT * FROM organizzazione';

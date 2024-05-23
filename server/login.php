@@ -1,13 +1,12 @@
 <?php
-    $dbconn = pg_connect("host=localhost port=5433 dbname=ltw user=postgres password=serverGod162");
-
+// Connessione al database
+require 'db_connection.php';
 ?>
 <!DOCTYPE html>
 <html>
 <head></head>
 <body>
 <?php
-if ($dbconn) {
     $email = $_POST['inputEmail'];
     $q1 = "select * from utente where email= $1";
     $result = pg_query_params($dbconn, $q1, array($email));
@@ -29,7 +28,7 @@ if ($dbconn) {
             per iniziare ad usare il sito";
         }
     }
-}
+
 ?>
 </body>
 </html>

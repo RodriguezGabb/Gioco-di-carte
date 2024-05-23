@@ -14,51 +14,19 @@ require 'db_connection.php';
 <body>
     <h2>Dati della Tabella User</h2>
     <?php
-    $sql = "SELECT * FROM player";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $users = $stmt->fetchAll();//separa in un array il risultato della querry
-    if ($users) {
-        echo "<table border='1'>
-              <tr>
-                  <th>Nome</th>
-                  <th>Password</th>
-              </tr>";
-        foreach ($users as $user) {
-            echo "<tr>
-                  <td>{$user['playername']}</td>
-                  <td>{$user['playerpassword']}</td>
-                  </tr>";//playername non ha la N maiuscola e playerpassword non ha la P maiuscola qunado ritornato da fetchall
+    $query = 'SELECT * FROM classifica ORDER BY "turn" ASC';
+    $result = pg_query($query);
+    // Printing results in HTML
+    echo "<table>\n";
+    while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+        echo "\t<tr>\n";
+        foreach ($line as $col_value) {
+            echo "\t\t<td>$col_value</td>";
         }
-        echo "</table>";
-    } else {
-        echo "<p>Nessun dato trovato nella tabella 'player'.</p>";
+        echo "\t</tr>\n";
     }
-    ?>
-
-    <h2>Dati della Tabella Classifica</h2>
-    <?php
-    $sql = "SELECT * FROM classifica ORDER BY turn ASC";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $classifiche = $stmt->fetchAll();
-
-    if ($classifiche) {
-        echo "<table border='1'>
-              <tr>
-                  <th>Nome Giocatore</th>
-                  <th>Turno</th>
-              </tr>";
-        foreach ($classifiche as $classifica) {
-            echo "<tr>
-                  <td>{$classifica['playername']}</td>
-                  <td>{$classifica['turn']}</td>
-                  </tr>";//playername non ha la N maiuscola qunado ritornato da fetchall
-        }
-        echo "</table>";
-    } else {
-        echo "<p>Nessun dato trovato nella tabella 'classifica'.</p>";
-    }
+    echo "</table>\n";
+    pg_free_result($result);
     ?>
 </body>
 

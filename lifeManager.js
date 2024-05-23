@@ -7,7 +7,11 @@ const evilLifeNumber = document.getElementById("evilLifeNumber");
 const goodLifeNumber = document.getElementById("goodLifeNumber");
 const evilArmourNumber = document.getElementById("evilArmourNumber");
 const goodArmourNumber = document.getElementById("goodArmourNumber");
-
+//Numero turni 
+var nTurni = 0;
+function incrTurni() {
+    nTurni += 1;
+}
 // Function to update the bar based on the variable value
 function setGoodLifeBar() {
     const fillGoodLife = document.getElementById('fillGoodLife');
@@ -100,7 +104,9 @@ function updEvilLifeBar(i) {
         window.EvilLifeFullness += i;
         setEvilLifeBar();
         updateEvilLifeNumber(window.EvilLifeFullness);
+        localStorage.setItem("nTurni", nTurni);
         alert("hai vinto");
+
     }
     window.EvilLifeFullness += i;
     setEvilLifeBar();

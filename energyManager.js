@@ -1,7 +1,7 @@
 // Define fullness globally
 window.GoodManafullness = 0;
 window.EvilManafullness = 0;
-const evilManaNumber = document.getElementById("eviManaNumber");
+const evilManaNumber = document.getElementById("evilManaNumber");
 const goodManaNumber = document.getElementById("goodManaNumber");
 // Function to update the bar based on the variable value
 function setGoodManaBar() {

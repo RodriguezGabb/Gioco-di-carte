@@ -46,16 +46,6 @@
             background-color: rgba(255, 255, 255, 0.9);
         }
     </style>
-</head>
-
-<body>
-    <div class="menu-title">Gioco di carte sulla scherma del 1500?</div>
-    <div class="menu-buttons">
-        <button class="menu-button" onclick="play()">Gioca</button>
-        <button class="menu-button" onclick="showLeaderboard()">Classifica</button>
-        <button class="menu-button" onclick="showTutorial()">Tutorial</button>
-    </div>
-
     <script>
         function play() {
             window.location.href = 'tavola.html';
@@ -68,7 +58,34 @@
         function showTutorial() {
             window.location.href = 'tutorial.png';
         }
+        function inscriviti() {
+            window.location.href = 'http://localhost:3000/server/inscriversi.php';
+        }
+        function accedi() {
+            window.location.href = 'http://localhost:3000/server/accedi.php';
+        }
+
     </script>
+</head>
+
+<body>
+    <div class="menu-title">Gioco di carte sulla scherma del 1500?</div>
+    <div class="menu-buttons">
+        <button class="menu-button" onclick="play()">Gioca</button>
+        <button class="menu-button" onclick="showLeaderboard()">Classifica</button>
+        <button class="menu-button" onclick="showTutorial()">Tutorial</button>
+        <table>
+            <tr>
+                <td>
+                    <button class="menu-button" onclick="inscriviti()">Inscriviti</button>
+                </td>
+                <td>
+                    <button class="menu-button" onclick="accedi()">Accedi</button>
+                </td>
+            </tr>
+        </table>
+
+    </div>
 </body>
 
 </html>

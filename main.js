@@ -20,7 +20,6 @@ function debug() {
   console.log(manoBuono);
   console.log(manoBuono.carte.length);
 }
-var nturni = 0;
 //Fine turno
 const pulsFine = document.getElementById("pulsanteFineTurno");
 pulsFine.addEventListener("click", fineTurno);
@@ -72,7 +71,7 @@ function fineTurno() {
 
   updateCarteInCimi();
   aggiornaShop();//resetShop
-  nturni++;//counter di turni
+  incrTurni();//counter di turni
   resetEvilArmour();//reset armatura avversario quando è il suo turno;
   var carteDaGiocare = mydumbPlay(manoCattivo);
   carteDaGiocare.forEach(avversarioGioca);
@@ -467,7 +466,6 @@ function mydumbPlay(hand) {
 function inizioPartita() {
   manaCattivo = 5;
   manaBuono = 5;
-  nturni = 0;
   mazzoBuono.svuota();
   mazzoCattivo.svuota();
   mazzoBuono.CreaDeckBuono();

@@ -140,10 +140,10 @@ function aggiornaShop() {
   resetIntValue();
 }
 function creaCartaShop(card, id) {
-  var carta = document.getElementById(id);
+  let carta = document.getElementById(id);
+  let img = document.getElementById(id + "Img");
   carta.style.display = "block";
   carta.className = card.elemento + "Shop";//Class serve per lo stile
-  carta.innerHTML = card.nome;//cosa per debug
   card.id = id;
   //bottone compra
   var bottoneCompra = document.createElement("button");
@@ -151,10 +151,12 @@ function creaCartaShop(card, id) {
   bottoneCompra.setAttribute("id", "bottone" + id);
   bottoneCompra.innerHTML = "Compra";
   bottoneCompra.style.display = "block";
+  let path = 'images/versione_shop/' + card.immagine;
+  img.src = path;
+  carta.appendChild(img);
   carta.appendChild(bottoneCompra);
   //dobbiamo fare l'event listener
-  let path = 'images/versione_shop/' + card.immagine;
-  carta.src = path;
+
   bottoneCompra.addEventListener("click", function () {
     bottoneCompraAct(card, bottoneCompra.id);
   });
@@ -351,16 +353,17 @@ function giocatorePesca() {
 
 //Funzione di creazione della prima carta del mazzo
 function creaCartaGiocatore(card) {//card è un instanza della classe carta(è la carta logica da creare grafficamente)
-  var carta = document.createElement("img");
+  let carta = document.createElement("div");
+  let img = document.createElement("img");
   carta.className = card.elemento;//Class serve per lo stile
   let path = 'images/versione_normale/' + card.immagine;
-  carta.src = path;
+  img.src = path;
   carta.setAttribute("id", card.id);
-  carta.innerHTML = card.nome;//cosa per debug
-  var bottone = document.createElement("button");
+  let bottone = document.createElement("button");
   bottone.className = "bottoneGioca";
   bottone.setAttribute("id", "bottoneGiocaDi" + card.id);
   bottone.innerHTML = "Gioca";
+  carta.appendChild(img);
   carta.appendChild(bottone);
   bottone.style.display = "none";
   //event listener dei componenti

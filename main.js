@@ -349,8 +349,10 @@ function giocatorePesca() {
 
 //Funzione di creazione della prima carta del mazzo
 function creaCartaGiocatore(card) {//card è un instanza della classe carta(è la carta logica da creare grafficamente)
-  var carta = document.createElement("div");
+  var carta = document.createElement("img");
   carta.className = card.elemento;//Class serve per lo stile
+  let path = 'images/versione_normale/' + card.immagine;
+  carta.src = path;
   carta.setAttribute("id", card.id);
   carta.innerHTML = card.nome;//cosa per debug
   var bottone = document.createElement("button");
@@ -472,6 +474,4 @@ function inizioPartita() {
   mazzoCattivo.CreaDeckCattivo();
   mazzoBuono.mescola();
   mazzoCattivo.mescola();
-
-  fineTurno();
 }*/

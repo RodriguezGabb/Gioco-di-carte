@@ -153,6 +153,8 @@ function creaCartaShop(card, id) {
   bottoneCompra.style.display = "block";
   carta.appendChild(bottoneCompra);
   //dobbiamo fare l'event listener
+  let path = 'images/versione_shop/' + card.immagine;
+  carta.src = path;
   bottoneCompra.addEventListener("click", function () {
     bottoneCompraAct(card, bottoneCompra.id);
   });
@@ -386,15 +388,19 @@ function avversarioPesca() {
 }
 /*test per vedere se ho capito il tuo codice*/
 function creaCartaAvversario(card) { //card è un instanza della classe carta(è la carta logica da creare grafficamente)
-  var carta = document.createElement("div");
+  var carta = document.createElement("img");
   carta.className = "carteManoAvversario";//te posso di che tanto le carte del avv sono di dorso quindi va bene cosi
   carta.setAttribute("id", card.id);
   carta.innerHTML = card.nome;//mette il nome della carta come testo
+  let path = 'images/retro.jpeg';
+  carta.src = path;
   return carta;
 }
 function avversarioGioca(card) {
   var carta = document.getElementById(card.id);
   var boardAvversario = document.getElementById("boardAvversario");
+  let path = 'images/versione_normale/' + card.immagine;
+  carta.src = path;
   manaCattivo -= card.costo;
   carta.className = card.elemento;
 

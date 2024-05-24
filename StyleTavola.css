@@ -327,6 +327,9 @@ body {
 
 /*shop*/
 .shopScritta {
+    font-weight: bold;
+    color: red;
+    font-size: 24px;
     text-align: center;
 }
 
@@ -388,7 +391,7 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #6b4444;
+    background-color: #f50202;
     color: white;
     display: flex;
     justify-content: center;
@@ -407,7 +410,7 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #28439d;
+    background-color: #022597;
     color: white;
     display: flex;
     justify-content: center;
@@ -426,7 +429,7 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #419236;
+    background-color: #199709;
     color: white;
     display: flex;
     justify-content: center;

@@ -68,9 +68,6 @@ function inizioPartita() {
   }
 }
 
-
-
-
 function fineTurno() {
   //rimposta a 5 il mana del giocatore e del avversario
   manaCattivo = 5;
@@ -483,7 +480,7 @@ function mydumbPlay(hand) {
 }
 //bottoni per vittoria/sconfitta
 function registratiButtonAction() {
-  window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php';//andrea
+  window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/test.php';//andrea
   // //gabriel
   inviaDataInscriversi();
 }
@@ -500,8 +497,8 @@ function rigiocaButtonAction() {
 }
 
 function inviaDataInscriversi() {
-  let nTurn = getTurni();
-  fetch('http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php', {
+  let nTurn = 5;
+  fetch('http://localhost:3000/Downloads/Gioco-di-carte-main/server/test.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -514,7 +511,7 @@ function inviaDataInscriversi() {
     })
     .catch((error) => {
       console.error('Error:', error);
-    })
+    });
 }
 function inviaDataAccedi() {
   let nTurn = getTurni();

@@ -395,6 +395,8 @@ img {
     background-color: crimson;
     display: none;
     position: absolute;
+    top: 40%;
+    left: 15%;
     width: 60px;
     height: 30px;
     border-radius: 50%;

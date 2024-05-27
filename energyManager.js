@@ -1,9 +1,9 @@
-// Define fullness globally
+// inizializzazione
 window.GoodManafullness = 0;
 window.EvilManafullness = 0;
 const evilManaNumber = document.getElementById("evilManaNumber");
 const goodManaNumber = document.getElementById("goodManaNumber");
-// Function to update the bar based on the variable value
+// aggiornamento barre
 function setGoodManaBar() {
     const fillGoodMana = document.getElementById('fillGoodMana');
     const GoodmanaPercentage = (window.GoodManafullness / 5) * 100; // da 0 a 10 ma standard è 5
@@ -39,10 +39,10 @@ function resetEvilManaBar() {
 }
 
 function updateEvilManaNumber(number) {
-    evilManaNumber.textContent = number; // Update the text content of the number div
+    evilManaNumber.textContent = number; // aggiorna div
 }
 function updateGoodManaNumber(number) {
-    goodManaNumber.textContent = number; // Update the text content of the number div
+    goodManaNumber.textContent = number; // aggiorna div
 }
 resetGoodManaBar();
 resetEvilManaBar();

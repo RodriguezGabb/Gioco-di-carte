@@ -1,4 +1,4 @@
-// Define fullness globally
+// inizializzazioni
 window.GoodLifeFullness = 0;
 window.EvilLifeFullness = 0;
 window.GoodarmourFullness = 0;
@@ -12,7 +12,7 @@ var nTurni = 0;
 function incrTurni() {
     nTurni += 1;
 }
-// Function to update the bar based on the variable value
+// aggiorna le barre
 function setGoodLifeBar() {
     const fillGoodLife = document.getElementById('fillGoodLife');
     const GoodlifePercentage = (window.GoodLifeFullness / 30) * 100; // da 0 a 10 ma standard è 30
@@ -36,7 +36,7 @@ function setEvilarmourBar() {
 
 function updGoodArmour(i) {
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
-    if (i < 0) {//se danno
+    if (i < 0) {//se player riceve danno
         if (i <= window.GoodarmourFullness) {//danno<=armatura
             window.GoodarmourFullness = window.GoodarmourFullness + i;
             setGoodarmourBar();
@@ -47,9 +47,9 @@ function updGoodArmour(i) {
         window.GoodarmourFullness = 0;
         setGoodarmourBar();
         updateGoodArmourNumber(window.GoodarmourFullness);
-        return temp;//cosi sappiamo danno extra da infliggere
+        return temp;//temp è il danno extra che viene inflitto
     }
-    //se armatura
+    //se riceve armatura
     window.GoodarmourFullness += i;
     setGoodarmourBar();
     updateGoodArmourNumber(window.GoodarmourFullness);
@@ -57,7 +57,7 @@ function updGoodArmour(i) {
 }
 function updEvilArmour(i) {
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
-    if (i < 0) {//se danno
+    if (i < 0) {//se avversario riceve danno
         if (i <= window.EvilarmourFullness) {//danno<=armatura
             window.EvilarmourFullness = window.EvilarmourFullness + i;
             setEvilarmourBar();
@@ -68,9 +68,9 @@ function updEvilArmour(i) {
         window.EvilarmourFullness = 0;
         setEvilarmourBar();
         updateEvilArmourNumber(window.EvilarmourFullness);
-        return temp;//cosi sappiamo danno extra da infliggere
+        return temp;//te,p è danno extra che viene inflitto
     }
-    //se è più armatura
+    //se riceve armatura
     window.EvilarmourFullness += i;
     setEvilarmourBar();
     updateEvilArmourNumber(window.EvilarmourFullness);
@@ -86,7 +86,7 @@ function resetEvilArmour() {
     setEvilarmourBar();
     updateEvilArmourNumber(0);
 }
-function updGoodLifeBar(i) {
+function updGoodLifeBar(i) {//aggiorna vita e barra vita player
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
     if (i <= 0 && i >= window.GoodLifeFullness) {
         window.GoodLifeFullness += i;
@@ -98,7 +98,7 @@ function updGoodLifeBar(i) {
     setGoodLifeBar();
     updateGoodLifeNumber(window.GoodLifeFullness);
 }
-function updEvilLifeBar(i) {
+function updEvilLifeBar(i) {//aggiorna vita e barra vita avversario
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
     if (i <= 0 && i >= window.EvilLifeFullness) {
         window.EvilLifeFullness += i;
@@ -106,7 +106,7 @@ function updEvilLifeBar(i) {
         updateEvilLifeNumber(window.EvilLifeFullness);
         localStorage.setItem("nTurni", nTurni);
         alert("hai vinto");
-
+        window.location.href = '/server/index.html';
     }
     window.EvilLifeFullness += i;
     setEvilLifeBar();
@@ -122,17 +122,17 @@ function resetEvilLifeBar() {
     setEvilLifeBar();
     updateEvilLifeNumber(30);
 }
-function updateEvilLifeNumber(number) {
-    evilLifeNumber.textContent = number; // Update the text content of the number div
+function updateEvilLifeNumber(numero) {
+    evilLifeNumber.textContent = numero; // aggiorna div
 }
-function updateGoodLifeNumber(number) {
-    goodLifeNumber.textContent = number; // Update the text content of the number div
+function updateGoodLifeNumber(numero) {
+    goodLifeNumber.textContent = numero; // aggiorna div
 }
-function updateEvilArmourNumber(number) {
-    evilArmourNumber.textContent = number; // Update the text content of the number div
+function updateEvilArmourNumber(numero) {
+    evilArmourNumber.textContent = numero; // aggiorna div
 }
-function updateGoodArmourNumber(number) {
-    goodArmourNumber.textContent = number; // Update the text content of the number div
+function updateGoodArmourNumber(numero) {
+    goodArmourNumber.textContent = numero; // aggiorna div
 }
 resetGoodLifeBar();
 resetEvilLifeBar();

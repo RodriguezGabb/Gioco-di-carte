@@ -1,4 +1,3 @@
-<!--Questo è un HTML temporaneo per creare il board game-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,9 +21,10 @@
     </div>
     <div class="contenitoreMazzoAvversario" id="contenitoreMazzoAvversario">
         <!-- Funzione per dire che resta una carta sola? -->
-        <div class="mazzo" id="mazzoAvversario"><img src="images/retro.jpeg" alt="mazzo avversario"></div>
+        <div class="mazzo" id="mazzoAvversario"><img src="images/retro/mazzo.jpeg" alt="mazzo avversario"></div>
         <div class="blocchetto"></div>
-        <div class="cimitero" id="cimiteroAvversario"><img src="images/retro.jpeg" alt="cimitero avversario"></div>
+        <div class="cimitero" id="cimiteroAvversario"><img src="images/retro/cimitero.jpeg" alt="cimitero avversario">
+        </div>
         <table>
             <tr>
                 <!-- Hp bar-->
@@ -62,20 +62,20 @@
                     </tr>
                     <tr><!--prima riga dello shop (quelle fisse)-->
                         <td class="shopZonaCarte">
-                            <div class="carteShop" id="cartaShop1"><img id="cartaShop1Img" src="images/retro.jpeg"
-                                    alt="cartaShop1"></div>
-                            <div class="carteShop" id="cartaShop2"><img id="cartaShop2Img" src="images/retro.jpeg"
-                                    alt="cartaShop2"></div>
-                            <div class="carteShop" id="cartaShop3"><img id="cartaShop3Img" src="images/retro.jpeg"
-                                    alt="cartaShop3"></div>
+                            <div class="carteShop" id="cartaShop1"><img id="cartaShop1Img"
+                                    src="images/retro/retro3.jpeg" alt="cartaShop1"></div>
+                            <div class="carteShop" id="cartaShop2"><img id="cartaShop2Img"
+                                    src="images/retro/retro3.jpeg" alt="cartaShop2"></div>
+                            <div class="carteShop" id="cartaShop3"><img id="cartaShop3Img"
+                                    src="images/retro/retro3.jpeg" alt="cartaShop3"></div>
                         </td>
                     </tr>
                     <tr><!--seconda riga dello shop (quelle random)-->
                         <td class="shopZonaCarte">
-                            <div class="carteShop" id="cartaShop4"><img id="cartaShop4Img" src="images/retro.jpeg"
-                                    alt="cartaShop4"></div>
-                            <div class="carteShop" id="cartaShop5"><img id="cartaShop5Img" src="images/retro.jpeg"
-                                    alt="cartaShop5"></div>
+                            <div class="carteShop" id="cartaShop4"><img id="cartaShop4Img"
+                                    src="images/retro/retro3.jpeg" alt="cartaShop4"></div>
+                            <div class="carteShop" id="cartaShop5"><img id="cartaShop5Img"
+                                    src="images/retro/retro3.jpeg" alt="cartaShop5"></div>
                         </td>
                     </tr>
                     <tr><!--Risorse per aquistare-->
@@ -134,16 +134,16 @@
             </tr>
         </table>
 
-        <div class="cimitero" id="cimiteroGiocatore"><img src="images/retro.jpeg" alt="mazzo giocatore">
+        <div class="cimitero" id="cimiteroGiocatore"><img src="images/retro/cimitero.jpeg" alt="mazzo giocatore">
             <div class="nCardCimitero" id="nCardCimitero">0</div>
         </div>
         <div class="blocchetto"></div>
-        <div class="mazzo" id="mazzoGiocatore"><img src="images/retro.jpeg" alt="cimitero giocatore"></div>
+        <div class="mazzo" id="mazzoGiocatore"><img src="images/retro/mazzo.jpeg" alt="cimitero giocatore"></div>
     </div>
     <div class="mano" id="manoGiocatore">
         <!-- Massiomo 5 carte in mano -->
     </div>
-    <script src="energyManager.js"></script> <!-- se li metti prima crasha tutto-->
+    <script src="energyManager.js"></script>
     <script src="lifeManager.js"></script>
 </body>
 

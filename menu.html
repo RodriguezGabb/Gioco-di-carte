@@ -50,41 +50,22 @@
         function play() {
             window.location.href = 'tavola.html';
         }
-
         function showLeaderboard() {
-            //window.location.href = 'game.html';
+            window.location.href = 'server/display_data.html';
         }
-
         function showTutorial() {
-            window.location.href = 'tutorial.png';
-        }
-        function inscriviti() {
-            window.location.href = 'http://localhost:3000/server/inscriversi.php';
-        }
-        function accedi() {
-            window.location.href = 'http://localhost:3000/server/accedi.php';
+            window.location.href = 'images/tutorial.png';
         }
 
     </script>
 </head>
 
 <body>
-    <div class="menu-title">Gioco di carte sulla scherma del 1500?</div>
+    <div class="menu-title">Gioco di carte sulla scherma italiana del sedicesimo secolo</div>
     <div class="menu-buttons">
         <button class="menu-button" onclick="play()">Gioca</button>
         <button class="menu-button" onclick="showLeaderboard()">Classifica</button>
         <button class="menu-button" onclick="showTutorial()">Tutorial</button>
-        <table>
-            <tr>
-                <td>
-                    <button class="menu-button" onclick="inscriviti()">Inscriviti</button>
-                </td>
-                <td>
-                    <button class="menu-button" onclick="accedi()">Accedi</button>
-                </td>
-            </tr>
-        </table>
-
     </div>
 </body>
 

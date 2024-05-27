@@ -30,10 +30,16 @@ function check($playerName, $playerPassword)
         if ($line['playername'] == $playerName && $line['playerpassword'] == $playerPassword) {
             return true;
         }
-
     }
     return false;
 }
+function getTurni(){
+    $turni = file_get_contents("php://input");
+    $decoded = json_decode($turni, true);
+    $myTurni = $decoded['data'];
+    $response = array('status' => 'success', 'data' => $myTurni);
+    return $myTurni;
+    }
 ?>
 
 <!DOCTYPE html>

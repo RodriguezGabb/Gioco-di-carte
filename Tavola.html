@@ -9,10 +9,29 @@
     <script src="main.js" type="module"></script>
 
 <body>
-    <!--Debug-->
-    <button id="BottonePesca">BottonePesca</button>
-    <button id="debug">debug</button>
-    <button id="Rimuovi">Rimuovi</button>
+    <!--caso vittoria-->
+    <div class="vittoria" id="vittoria">
+        <p>Complimenti hai vinto!<br>Vuoi registrare il tuo punteggio?</p>
+        <table>
+            <tr>
+                <td><button class="accedi" id="accedi">Accedi</button></td>
+                <td><button class="registrati" id="registrati">Registrati</button></td>
+                <td><button class="menu-button" id="menu1Button">Torna al menu</button></td>
+            </tr>
+        </table>
+    </div>
+    <!--caso sconfitta-->
+    <div class="vittoria" id="sconfitta">
+        <p>Complimenti hai perso!<br>Vuoi riprovare o tornare al menu?</p>
+        <table>
+            <tr>
+                <td><button class="rigioca" id="rigioca">Riprova</button></td>
+                <td><button class="menu-button" id="menu2Button">Torna al menu</button></td>
+            </tr>
+        </table>
+    </div>
+    <!--layer nero-->
+    <div class="layer_nero" id="layer_nero"></div>
 
 
     <!--lato avversario-->

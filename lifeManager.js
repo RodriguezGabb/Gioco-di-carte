@@ -36,15 +36,19 @@ function setEvilarmourBar() {
 
 function updGoodArmour(i) {
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
+
     if (i < 0) {//se player riceve danno
-        if (i <= window.GoodarmourFullness) {//danno<=armatura
+
+        if (-i <= window.GoodarmourFullness) {//danno<=armatura bloccato
             window.GoodarmourFullness = window.GoodarmourFullness + i;
             setGoodarmourBar();
             updateGoodArmourNumber(window.GoodarmourFullness);
             return 0;
         }
-        let temp = i - window.GoodarmourFullness;
+        console.log(i);
+        let temp = i + window.GoodarmourFullness;
         window.GoodarmourFullness = 0;
+        console.log(temp);
         setGoodarmourBar();
         updateGoodArmourNumber(window.GoodarmourFullness);
         return temp;//temp è il danno extra che viene inflitto
@@ -58,13 +62,13 @@ function updGoodArmour(i) {
 function updEvilArmour(i) {
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
     if (i < 0) {//se avversario riceve danno
-        if (i <= window.EvilarmourFullness) {//danno<=armatura
+        if (-i <= window.EvilarmourFullness) {//danno<=armatura bloccato
             window.EvilarmourFullness = window.EvilarmourFullness + i;
             setEvilarmourBar();
             updateEvilArmourNumber(window.EvilarmourFullness);
             return 0;
         }
-        let temp = i - window.EvilarmourFullness;
+        let temp = i + window.EvilarmourFullness;
         window.EvilarmourFullness = 0;
         setEvilarmourBar();
         updateEvilArmourNumber(window.EvilarmourFullness);
@@ -88,30 +92,25 @@ function resetEvilArmour() {
 }
 function updGoodLifeBar(i) {//aggiorna vita e barra vita player
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
-    if (i <= 0 && i >= window.GoodLifeFullness) {
-        window.GoodLifeFullness += i;
-        setGoodLifeBar();
-        updateGoodLifeNumber(window.GoodLifeFullness);
-        alert("hai perso");
-    }
     window.GoodLifeFullness += i;
     setGoodLifeBar();
     updateGoodLifeNumber(window.GoodLifeFullness);
+    if (window.GoodLifeFullness <= 0) {
+        document.getElementById("sconfitta").style.display = "block";
+        document.getElementById("layer_nero").style.display = "block"
+    }
 }
 function updEvilLifeBar(i) {//aggiorna vita e barra vita avversario
     if (Number.isNaN(i)) { throw new Error("life variata con NaN") }
-    if (i <= 0 && i >= window.EvilLifeFullness) {
-        window.EvilLifeFullness += i;
-        setEvilLifeBar();
-        updateEvilLifeNumber(window.EvilLifeFullness);
-        localStorage.setItem("nTurni", nTurni);
-        alert("hai vinto");
-        window.location.href = '/server/index.html';
-    }
     window.EvilLifeFullness += i;
     setEvilLifeBar();
     updateEvilLifeNumber(window.EvilLifeFullness);
+    if (window.EvilLifeFullness <= 0) {
+        document.getElementById("vittoria").style.display = "block";
+        document.getElementById("layer_nero").style.display = "block"
+    }
 }
+
 function resetGoodLifeBar() {
     window.GoodLifeFullness = 30;
     setGoodLifeBar();

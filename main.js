@@ -25,6 +25,17 @@ const manoCattivo = new Hand();
 //per board
 const boardBuono = [];
 const boardCattivo = [];
+//per vittoria/sconfitta
+const registratiButton = document.getElementById('registrati');
+registratiButton.addEventListener("click", registratiButtonAction);
+const menu2Button = document.getElementById('menu1Button');
+menu2Button.addEventListener("click", menuButtonAction);
+const menu1Button = document.getElementById('menu2Button');
+menu1Button.addEventListener("click", menuButtonAction);
+const accediButton = document.getElementById('accedi');
+accediButton.addEventListener("click", accediButtonAction);
+const rigiocaButton = document.getElementById('rigioca');
+rigiocaButton.addEventListener("click", rigiocaButtonAction);
 //per pescare cliccando su mazzo,  meccanica deprecata
 //document.getElementById("mazzoGiocatore").addEventListener("click", giocatorePesca);
 
@@ -323,7 +334,7 @@ function bottoneOnClick(card, idBottone) {//Giocatore gioca
   }
   else if (card.tipo == "attacco") {
     let danno = updEvilArmour(-card.value);
-    updEvilLifeBar(-danno);
+    updEvilLifeBar(danno);
   }
   else if (card.tipo == "difesa") {
     let danno = updGoodArmour(card.value);
@@ -416,7 +427,7 @@ function avversarioGioca(card) {
   }
   else if (card.tipo == "attacco") {
     let danno = updGoodArmour(-card.value);
-    updGoodLifeBar(-danno);
+    updGoodLifeBar(danno);
   }
   else if (card.tipo == "difesa") {
     let danno = updEvilArmour(card.value);
@@ -469,4 +480,57 @@ function mydumbPlay(hand) {
     }
   }
   return carteDaGiocare;
+}
+//bottoni per vittoria/sconfitta
+function registratiButtonAction() {
+  window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php';//andrea
+  // //gabriel
+  inviaDataInscriversi();
+}
+function menuButtonAction() {
+  window.location.href = 'menu.html';
+}
+function accediButtonAction() {
+  window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/accedi.php';//andrea
+  // //gabriel
+  inviaDataAccedi();
+}
+function rigiocaButtonAction() {
+  location.reload();
+}
+
+function inviaDataInscriversi() {
+  let nTurn = getTurni();
+  fetch('http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ data: nTurn })
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    })
+}
+function inviaDataAccedi() {
+  let nTurn = getTurni();
+  console.log(nTurn);
+  fetch('http://localhost:3000/Downloads/Gioco-di-carte-main/server/accedi.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ data: nTurn })
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    })
 }

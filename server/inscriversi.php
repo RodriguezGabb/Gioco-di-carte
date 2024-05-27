@@ -13,11 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica che i campi non siano vuoti e che i tipi di dati siano corretti
     if (!empty($playerName) && !empty($playerPassword)) {
         if (doppione($playerName)) {
-            $result = pg_insert($db, "player", ["playername" => $playerName, "playerpassword" => $playerPassword]);
-            if ($result) {
-                $insertMessage .= "Dati inseriti nella tabella 'player' con successo!<br>";
-            } else {
-                $insertMessage .= "Errore nell'inserimento dei dati nella tabella 'player'.<br>";
+            $resultPerPlayer = pg_insert($db, "player", ["playername" => $playerName, "playerpassword" => $playerPassword]);
+            $nTurni=getTurni();
+            $resultPerClassifica = pg_insert($db, "player", ["playername" => $playerName, "turn" => $nTurni]);
+             if ($resultPerPlayer && $resultPerClassifica) {
+                $insertMessage .= "Dati inseriti con successo nel server !<br>";
+            }
+            else {
+                $insertMessage .= "Errore nell'inserimento dei dati nel server.<br>";
             }
         } else {
             $insertMessage .= "Nome utente già utilizzato.<br> Inserirne un altro.<br>";
@@ -26,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 function doppione($playerName)
 {
-    $querry = 'SELECT playername FROM player';
+    $querry = 'SELECT "playername" FROM "player"';
     $result = pg_query($querry);
     while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
         foreach ($line as $col_value) {
@@ -36,6 +39,13 @@ function doppione($playerName)
         }
     }
     return true;
+}
+function getTurni(){
+$turni = file_get_contents("php://input");
+$decoded = json_decode($turni, true);
+$myTurni = $decoded['data'];
+$response = array('status' => 'success', 'data' => $myTurni);
+return $myTurni;
 }
 ?>
 

@@ -106,6 +106,7 @@ function updEvilLifeBar(i) {//aggiorna vita e barra vita avversario
     setEvilLifeBar();
     updateEvilLifeNumber(window.EvilLifeFullness);
     if (window.EvilLifeFullness <= 0) {
+        localStorage.setItem("nTurni", nTurni);
         document.getElementById("vittoria").style.display = "block";
         document.getElementById("layer_nero").style.display = "block"
     }

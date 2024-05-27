@@ -1,4 +1,7 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
 // Connessione al database
 require 'db_connection.php';
 
@@ -7,6 +10,7 @@ $insertMessage = '';
 
 // Controlla se il modulo è stato inviato
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nTurni = $_POST['$nTurni'];
     $playerName = $_POST['playerName'];
     $playerPassword = $_POST['playerPassword'];
 
@@ -33,13 +37,14 @@ function check($playerName, $playerPassword)
     }
     return false;
 }
-function getTurni(){
+function getTurni()
+{
     $turni = file_get_contents("php://input");
     $decoded = json_decode($turni, true);
     $myTurni = $decoded['data'];
     $response = array('status' => 'success', 'data' => $myTurni);
     return $myTurni;
-    }
+}
 ?>
 
 <!DOCTYPE html>

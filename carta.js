@@ -1,7 +1,7 @@
 class carta {//id num serve per differenziare le carte dello stesso tipo con un numero che aumenta di uno, es: affondo1 affondo2 affondo3
     constructor() {
         this.nome = "nome carta";
-        this.tipo = "tipo carta";//attacco,penetrazione,difesa
+        this.tipo = "tipo carta";//attacco,penetrante,difesa
         this.elemento = "elem carta";//str,agi,int
         this.livello = "livello";//1,2,3
         this.immagine = "immagine";
@@ -17,7 +17,7 @@ class carta {//id num serve per differenziare le carte dello stesso tipo con un 
         this.generaCarta("taglio", "attacco", "str", 1, "taglio.png", 1, 3, idNum, 2);
     }
     CreaToccata(idNum) {
-        this.generaCarta("Toccata", "penetrazione", "str", 1, "toccata.png", 1, 3, idNum, 2);//no idea
+        this.generaCarta("Toccata", "penetrante", "str", 1, "toccata.png", 1, 3, idNum, 2);//no idea
     }
     //lv2
     CreaBattuta(idNum) {

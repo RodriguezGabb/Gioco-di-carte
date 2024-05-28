@@ -14,7 +14,7 @@ class Deck {
             this.carte[i] = oldValue;
         }
     }
-    controllo(cimitero) {
+    controllo(cimitero) {//sposta carte da cimitero al mazzo e mescola
         if (this.carte.length == 0) {
             while (cimitero.carte.length != 0) {
                 let card = cimitero.carte.pop();

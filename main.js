@@ -113,7 +113,7 @@ function fineTurno() {
     }
   }
 
-  updateCarteInCimi();
+  updateCarteInCimi();//numero carte in cimitero
   aggiornaShop();//resetShop
   incrTurni();//counter di turni
   resetEvilArmour();//reset armatura avversario quando è il suo turno;
@@ -453,7 +453,7 @@ function mydumbPlay(hand) {
   var costoMax = manaCattivo;//costo della combinazione attuale
   for (let cartaIni = 0; cartaIni <= nCarte - 1; cartaIni++) {
     for (let pos = 0; pos <= nCarte - 1; pos++) {
-      var ciclo = (pos + cartaIni) % nCarte;//ti cicla per tutte le carte ma inizi da un altro punto es 2,3,0,1
+      var ciclo = (pos + cartaIni) % nCarte;//cicla per tutte le carte ma inizi da un altro punto es 2,3,0,1
       if (costi[ciclo] <= costoMax) {//se costa più di quanto hai non la puoi lanciare
         costoMax = costoMax - costi[ciclo];
         arrayTemp[ciclo] = true;//aggiorni l array e il costo rimanente
@@ -466,7 +466,7 @@ function mydumbPlay(hand) {
       }
     }
     costoMax = manaCattivo//quando vado a carta dopo resetto tutto
-    for (let i = 0; i < nCarte; i++) {//resetto anche l array
+    for (let i = 0; i < nCarte; i++) {//resetta l array
       arrayTemp[i] = false;
     }
   }

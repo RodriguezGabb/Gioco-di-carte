@@ -10,12 +10,14 @@ $insertMessage = '';
 
 // Controlla se il modulo è stato inviato
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nTurni = $_POST['$nTurni'];
+    $nTurni = $_POST['turni'];
     $playerName = $_POST['playerName'];
     $playerPassword = $_POST['playerPassword'];
 
     if (check($playerName, $playerPassword)) {
-        $result = pg_insert($db, "player", ["playername" => $playerName, "playerpassword" => $playerPassword]);
+        $resultPerPlayer = pg_insert($db, "player", ["playername" => $playerName, "playerpassword" => $playerPassword]);
+        $resultPerClassifica = pg_insert($db, "classifica", ["playername" => $playerName, "turn" => $nTurni]);
+
         if ($result) {
             $insertMessage .= "Dati inseriti nella tabella 'player' con successo!<br>";
         } else {
@@ -37,14 +39,6 @@ function check($playerName, $playerPassword)
     }
     return false;
 }
-function getTurni()
-{
-    $turni = file_get_contents("php://input");
-    $decoded = json_decode($turni, true);
-    $myTurni = $decoded['data'];
-    $response = array('status' => 'success', 'data' => $myTurni);
-    return $myTurni;
-}
 ?>
 
 <!DOCTYPE html>
@@ -60,14 +54,30 @@ function getTurni()
 
 <body>
     <h2>Accedi!</h2>
-    <form method="post" action="inscriversi.php">
+    <form method="post" action="inscriversi.php" id="formAccedi">
+        <input type="hidden" id="turni" name="turni" value="-1">
         <label for="playerName">Nome Giocatore:</label>
         <input type="text" id="playerName" name="playerName" required><br>
         <label for="playerPassword">Password:</label>
         <input type="Password" id="playerPassword" name="playerPassword" required><br><br>
 
-        <input type="submit" value="Inscriviti">
+        <input id="bottoneAccedi" type="submit" value="Accedi">
     </form>
+    <script>
+        function mySubmit() {
+            const form = document.getElementById("formAccedi");
+            form.addEventListener("click", function (event) { event.preventDefault() });
+            let temp = localStorage.getItem("nTurni");
+            document.formAccedi.turni.value = Math.floor(temp);//floor serve a rendere temp un intero.
+            temp = Math.floor(temp);
+
+            alert(temp);
+            form.submit();
+            return true;
+        }
+        const bottoneAccedi = document.getElementById("bottoneAccedi");
+        bottoneAccedi.addEventListener("click", mySubmit);
+    </script>
 </body>
 
 </html>

@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($playerName) && !empty($playerPassword)) {
         if (doppione($playerName)) {
             $resultPerPlayer = pg_insert($db, "player", ["playername" => $playerName, "playerpassword" => $playerPassword]);
-            $resultPerClassifica = pg_insert($db, "player", ["playername" => $playerName, "turni" => $nTurni]);
+            $resultPerClassifica = pg_insert($db, "classifica", ["playername" => $playerName, "turn" => $nTurni]);
             if ($resultPerPlayer && $resultPerClassifica) {
                 $insertMessage .= "Dati inseriti con successo nel server !<br>";
             } else {
@@ -49,7 +49,7 @@ function doppione($playerName)
 
 <body>
     <h2>Inscriviti!</h2>
-    <form name="formIscrviti" method="post" action="inscriversi.php">
+    <form name="formIscrviti" method="post" action="inscriversi.php" id="formIscrviti">
         <input type="hidden" id="turni" name="turni" value="-1">
         <label for="playerName">Nome Giocatore:</label>
         <input type="text" id="playerName" name="playerName" required><br>
@@ -60,10 +60,14 @@ function doppione($playerName)
     </form>
     <script>
         function mySubmit() {
+            const form = document.getElementById("formIscrviti");
+            form.addEventListener("click", function (event) { event.preventDefault() });
             let temp = localStorage.getItem("nTurni");
             document.formIscrviti.turni.value = Math.floor(temp);//floor serve a rendere temp un intero.
-            console.log("ciao");
-            console.log(temp);
+            temp = Math.floor(temp);
+
+            alert(temp);
+            form.submit();
             return true;
         }
         const bottoneIscriviti = document.getElementById("bottoneIscriviti");

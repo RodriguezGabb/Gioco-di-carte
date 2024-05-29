@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>pagina per login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/favicon-32x32.png" />
+    <link rel="stylesheet" href="./signin.css" />
+</head>
+
+<body class="text-center">
+    <form name="myForm" action="login.php" method="POST" class="form-signin m-auto" onsubmit="return alertRmb()">
+        <h1 class="mb-3">loggati se vuoi mettere il tuo punteggio in classifica</h1>
+        <input type="nome" placeholder="username" name="name" class="form-control" required autofocus>
+        <input type="password" placeholder="Password" name="inputPassword" class="form-control" required>
+        <div id="divRemember" class="checkbox mb-2">
+            <input type="checkbox" name="remember" id="rmb">
+            <label for="rmb">Ricordami</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Invia!</button>
+    </form>
+</body>
+
+</html>

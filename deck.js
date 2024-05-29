@@ -4,9 +4,14 @@ class Deck {
         this.carte = [];
     }
     contaCarte() {
-        return this.carte.length;
+        try {
+            return this.carte.length;
+
+        } catch (error) {
+            console.log("contacarte esplode");
+        }
     }
-    mescola() {//cambia posizioni carte in deck
+    mescola() {//cambia posizione carte in deck
         for (let i = this.contaCarte - 1; i > 0; i--) {
             const newIndex = Math.floor(Math.random() * (i + 1));
             const oldValue = this.carte[newIndex];
@@ -14,7 +19,7 @@ class Deck {
             this.carte[i] = oldValue;
         }
     }
-    controllo(cimitero) {//sposta carte da cimitero al mazzo e mescola
+    controllo(cimitero) {
         if (this.carte.length == 0) {
             while (cimitero.carte.length != 0) {
                 let card = cimitero.carte.pop();
@@ -30,7 +35,7 @@ class Deck {
         this.carte.push(card);
     }
     //Creazione mazzi
-    CreaDeckBuono() {
+    CreaDeckBuono() {//non deve fare return ma aggire sul mazzo che chiama la funzione coglione di merda
         var ret = [];
         let idNum = 1;
         for (var i = 0; i < 5; i++) {
@@ -65,4 +70,7 @@ class Deck {
         this.carte = ret;
     }
 }
+
+
+
 export default Deck;

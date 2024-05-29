@@ -1,64 +1,14 @@
 body {
-    height: 90%;
+    height: 100%;
     width: 100%;
     background-image: url('images/sfondoGioco.png');
-    overflow-x: hidden;
-    transform: scale(1);
-}
-
-img {
-    height: 100%;
-    width: 100%;
-}
-
-/*vittoria*/
-/*vittoria*/
-.vittoria {
-    position: absolute;
-    display: none;
-    text-align: center;
-    top: 50%;
-    left: 45%;
-    border: 1px solid black;
-    background-color: darkgrey;
-    /*lo sovrappone sulle altre div*/
-    z-index: 1000;
-}
-
-.layer_nero {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
-    background-color: rgb(0, 0, 0);
-    opacity: 0.5;
-    display: none;
-}
-
-.vittoriaTd {
-    text-align: center;
-}
-
-.button {
-    background-color: rgb(244, 244, 244);
-    border: 1px solid rgb(221, 221, 221);
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.button:hover {
-    background-color: rgb(226, 226, 226);
 }
 
 /* Mano*/
 .mano {
     /*display: flex;*/
     text-align: center;
+    border: 1px solid brown;
 }
 
 .carteManoAvversario {
@@ -66,6 +16,7 @@ img {
     height: 150px;
     border: 1px solid black;
     border-radius: 10px;
+    /*robba sotto da cambiare*/
     background-color: white;
     display: inline-block;
 }
@@ -158,7 +109,6 @@ img {
 
 
 .strShop {
-    position: relative;
     width: 90px;
     height: 112px;
     border: 1px solid black;
@@ -177,7 +127,6 @@ img {
 }
 
 .agiShop {
-    position: relative;
     width: 90px;
     height: 112px;
 
@@ -196,7 +145,6 @@ img {
 }
 
 .intShop {
-    position: relative;
     width: 90px;
     height: 112px;
     border: 1px solid black;
@@ -213,11 +161,12 @@ img {
     }
 }
 
+/*se vuoi cerchio aumenta altezza*/
 /*bottone per giocare le carte come giocatore*/
 .bottoneGioca {
     position: absolute;
-    top: 40%;
-    left: 17%;
+    top: 60%;
+    left: 15%;
     background-color: crimson;
     display: none;
     border-radius: 50%;
@@ -240,12 +189,14 @@ img {
 .contenitoreMazzoAvversario {
     display: flex;
     justify-content: left;
+    /*border: 2px solid grey;*/
     height: auto;
 }
 
 .contenitoreMazzoGiocaotore {
     display: flex;
     justify-content: right;
+    border: 2px solid violet;
     height: 150px;
 }
 
@@ -272,7 +223,6 @@ img {
 }
 
 .cimitero {
-
     position: relative;
     width: 120px;
     height: 150px;
@@ -294,6 +244,8 @@ img {
 
 .nCardCimitero {
     /*n carte che sono in cimitero*/
+    /*content: attr(carteMorte);*/
+    /* Get the number from the 'carteMorte' attribute */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -325,6 +277,7 @@ img {
 .contenitoreCentrale {
     width: 100%;
     height: 30%;
+    border: 1px solid green;
 }
 
 .contenitoreLineaCentrale {
@@ -353,6 +306,7 @@ img {
     display: flex;
     justify-content: center;
     height: 150px;
+    border: 1px solid violet;
 }
 
 @media screen and (max-width: 1000px) {
@@ -365,7 +319,7 @@ img {
     width: 120px;
     height: 150px;
     border-radius: 20px;
-    border: 1px solid black;
+    border: 3px solid black;
     position: relative;
     background-color: rgb(150, 99, 68);
     display: inline-block;
@@ -373,9 +327,6 @@ img {
 
 /*shop*/
 .shopScritta {
-    font-weight: bold;
-    color: red;
-    font-size: 24px;
     text-align: center;
 }
 
@@ -406,11 +357,12 @@ img {
 }
 
 .bottoneCompra {
+    /*Da sistemare posizione quando abbiamo la immagine*/
     background-color: crimson;
     display: none;
-    position: absolute;
+    position: relative;
     top: 40%;
-    left: 15%;
+    left: 20%;
     width: 60px;
     height: 30px;
     border-radius: 50%;
@@ -436,7 +388,7 @@ img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #f50202;
+    background-color: #6b4444;
     color: white;
     display: flex;
     justify-content: center;
@@ -455,7 +407,7 @@ img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #022597;
+    background-color: #28439d;
     color: white;
     display: flex;
     justify-content: center;
@@ -474,7 +426,7 @@ img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #199709;
+    background-color: #419236;
     color: white;
     display: flex;
     justify-content: center;
@@ -674,26 +626,22 @@ img {
     }
 }
 
-
+/*Dafare*/
 /*Numeri vicino barre*/
 /*buono*/
 .LifeNumber {
     height: 20px;
     border: solid 1px black;
-    color: #f50202;
-    background-color: azure;
 }
 
 .ManaNumber {
     height: 20px;
     border: solid 1px black;
-    color: #022597;
-    background-color: azure;
 }
 
 .ArmourNumber {
     height: 20px;
     border: solid 1px black;
-    color: #199709;
-    background-color: azure;
 }
+
+/*classi da cancellare*/

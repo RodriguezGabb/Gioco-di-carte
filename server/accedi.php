@@ -47,21 +47,84 @@ function check($playerName, $playerPassword)
 <head>
     <meta charset="UTF-8">
     <title>Accedi</title>
-    <script>
-        var nTurni = localStorage.getItem("nTurni");
-    </script>
     <style>
         body {
-            text-align: center;
+            font-family: Arial, sans-serif;
+            background: url('/../images/sfondo\ menu.png') no-repeat center center fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
         .container {
-            position: absolute;
-            top: 20%;
-            right: 40%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            border: solid 1px black;
-            width: 25%;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form input[type="text"],
+        .form input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form input[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0062E6;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form input[type="submit"]:hover {
+            background-color: #0052cc;
+        }
+
+        .button {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #e2e2e2;
+        }
+
+        .divPulsanti {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            text-align: center;
         }
     </style>
 </head>
@@ -85,8 +148,8 @@ function check($playerName, $playerPassword)
             <table>
                 <tr>
                     <td><button class="button" onclick="goMenu()">Menu</button></td>
-                    <td><button class="button" onclick="goIscriviti()"></button></td>
-                    <td><button class="button" onclick="showLeaderboard()"></button></td>
+                    <td><button class="button" onclick="goIscriviti()">Iscriviti</button></td>
+                    <td><button class="button" onclick="showLeaderboard()">Classifica</button></td>
                 </tr>
             </table>
         </div>
@@ -115,7 +178,7 @@ function check($playerName, $playerPassword)
             //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/menu.html';//andrea
         }
         function showLeaderboard() {
-            window.location.href = 'http://localhost:3000/display_data.php'//gabriel
+            window.location.href = 'http://localhost:3000/server/display_data.php'//gabriel
             //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/display_data.php';//andrea
         }
     </script>

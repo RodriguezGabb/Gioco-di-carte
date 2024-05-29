@@ -164,7 +164,6 @@ function check($playerName, $playerPassword, $db)
             document.getElementById("turni").value = Math.floor(temp); //floor serve a rendere temp un intero.
             temp = Math.floor(temp);
 
-            alert(temp);
             form.submit();
             return true;
         }

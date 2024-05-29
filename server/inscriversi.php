@@ -155,7 +155,6 @@ function doppione($playerName, $db)
             event.preventDefault();
             let temp = localStorage.getItem("nTurni");
             document.getElementById("turni").value = Math.floor(temp);
-            alert(Math.floor(temp));
             document.getElementById("formIscrviti").submit();
         }
 

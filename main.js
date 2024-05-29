@@ -476,10 +476,8 @@ function mydumbPlay(hand) {
   }
   return carteDaGiocare;
 }
-var nTurni = 6;
 //bottoni per vittoria/sconfitta
 function registratiButtonAction() {
-  localStorage.setItem("nTurni", nTurni);
   //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php';//andrea
   window.location.href = 'http://localhost:3000/server/inscriversi.php';//gabriel
 }
@@ -487,7 +485,6 @@ function menuButtonAction() {
   window.location.href = 'menu.html';
 }
 function accediButtonAction() {
-  localStorage.setItem("nTurni", nTurni);
   //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/accedi.php';//andrea
   window.location.href = 'http://localhost:3000/server/accedi.php';//gabriel
 }

@@ -8,7 +8,7 @@ const goodLifeNumber = document.getElementById("goodLifeNumber");
 const evilArmourNumber = document.getElementById("evilArmourNumber");
 const goodArmourNumber = document.getElementById("goodArmourNumber");
 //Numero turni 
-var nTurni = 0;
+var nTurni = 1;
 function incrTurni() {
     nTurni += 1;
 }

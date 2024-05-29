@@ -49,20 +49,23 @@ function doppione($playerName, $db)
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
+            background: url('/../images/sfondo\ menu.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
         .container {
-            position: absolute;
-            top: 20%;
-            right: 40%;
-            text-align: center;
-            border: solid 1px black;
-            width: 25%;
-            padding: 20px;
             background-color: #fff;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
         }
 
         h2 {
@@ -97,6 +100,32 @@ function doppione($playerName, $db)
         .form input[type="submit"]:hover {
             background-color: #0052cc;
         }
+
+        .button {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #e2e2e2;
+        }
+
+        .divPulsanti {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -111,6 +140,15 @@ function doppione($playerName, $db)
             <input type="password" id="playerPassword" name="playerPassword" required><br><br>
             <input id="bottoneIscriviti" type="submit" value="Iscriviti">
         </form>
+        <div id="divPulsanti">
+            <table>
+                <tr>
+                    <td><button class="button" onclick="goMenu()">Menu</button></td>
+                    <td><button class="button" onclick="goAccedi()">Accedi</button></td>
+                    <td><button class="button" onclick="showLeaderboard()">Classifica</button></td>
+                </tr>
+            </table>
+        </div>
     </div>
     <script>
         function mySubmit(event) {
@@ -120,8 +158,21 @@ function doppione($playerName, $db)
             alert(Math.floor(temp));
             document.getElementById("formIscrviti").submit();
         }
-        
+
         document.getElementById("bottoneIscriviti").addEventListener("click", mySubmit);
+
+        function goAccedi() {
+            window.location.href = 'http://localhost:3000/server/Accedi.php'; //gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php'; //andrea
+        }
+        function goMenu() {
+            window.location.href = 'http://localhost:3000/menu.html'; //gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/menu.html'; //andrea
+        }
+        function showLeaderboard() {
+            window.location.href = 'http://localhost:3000/server/display_data.php'; //gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/display_data.php'; //andrea
+        }
     </script>
     <?php
     if (!empty($insertMessage)) {

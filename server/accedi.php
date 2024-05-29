@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (check($playerName, $playerPassword, $db)) {
         $result = pg_prepare($db, "update_classifica", 'UPDATE classifica SET turn = $1 WHERE playername = $2');
         $result = pg_execute($db, "update_classifica", array($nTurni, $playerName));//contro sql injection
-        
+
         if ($result) {
             $insertMessage .= "Dati aggiornati nella tabella 'classifica' con successo!<br>";
         } else {
@@ -34,7 +34,7 @@ function check($playerName, $playerPassword, $db)
     $query = 'SELECT * FROM player WHERE playername = $1 AND playerpassword = $2';
     $result = pg_prepare($db, "check_user", $query);//contro sql injection
     $result = pg_execute($db, "check_user", array($playerName, $playerPassword));
-    
+
     if (pg_fetch_array($result, null, PGSQL_ASSOC)) {
         return true;
     }
@@ -52,6 +52,7 @@ function check($playerName, $playerPassword, $db)
         body {
             font-family: Arial, sans-serif;
             background: url('/../images/sfondo\ menu.png') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;

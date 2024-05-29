@@ -23,11 +23,11 @@ require 'db_connection.php';
             justify-content: center;
             height: 100vh;
             margin: 0;
-            color: #333;
+            color: rgb(51, 51, 51);
         }
 
         .container {
-            background-color: #fff;
+            background-color: rgb(255, 255, 255);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -38,7 +38,7 @@ require 'db_connection.php';
 
         h2 {
             margin-bottom: 20px;
-            color: #333;
+            color: rgb(51, 51, 51);
             border: 1px solid black;
             background-color: darkgrey;
             padding: 10px;
@@ -64,20 +64,20 @@ require 'db_connection.php';
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: rgb(242, 242, 242);
         }
 
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: rgb(249, 249, 249);
         }
 
         tr:hover {
-            background-color: #f1f1f1;
+            background-color: rgb(241, 241, 241);
         }
 
         .button {
-            background-color: #f4f4f4;
-            border: 1px solid #ddd;
+            background-color: rgb(244, 244, 244);
+            border: 1px solid rgb(221, 221, 221);
             padding: 10px 20px;
             margin: 10px;
             border-radius: 5px;
@@ -86,7 +86,7 @@ require 'db_connection.php';
         }
 
         .button:hover {
-            background-color: #e2e2e2;
+            background-color:rgb(226, 226, 226);
         }
 
         .divPulsanti {

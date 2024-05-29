@@ -59,7 +59,7 @@ function doppione($playerName, $db)
         }
 
         .container {
-            background-color: #fff;
+            background-color: rgb(255, 255, 255);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -70,7 +70,7 @@ function doppione($playerName, $db)
 
         h2 {
             margin-bottom: 20px;
-            color: #333;
+            color: rgb(51, 51, 51);
         }
 
         .form {
@@ -90,7 +90,7 @@ function doppione($playerName, $db)
             padding: 10px;
             border: none;
             border-radius: 5px;
-            background-color: #0062E6;
+            background-color: rgb(0, 98, 230);
             color: white;
             font-size: 16px;
             cursor: pointer;
@@ -98,12 +98,12 @@ function doppione($playerName, $db)
         }
 
         .form input[type="submit"]:hover {
-            background-color: #0052cc;
+            background-color: rgb(0, 82, 204);
         }
 
         .button {
-            background-color: #f4f4f4;
-            border: 1px solid #ddd;
+            background-color: rgb(244, 244, 244);
+            border: 1px solid rgb(221, 221, 221);
             padding: 10px 20px;
             margin: 10px;
             border-radius: 5px;
@@ -112,7 +112,7 @@ function doppione($playerName, $db)
         }
 
         .button:hover {
-            background-color: #e2e2e2;
+            background-color:  rgb(226, 226, 226);
         }
 
         .divPulsanti {

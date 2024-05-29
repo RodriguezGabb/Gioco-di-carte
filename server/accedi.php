@@ -84,7 +84,7 @@ function check($playerName, $playerPassword, $db)
         .form input[type="password"] {
             padding: 10px;
             margin: 10px 0;
-            border: 1px solid #ccc;
+            border: 1px solid rgb(204, 204, 204);
             border-radius: 5px;
         }
 
@@ -92,7 +92,7 @@ function check($playerName, $playerPassword, $db)
             padding: 10px;
             border: none;
             border-radius: 5px;
-            background-color: #0062E6;
+            background-color: rgb(0, 98, 230);
             color: white;
             font-size: 16px;
             cursor: pointer;
@@ -100,11 +100,11 @@ function check($playerName, $playerPassword, $db)
         }
 
         .form input[type="submit"]:hover {
-            background-color: #0052cc;
+            background-color: rgb(0, 82, 204);
         }
 
         .button {
-            background-color: #f4f4f4;
+            background-color: rgb(224, 224, 224);
             border: 1px solid #ddd;
             padding: 10px 20px;
             margin: 10px;
@@ -114,7 +114,7 @@ function check($playerName, $playerPassword, $db)
         }
 
         .button:hover {
-            background-color: #e2e2e2;
+            background-color: rgb(226, 226, 226);
         }
 
         .divPulsanti {

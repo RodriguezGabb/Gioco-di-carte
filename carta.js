@@ -1,23 +1,23 @@
 class carta {//id num serve per differenziare le carte dello stesso tipo con un numero che aumenta di uno, es: affondo1 affondo2 affondo3
-    constructor() {//da fare imagine, aggiungere costo
+    constructor() {
         this.nome = "nome carta";
-        this.tipo = "tipo carta";
-        this.elemento = "elem carta";
-        this.livello = "livello";
+        this.tipo = "tipo carta";//attacco,penetrante,difesa
+        this.elemento = "elem carta";//str,agi,int
+        this.livello = "livello";//1,2,3
         this.immagine = "immagine";
-        this.costo = "costo carta";
-        this.value = "value carta";
+        this.costo = "costo carta";//costo per giocare la carta
+        this.value = "value carta";//quanto danno/armatura da
         this.id = "id carta";
-        this.costoShop = "costo per comprare";
+        this.costoShop = "costo per comprare";//costo per comprare da shop
     }
-    //nome,tipo,costo,valore,id gli effetti extra li possiamo mettere nella funzione che gioca le carte con un if sul nome?
+
     //forza
     //lv1
     CreaTaglio(idNum) {//valore off piu alto ma parata del avversario vale di piu?
-        this.generaCarta("taglio", "attacco", "str", 1, "taglio.png", 1, 3, idNum, 2);
+        this.generaCarta("taglio", "attacco", "str", 1, "taglio.png", 1, 30, idNum, 2);
     }
     CreaToccata(idNum) {
-        this.generaCarta("Toccata", "penetrazione", "str", 1, "toccata.png", 1, 3, idNum, 2);//no idea
+        this.generaCarta("Toccata", "penetrante", "str", 1, "toccata.png", 1, 3, idNum, 2);//no idea
     }
     //lv2
     CreaBattuta(idNum) {
@@ -30,6 +30,7 @@ class carta {//id num serve per differenziare le carte dello stesso tipo con un 
     CreaDisarmo(idNum) {
         this.generaCarta("disarmo", "attacco", "str", 3, "disarmo.png", 5, 20, idNum, 6);
     }
+
     //agi
     //lv1
     CreaCavazione(idNum) {
@@ -49,6 +50,7 @@ class carta {//id num serve per differenziare le carte dello stesso tipo con un 
     CreaInquartata(idNum) {
         this.generaCarta("inquartata", "penetrante", "agi", 3, "inquartata.png", 4, 12, idNum, 6);//+4 armatura
     }
+
     //int
     //lv1
     CreaAffondo(idNum) {
@@ -68,6 +70,7 @@ class carta {//id num serve per differenziare le carte dello stesso tipo con un 
     CreaParataDiCeduta(idNum) {
         this.generaCarta("parata di ceduta", "difesa", "int", 3, "parata di ceduta.png", 3, 15, idNum, 6);//+5 danni al taglio successivo?
     }
+
     generaCarta(nome, tipo, elemento, livello, immagine, costo, value, idNum, costoShop) {//da fare immagine
         this.nome = nome;
         this.tipo = tipo;

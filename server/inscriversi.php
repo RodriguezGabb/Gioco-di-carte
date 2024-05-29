@@ -9,31 +9,32 @@ $insertMessage = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $playerName = $_POST['playerName'];
     $playerPassword = $_POST['playerPassword'];
+    $nTurni = $_POST['turni'];
 
     // Verifica che i campi non siano vuoti e che i tipi di dati siano corretti
     if (!empty($playerName) && !empty($playerPassword)) {
-        if (doppione($playerName)) {
-            $result = pg_insert($db, "player", ["playername" => $playerName, "playerpassword" => $playerPassword]);
-            if ($result) {
-                $insertMessage .= "Dati inseriti nella tabella 'player' con successo!<br>";
+        if (doppione($playerName, $db)) {
+            $resultPerPlayer = pg_insert($db, "player", ["playername" => $playerName, "playerpassword" => $playerPassword]);
+            $resultPerClassifica = pg_insert($db, "classifica", ["playername" => $playerName, "turn" => $nTurni]);
+            if ($resultPerPlayer && $resultPerClassifica) {
+                $insertMessage .= "Dati inseriti con successo!<br>";
             } else {
-                $insertMessage .= "Errore nell'inserimento dei dati nella tabella 'player'.<br>";
+                $insertMessage .= "Errore nell'inserimento dei dati.<br>";
             }
         } else {
             $insertMessage .= "Nome utente già utilizzato.<br> Inserirne un altro.<br>";
         }
     }
 }
-function doppione($playerName)
+
+function doppione($playerName, $db)
 {
-    $querry = 'SELECT playername FROM player';
-    $result = pg_query($querry);
-    while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-        foreach ($line as $col_value) {
-            if ($col_value == $playerName) {
-                return false;
-            }
-        }
+    $query = 'SELECT "playername" FROM "player" WHERE "playername" = $1';
+    $result = pg_prepare($db, "check_duplicate", $query);//contro sql injection
+    $result = pg_execute($db, "check_duplicate", array($playerName));
+
+    if (pg_num_rows($result) > 0) {
+        return false;
     }
     return true;
 }
@@ -44,25 +45,140 @@ function doppione($playerName)
 
 <head>
     <meta charset="UTF-8">
-    <title>Inserimento Dati</title>
+    <title>Iscriviti</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('/../images/sfondo\ menu.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: rgb(51, 51, 51);
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form input[type="text"],
+        .form input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form input[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(0, 98, 230);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form input[type="submit"]:hover {
+            background-color: rgb(0, 82, 204);
+        }
+
+        .button {
+            background-color: rgb(244, 244, 244);
+            border: 1px solid rgb(221, 221, 221);
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: rgb(226, 226, 226);
+        }
+
+        .divPulsanti {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-    <h2>Inscriviti!</h2>
-    <form method="post" action="inscriversi.php">
-        <label for="playerName">Nome Giocatore:</label>
-        <input type="text" id="playerName" name="playerName" required><br>
-        <label for="playerPassword">Password:</label>
-        <input type="Password" id="playerPassword" name="playerPassword" required><br><br>
+    <div class="container">
+        <h2>Iscriviti!</h2>
+        <form class="form" method="post" action="inscriversi.php" id="formIscrviti">
+            <input type="hidden" id="turni" name="turni" value="-1">
+            <label for="playerName">Nome Giocatore:</label><br>
+            <input type="text" id="playerName" name="playerName" required><br>
+            <label for="playerPassword">Password:</label><br>
+            <input type="password" id="playerPassword" name="playerPassword" required><br><br>
+            <input id="bottoneIscriviti" type="submit" value="Iscriviti">
+        </form>
+        <div id="divPulsanti">
+            <table>
+                <tr>
+                    <td><button class="button" onclick="goMenu()">Menu</button></td>
+                    <td><button class="button" onclick="goAccedi()">Accedi</button></td>
+                    <td><button class="button" onclick="showLeaderboard()">Classifica</button></td>
+                </tr>
+            </table>
+        </div>
+        <?php
+        if (!empty($insertMessage)) {
+            echo "<p>$insertMessage</p>";
+        }
+        ?>
+    </div>
+    <script>
+        function mySubmit(event) {
+            event.preventDefault();
+            let temp = localStorage.getItem("nTurni");
+            document.getElementById("turni").value = Math.floor(temp);
+            document.getElementById("formIscrviti").submit();
+        }
 
-        <input type="submit" value="Inscriviti">
-    </form>
+        document.getElementById("bottoneIscriviti").addEventListener("click", mySubmit);
 
-    <?php
-    if (!empty($insertMessage)) {
-        echo "<p>$insertMessage</p>";
-    }
-    ?>
+        function goAccedi() {
+            window.location.href = 'http://localhost:3000/server/Accedi.php'; //gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php'; //andrea
+        }
+        function goMenu() {
+            window.location.href = 'http://localhost:3000/menu.html'; //gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/menu.html'; //andrea
+        }
+        function showLeaderboard() {
+            window.location.href = 'http://localhost:3000/server/display_data.php'; //gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/display_data.php'; //andrea
+        }
+    </script>
+
 </body>
 
 </html>

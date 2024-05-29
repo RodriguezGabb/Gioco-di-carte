@@ -2,27 +2,71 @@ import Deck from "./deck.js";
 import Hand from "./hand.js";
 import carta from "./carta.js";
 import shop from "./shop.js";
-//buono/cattivo parte logica
-//Giocatore/avversario parte grafica
-
-//zona debug
-//document.getElementById(manoAvversario);
-document.getElementById("BottonePesca").addEventListener("click", avversarioPesca);
-document.getElementById("debug").addEventListener("click", debug);
-document.getElementById("Rimuovi").addEventListener("click", cancellamiplz);
-//da qui **
-function cancellamiplz() {//sta funzione non serve a nulla era per capire getId se funziona, spoiler no
-  for (let i = 0; i < 5; i++) {
-    giocatorePesca(mazzoBuono);
-  }
-}
-function debug() {
-  console.log(manoBuono);
-  console.log(manoBuono.carte.length);
-}
+//inizializzazioni
+//per mazzi e cimitero
+const mazzoBuono = new Deck();//creazione mazzo
+const mazzoCattivo = new Deck();
+const cimiteroBuono = new Deck();
+const cimiteroCattivo = new Deck();
+//per shop
+const shopx = new shop();
+const strValue = document.getElementById('tokenStr');
+const intValue = document.getElementById('tokenInt');
+const agiValue = document.getElementById('tokenAgi');
+//mana globale
+var manaCattivo = 5;
+var manaBuono = 5;
 //Fine turno
 const pulsFine = document.getElementById("pulsanteFineTurno");
 pulsFine.addEventListener("click", fineTurno);
+//mano
+const manoBuono = new Hand();
+const manoCattivo = new Hand();
+//per board
+const boardBuono = [];
+const boardCattivo = [];
+//per vittoria/sconfitta
+const registratiButton = document.getElementById('registrati');
+registratiButton.addEventListener("click", registratiButtonAction);
+const menu2Button = document.getElementById('menu1Button');
+menu2Button.addEventListener("click", menuButtonAction);
+const menu1Button = document.getElementById('menu2Button');
+menu1Button.addEventListener("click", menuButtonAction);
+const accediButton = document.getElementById('accedi');
+accediButton.addEventListener("click", accediButtonAction);
+const rigiocaButton = document.getElementById('rigioca');
+rigiocaButton.addEventListener("click", rigiocaButtonAction);
+//per pescare cliccando su mazzo,  meccanica deprecata
+//document.getElementById("mazzoGiocatore").addEventListener("click", giocatorePesca);
+
+inizioPartita();
+function inizioPartita() {
+  manaCattivo = 5;
+  manaBuono = 5;
+  mazzoBuono.svuota();
+  mazzoCattivo.svuota();
+  mazzoBuono.CreaDeckBuono();
+  mazzoCattivo.CreaDeckCattivo();
+  mazzoBuono.mescola();
+  mazzoCattivo.mescola();
+  aggiornaShop();//resetShop
+  for (let i = 0; i < 5; i++) {
+    if (mazzoBuono.carte.length != 0) {
+      giocatorePesca(mazzoBuono);
+    }
+    else {
+      mazzoBuono.controllo(cimiteroBuono);
+      giocatorePesca(mazzoBuono);
+    }
+    if (mazzoCattivo.carte.length != 0) {
+      avversarioPesca(mazzoCattivo);
+    }
+    else {
+      mazzoCattivo.controllo(cimiteroCattivo);
+      avversarioPesca(mazzoCattivo);
+    }
+  }
+}
 
 function fineTurno() {
   //rimposta a 5 il mana del giocatore e del avversario
@@ -41,7 +85,7 @@ function fineTurno() {
     cimiteroCattivo.carte.push(c);
 
   }
-  //rimupve le carte dalle mani
+  //rimuove le carte dalle mani
   while (manoBuono.carte.length != 0) {
     let c = manoBuono.rimuoviCarta(cimiteroBuono);
     document.getElementById(c.id).remove();
@@ -79,9 +123,7 @@ function fineTurno() {
   resetGoodArmour();//resetto armatura quando riè turno giocatore
 }
 
-//shop
-//palle shop
-const strValue = document.getElementById('tokenStr');
+//funzioni shop
 
 function updStrValue(str) {
   const valOra = parseInt(strValue.textContent);
@@ -89,10 +131,8 @@ function updStrValue(str) {
   strValue.textContent = newValue;
 }
 function resetStrValue() {
-  //strValue = 0;
   strValue.textContent = 0;
 }
-const intValue = document.getElementById('tokenInt');
 
 function updIntValue(int) {
   const valOra = parseInt(intValue.textContent);
@@ -100,10 +140,8 @@ function updIntValue(int) {
   intValue.textContent = newValue;
 }
 function resetIntValue() {
-  //intValue = 0;
   intValue.textContent = 0;
 }
-const agiValue = document.getElementById('tokenAgi');
 
 function updAgiValue(agi) {
   const valOra = parseInt(agiValue.textContent);
@@ -111,7 +149,6 @@ function updAgiValue(agi) {
   agiValue.textContent = newValue;
 }
 function resetAgiValue() {
-  //agiValue = 0;
   agiValue.textContent = 0;
 }
 function aggiornaShop() {
@@ -140,10 +177,10 @@ function aggiornaShop() {
   resetIntValue();
 }
 function creaCartaShop(card, id) {
-  var carta = document.getElementById(id);
+  let carta = document.getElementById(id);
+  let img = document.getElementById(id + "Img");
   carta.style.display = "block";
   carta.className = card.elemento + "Shop";//Class serve per lo stile
-  carta.innerHTML = card.nome;//cosa per debug
   card.id = id;
   //bottone compra
   var bottoneCompra = document.createElement("button");
@@ -151,8 +188,12 @@ function creaCartaShop(card, id) {
   bottoneCompra.setAttribute("id", "bottone" + id);
   bottoneCompra.innerHTML = "Compra";
   bottoneCompra.style.display = "block";
+  let path = 'images/versione_shop/' + card.immagine;
+  img.src = path;
+  carta.appendChild(img);
   carta.appendChild(bottoneCompra);
   //dobbiamo fare l'event listener
+
   bottoneCompra.addEventListener("click", function () {
     bottoneCompraAct(card, bottoneCompra.id);
   });
@@ -161,16 +202,19 @@ function bottoneCompraAct(card, idBottone) {//compra carta
   if (card.costoShop <= agiValue.textContent && card.elemento == "agi") {//se è agi e ho abbastanza punti nella sfera giusta
     shopToCimitero(card, idBottone);
     updAgiValue(-card.costoShop);//valore sfera viene ridotto
+    shopx.compraAgi();
     return;
   }
   else if (card.costoShop <= strValue.textContent && card.elemento == "str") {
     shopToCimitero(card, idBottone);
     updStrValue(-card.costoShop);
+    shopx.compraStr();
     return;
   }
   else if (card.costoShop <= intValue.textContent && card.elemento == "int") {
     shopToCimitero(card, idBottone);
     updIntValue(-card.costoShop);
+    shopx.compraInt();
     return;
   }
 }
@@ -181,9 +225,7 @@ function shopToCimitero(card, idBottone) {
   let carta = document.getElementById(card.id);
   card.id = card.nome + shopNumeroId;
   shopNumeroId++;
-  console.log(cimiteroBuono);
   cimiteroBuono.carte.push(card);
-  console.log(cimiteroBuono);
   carta.style.display = "none";
   updateCarteInCimi();
 }
@@ -246,40 +288,6 @@ function creaCartaDaNome(nomeCarta) {//possiamo aggiungere dove va messo grafica
   return c;
 }
 
-//mana
-var manaCattivo = 5;
-var manaBuono = 5;
-
-const mazzoBuono = new Deck();//creazione mazzo
-const mazzoCattivo = new Deck();
-const cimiteroBuono = new Deck();
-const cimiteroCattivo = new Deck();
-mazzoBuono.CreaDeckBuono();
-mazzoCattivo.CreaDeckCattivo();
-mazzoBuono.mescola();
-mazzoCattivo.mescola();
-const shopx = new shop();
-console.log("mazzo Cattivo:")
-console.log(mazzoCattivo.carte);
-
-console.log("mazzo buono:")
-console.log(mazzoBuono.carte);
-const manoBuono = new Hand();//creazione mano
-const manoCattivo = new Hand();
-const boardBuono = [];//servono per tenere gli oggetti carta da qualche parte quando sono in gioco.
-const boardCattivo = [];
-
-
-
-
-
-//Rivedere i vari getelementbyid perché si possono fare delle variabbili globali
-
-document.getElementById("mazzoGiocatore").addEventListener("click", giocatorePesca);
-
-//potremmo sistemare questo codice spostando tutte le funzioni con carte nel file giusto(hand o deck)!!!!!!!!!!!!!!!!!!!!!
-
-
 // Funzione che fa comparire il pulsante dentro le carte
 function carteOnClick(idBottone) {
   var button = document.getElementById(idBottone);
@@ -321,7 +329,7 @@ function bottoneOnClick(card, idBottone) {//Giocatore gioca
   }
   else if (card.tipo == "attacco") {
     let danno = updEvilArmour(-card.value);
-    updEvilLifeBar(-danno);
+    updEvilLifeBar(danno);
   }
   else if (card.tipo == "difesa") {
     let danno = updGoodArmour(card.value);
@@ -347,18 +355,19 @@ function giocatorePesca() {
   }
 }
 
-//Funzione di creazione della prima carta del mazzo
-function creaCartaGiocatore(card) {//card è un instanza della classe carta(è la carta logica da creare grafficamente)
-  var carta = document.createElement("img");
+//crea graficamente carta pescata del player
+function creaCartaGiocatore(card) {//card è un instanza della classe carta(è la carta logica da creare graficamente)
+  let carta = document.createElement("div");
+  let img = document.createElement("img");
   carta.className = card.elemento;//Class serve per lo stile
   let path = 'images/versione_normale/' + card.immagine;
-  carta.src = path;
+  img.src = path;
   carta.setAttribute("id", card.id);
-  carta.innerHTML = card.nome;//cosa per debug
-  var bottone = document.createElement("button");
+  let bottone = document.createElement("button");
   bottone.className = "bottoneGioca";
   bottone.setAttribute("id", "bottoneGiocaDi" + card.id);
   bottone.innerHTML = "Gioca";
+  carta.appendChild(img);
   carta.appendChild(bottone);
   bottone.style.display = "none";
   //event listener dei componenti
@@ -371,7 +380,7 @@ function creaCartaGiocatore(card) {//card è un instanza della classe carta(è l
   });
   return carta;
 }
-//Funzioni avversario
+//Funzioni per avversario
 function avversarioPesca() {
   /*-----------parte grafica-----------*/
   var manoAvversario = document.getElementById("manoAvversario");
@@ -384,17 +393,26 @@ function avversarioPesca() {
     manoAvversario.appendChild(nuovaCarta);
   }
 }
-/*test per vedere se ho capito il tuo codice*/
-function creaCartaAvversario(card) { //card è un instanza della classe carta(è la carta logica da creare grafficamente)
-  var carta = document.createElement("div");
-  carta.className = "carteManoAvversario";//te posso di che tanto le carte del avv sono di dorso quindi va bene cosi
+//crea graficamente carta pescata del avversario
+function creaCartaAvversario(card) {
+  var carta = document.createElement("img");
+  carta.className = "carteManoAvversario";
   carta.setAttribute("id", card.id);
-  carta.innerHTML = card.nome;//mette il nome della carta come testo
+  carta.innerHTML = card.nome;
+  let path = 'images/retro/retro' + decideRetro() + ".jpeg";
+  carta.src = path;
   return carta;
 }
+//sceglie una carta nella cartella retro da mettere come retro
+function decideRetro() {
+  return Math.floor(Math.random() * (8 - 0 + 1));
+}
+//gioca le carte decise da dumbplay
 function avversarioGioca(card) {
   var carta = document.getElementById(card.id);
   var boardAvversario = document.getElementById("boardAvversario");
+  let path = 'images/versione_normale/' + card.immagine;
+  carta.src = path;
   manaCattivo -= card.costo;
   carta.className = card.elemento;
 
@@ -404,7 +422,7 @@ function avversarioGioca(card) {
   }
   else if (card.tipo == "attacco") {
     let danno = updGoodArmour(-card.value);
-    updGoodLifeBar(-danno);
+    updGoodLifeBar(danno);
   }
   else if (card.tipo == "difesa") {
     let danno = updEvilArmour(card.value);
@@ -414,13 +432,9 @@ function avversarioGioca(card) {
   boardAvversario.appendChild(carta);
   boardCattivo.push(card);
 }
-
-
 //numero di carte rimanenti in cimitero
-// prendi elem
-const nCimA = document.getElementById('nCardCimitero');
-
 function updateCarteInCimi() {
+  let nCimA = document.getElementById('nCardCimitero');
   nCimA.textContent = cimiteroBuono.carte.length;
 }
 
@@ -462,16 +476,18 @@ function mydumbPlay(hand) {
   }
   return carteDaGiocare;
 }
-
-
-/*inizioPartita();
-function inizioPartita() {
-  manaCattivo = 5;
-  manaBuono = 5;
-  mazzoBuono.svuota();
-  mazzoCattivo.svuota();
-  mazzoBuono.CreaDeckBuono();
-  mazzoCattivo.CreaDeckCattivo();
-  mazzoBuono.mescola();
-  mazzoCattivo.mescola();
-}*/
+//bottoni per vittoria/sconfitta
+function registratiButtonAction() {
+  //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php';//andrea
+  window.location.href = 'http://localhost:3000/server/inscriversi.php';//gabriel
+}
+function menuButtonAction() {
+  window.location.href = 'menu.html';
+}
+function accediButtonAction() {
+  //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/accedi.php';//andrea
+  window.location.href = 'http://localhost:3000/server/accedi.php';//gabriel
+}
+function rigiocaButtonAction() {
+  location.reload();
+}

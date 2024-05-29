@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gioco di carte sulla scherma del 1500?</title>
+    <title>Gioco di carte sulla scherma italiana del sedicesimo secolo</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background: url('background.jpg') no-repeat center center fixed;
+            background: url('images/sfondo\ menu.png') no-repeat center center fixed;
             background-size: cover;
             height: 100vh;
             display: flex;
@@ -20,7 +20,7 @@
 
         .menu-title {
             font-size: 32px;
-            color: rgb(0, 0, 0);
+            color: white;
             text-align: center;
             margin-bottom: 30px;
         }
@@ -48,43 +48,26 @@
     </style>
     <script>
         function play() {
-            window.location.href = 'tavola.html';
+            window.location.href = 'http://localhost:3000/Tavola.html'//gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/Tavola.html';//andrea
         }
-
         function showLeaderboard() {
-            //window.location.href = 'game.html';
+            window.location.href = 'http://localhost:3000/server/display_data.php'//gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/display_data.php';//andrea
         }
-
         function showTutorial() {
-            window.location.href = 'tutorial.png';
+            window.location.href = 'http://localhost:3000/tutorial.html'//gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/tutorial.html';//andrea
         }
-        function inscriviti() {
-            window.location.href = 'http://localhost:3000/server/inscriversi.php';
-        }
-        function accedi() {
-            window.location.href = 'http://localhost:3000/server/accedi.php';
-        }
-
     </script>
 </head>
 
 <body>
-    <div class="menu-title">Gioco di carte sulla scherma del 1500?</div>
+    <div class="menu-title">Gioco di carte sulla scherma italiana del sedicesimo secolo</div>
     <div class="menu-buttons">
         <button class="menu-button" onclick="play()">Gioca</button>
         <button class="menu-button" onclick="showLeaderboard()">Classifica</button>
         <button class="menu-button" onclick="showTutorial()">Tutorial</button>
-        <table>
-            <tr>
-                <td>
-                    <button class="menu-button" onclick="inscriviti()">Inscriviti</button>
-                </td>
-                <td>
-                    <button class="menu-button" onclick="accedi()">Accedi</button>
-                </td>
-            </tr>
-        </table>
-
     </div>
 </body>
 

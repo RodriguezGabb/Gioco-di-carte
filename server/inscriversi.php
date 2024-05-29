@@ -44,26 +44,42 @@ function doppione($playerName)
 
 <head>
     <meta charset="UTF-8">
-    <title>Inserimento Dati</title>
+    <title>Inscriviti</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .container {
+            position: absolute;
+            top: 20%;
+            right: 40%;
+            text-align: center;
+            border: solid 1px black;
+            width: 25%;
+        }
+    </style>
 </head>
 
 <body>
-    <h2>Inscriviti!</h2>
-    <form name="formIscrviti" method="post" action="inscriversi.php" id="formIscrviti">
-        <input type="hidden" id="turni" name="turni" value="-1">
-        <label for="playerName">Nome Giocatore:</label>
-        <input type="text" id="playerName" name="playerName" required><br>
-        <label for="playerPassword">Password:</label>
-        <input type="Password" id="playerPassword" name="playerPassword" required><br><br>
+    <div class="container">
+        <h2>Inscriviti!</h2>
+        <form name="formIscrviti" method="post" action="inscriversi.php" id="formIscrviti">
+            <input type="hidden" id="turni" name="turni" value="-1">
+            <label for="playerName">Nome Giocatore:</label><br>
+            <input type="text" id="playerName" name="playerName" required><br>
+            <label for="playerPassword">Password:</label><br>
+            <input type="Password" id="playerPassword" name="playerPassword" required><br><br>
 
-        <input id="bottoneIscriviti" type="submit" value="Inscriviti">
-    </form>
+            <input id="bottoneIscriviti" type="submit" value="Inscriviti">
+        </form>
+    </div>
     <script>
         function mySubmit() {
             const form = document.getElementById("formIscrviti");
             form.addEventListener("click", function (event) { event.preventDefault() });
             let temp = localStorage.getItem("nTurni");
-            document.formIscrviti.turni.value = Math.floor(temp);//floor serve a rendere temp un intero.
+            document.getElementById("turni").value = Math.floor(temp);//floor serve a rendere temp un intero.
             temp = Math.floor(temp);
 
             alert(temp);

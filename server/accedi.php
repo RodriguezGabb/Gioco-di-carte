@@ -15,19 +15,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $playerPassword = $_POST['playerPassword'];
 
     if (check($playerName, $playerPassword)) {
-        $resultPerPlayer = pg_insert($db, "player", ["playername" => $playerName, "playerpassword" => $playerPassword]);
-        $resultPerClassifica = pg_insert($db, "classifica", ["playername" => $playerName, "turn" => $nTurni]);
-
+        $data = ["turn" => $nTurni];
+        $condition = ["playername" => $playerName];
+        $result = pg_update($db, "classifica", $data, $condition);
         if ($result) {
             $insertMessage .= "Dati inseriti nella tabella 'player' con successo!<br>";
         } else {
             $insertMessage .= "Errore nell'inserimento dei dati nella tabella 'player'.<br>";
         }
+    } else {
+        $insertMessage .= "Nome utente o password errati";
     }
 }
-if (!empty($insertMessage)) {
-    echo "<p>$insertMessage</p>";
-}
+
 function check($playerName, $playerPassword)
 {
     $querry = 'SELECT * FROM player';
@@ -46,29 +46,57 @@ function check($playerName, $playerPassword)
 
 <head>
     <meta charset="UTF-8">
-    <title>Inserimento Dati</title>
+    <title>Accedi</title>
     <script>
         var nTurni = localStorage.getItem("nTurni");
     </script>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .container {
+            position: absolute;
+            top: 20%;
+            right: 40%;
+            text-align: center;
+            border: solid 1px black;
+            width: 25%;
+        }
+    </style>
 </head>
 
 <body>
-    <h2>Accedi!</h2>
-    <form method="post" action="inscriversi.php" id="formAccedi">
-        <input type="hidden" id="turni" name="turni" value="-1">
-        <label for="playerName">Nome Giocatore:</label>
-        <input type="text" id="playerName" name="playerName" required><br>
-        <label for="playerPassword">Password:</label>
-        <input type="Password" id="playerPassword" name="playerPassword" required><br><br>
+    <div class="container">
+        <div id="divForm">
+            <h2>Accedi!</h2>
 
-        <input id="bottoneAccedi" type="submit" value="Accedi">
-    </form>
+            <form class="form" method="post" action="accedi.php" id="formAccedi">
+                <input type="hidden" id="turni" name="turni" value="-1">
+                <label for="playerName">Nome Giocatore:</label><br>
+                <input type="text" id="playerName" name="playerName" required><br>
+                <label for="playerPassword">Password:</label><br>
+                <input type="Password" id="playerPassword" name="playerPassword" required><br><br>
+
+                <input id="bottoneAccedi" type="submit" value="Accedi">
+            </form>
+        </div>
+        <div id="divPulsanti">
+            <table>
+                <tr>
+                    <td><button class="button" onclick="goMenu()">Menu</button></td>
+                    <td><button class="button" onclick="goIscriviti()"></button></td>
+                    <td><button class="button" onclick="showLeaderboard()"></button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <script>
         function mySubmit() {
             const form = document.getElementById("formAccedi");
             form.addEventListener("click", function (event) { event.preventDefault() });
             let temp = localStorage.getItem("nTurni");
-            document.formAccedi.turni.value = Math.floor(temp);//floor serve a rendere temp un intero.
+            document.getElementById("turni").value = Math.floor(temp);//floor serve a rendere temp un intero.
             temp = Math.floor(temp);
 
             alert(temp);
@@ -77,7 +105,24 @@ function check($playerName, $playerPassword)
         }
         const bottoneAccedi = document.getElementById("bottoneAccedi");
         bottoneAccedi.addEventListener("click", mySubmit);
+
+        function goIscriviti() {
+            window.location.href = 'http://localhost:3000/server/inscriversi.php'//gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php';//andrea
+        }
+        function goMenu() {
+            window.location.href = 'http://localhost:3000/menu.html'//gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/menu.html';//andrea
+        }
+        function showLeaderboard() {
+            window.location.href = 'http://localhost:3000/display_data.php'//gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/display_data.php';//andrea
+        }
     </script>
+    <?php if (!empty($insertMessage)) {
+        echo "<p>$insertMessage</p>";
+    }
+    ?>
 </body>
 
 </html>

@@ -1,0 +1,158 @@
+<!--Questo è un HTML temporaneo per creare il board game-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game</title>
+    <link rel="stylesheet" href="StyleTavola.css">
+    <style>
+        .mano {
+            position: absolute;
+            right: 35%;
+        }
+    </style>
+    <script src="main.js" type="module"></script>
+
+<body>
+    <!--Debug-->
+    <button id="BottonePesca">BottonePesca</button>
+    <button id="debug">debug</button>
+    <button id="Rimuovi">Rimuovi</button>
+
+
+    <!--lato avversario-->
+
+    <!-- Massiomo 5 carte in mano -->
+    </div>
+    <div class="contenitoreMazzoAvversario" id="contenitoreMazzoAvversario">
+        <!-- Funzione per dire che resta una carta sola? -->
+        <div class="mazzo" id="mazzoAvversario"><img src="images/retro.jpeg" alt="mazzo avversario"></div>
+        <div class="blocchetto"></div>
+        <div class="cimitero" id="cimiteroAvversario"><img src="images/retro.jpeg" alt="cimitero avversario"></div>
+        <table>
+            <tr>
+                <!-- Hp bar-->
+                <td class="LifeNumber" id="evilLifeNumber"></td>
+                <td class="hpBarAvversario" id="hpBarAvversario">
+                    <div class="fillEvilLife" id="fillEvilLife"></div>
+                </td>
+            </tr>
+            <tr>
+                <!-- mana bar-->
+                <td class="ManaNumber" id="evilManaNumber"></td>
+                <td class="manaBarAvversario" id="manaBarAvversario">
+                    <div class="fillEvilMana" id="fillEvilMana"></div>
+                </td>
+            </tr>
+            <tr>
+                <!-- armour bar-->
+                <td class="ArmourNumber" id="evilArmourNumber"></td>
+                <td class="armourBarAvversario" id="armourBarAvversario">
+                    <div class="fillEvilarmour" id="fillEvilarmour"></div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+        <div class="mano" id="manoAvversario"></div>
+    </div>
+
+    <table class="contenitoreCentrale">
+        <tr>
+            <td class="shop" rowspan="3"><!--Shop-->
+                <table>
+                    <tr>
+                        <td class="shopScritta">SHOP</td>
+                    </tr>
+                    <tr><!--prima riga dello shop (quelle fisse)-->
+                        <td class="shopZonaCarte">
+                            <div class="carteShop" id="cartaShop1"><img id="cartaShop1Img" src="images/retro.jpeg"
+                                    alt="cartaShop1"></div>
+                            <div class="carteShop" id="cartaShop2"><img id="cartaShop2Img" src="images/retro.jpeg"
+                                    alt="cartaShop2"></div>
+                            <div class="carteShop" id="cartaShop3"><img id="cartaShop3Img" src="images/retro.jpeg"
+                                    alt="cartaShop3"></div>
+                        </td>
+                    </tr>
+                    <tr><!--seconda riga dello shop (quelle random)-->
+                        <td class="shopZonaCarte">
+                            <div class="carteShop" id="cartaShop4"><img id="cartaShop4Img" src="images/retro.jpeg"
+                                    alt="cartaShop4"></div>
+                            <div class="carteShop" id="cartaShop5"><img id="cartaShop5Img" src="images/retro.jpeg"
+                                    alt="cartaShop5"></div>
+                        </td>
+                    </tr>
+                    <tr><!--Risorse per aquistare-->
+                        <td class="shopZonaRisorse">
+                            <div class="tokenStr" id="tokenStr">0</div>
+                            <div class="tokenInt" id="tokenInt">0</div>
+                            <div class="tokenAgi" id="tokenAgi">0</div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <!-- Board avversario -->
+            <td class="latoBoard" id="boardAvversario" colspan="2"></td>
+        </tr>
+        <tr><!-- Riga separatrice -->
+            <td class="contenitoreLineaCentrale">
+                <hr class="lineaCentrale">
+            </td> <!-- Linea centrale -->
+            <td class="contenitorePulsante" rowspan="3">
+                <button class="pulsanteFineTurno" id="pulsanteFineTurno">Fine Turno</button>
+            </td>
+            <!-- Pulsante fine turno -->
+        </tr>
+        <tr><!-- Board giocatore -->
+            <td class="latoBoard" colspan="2" id="boardGiocatore"></td>
+        </tr>
+    </table>
+
+
+    <div class="contenitoreMazzoGiocaotore" id="contenitoreMazzoGiocatore">
+        <div class="mano" id="manoGiocatore"></div>
+        <table>
+            <tr>
+                <!-- Hp bar-->
+                <td class="LifeNumber" id="goodLifeNumber">
+                </td>
+                <td class="hpBarGiocatore" id="hpBarGiocatore">
+                    <div class="fillGoodLife" id="fillGoodLife"></div>
+                </td>
+            </tr>
+            <tr>
+                <!-- mana bar-->
+                <td class="ManaNumber" id="goodManaNumber"></td>
+                <td class="manaBarGiocatore" id="manaBarGiocatore">
+                    <div class="fillGoodMana" id="fillGoodMana"></div>
+                </td>
+            </tr>
+            <tr>
+                <!-- armour bar-->
+                <td class="ArmourNumber" id="goodArmourNumber"></td>
+                <td class="armourBarGiocatore" id="armourBarGiocatore">
+                    <div class="fillGoodarmour" id="fillGoodarmour"></div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+        <div class="cimitero" id="cimiteroGiocatore"><img src="images/retro.jpeg" alt="mazzo giocatore">
+            <div class="nCardCimitero" id="nCardCimitero">0</div>
+        </div>
+        <div class="blocchetto"></div>
+        <div class="mazzo" id="mazzoGiocatore"><img src="images/retro.jpeg" alt="cimitero giocatore"></div>
+    </div>
+
+    <!-- Massiomo 5 carte in mano -->
+
+    <script src="energyManager.js"></script> <!-- se li metti prima crasha tutto-->
+    <script src="lifeManager.js"></script>
+</body>
+
+</html>

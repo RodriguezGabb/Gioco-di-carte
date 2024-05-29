@@ -113,7 +113,7 @@ function fineTurno() {
     }
   }
 
-  updateCarteInCimi();//numero carte in cimitero
+  updateCarteInCimi();
   aggiornaShop();//resetShop
   incrTurni();//counter di turni
   resetEvilArmour();//reset armatura avversario quando è il suo turno;
@@ -202,19 +202,19 @@ function bottoneCompraAct(card, idBottone) {//compra carta
   if (card.costoShop <= agiValue.textContent && card.elemento == "agi") {//se è agi e ho abbastanza punti nella sfera giusta
     shopToCimitero(card, idBottone);
     updAgiValue(-card.costoShop);//valore sfera viene ridotto
-    compraAgi();
+    shopx.compraAgi();
     return;
   }
   else if (card.costoShop <= strValue.textContent && card.elemento == "str") {
     shopToCimitero(card, idBottone);
     updStrValue(-card.costoShop);
-    compraStr();
+    shopx.compraStr();
     return;
   }
   else if (card.costoShop <= intValue.textContent && card.elemento == "int") {
     shopToCimitero(card, idBottone);
     updIntValue(-card.costoShop);
-    compraInt();
+    shopx.compraInt();
     return;
   }
 }
@@ -225,9 +225,7 @@ function shopToCimitero(card, idBottone) {
   let carta = document.getElementById(card.id);
   card.id = card.nome + shopNumeroId;
   shopNumeroId++;
-  console.log(cimiteroBuono);
   cimiteroBuono.carte.push(card);
-  console.log(cimiteroBuono);
   carta.style.display = "none";
   updateCarteInCimi();
 }
@@ -453,7 +451,7 @@ function mydumbPlay(hand) {
   var costoMax = manaCattivo;//costo della combinazione attuale
   for (let cartaIni = 0; cartaIni <= nCarte - 1; cartaIni++) {
     for (let pos = 0; pos <= nCarte - 1; pos++) {
-      var ciclo = (pos + cartaIni) % nCarte;//cicla per tutte le carte ma inizi da un altro punto es 2,3,0,1
+      var ciclo = (pos + cartaIni) % nCarte;//ti cicla per tutte le carte ma inizi da un altro punto es 2,3,0,1
       if (costi[ciclo] <= costoMax) {//se costa più di quanto hai non la puoi lanciare
         costoMax = costoMax - costi[ciclo];
         arrayTemp[ciclo] = true;//aggiorni l array e il costo rimanente
@@ -466,7 +464,7 @@ function mydumbPlay(hand) {
       }
     }
     costoMax = manaCattivo//quando vado a carta dopo resetto tutto
-    for (let i = 0; i < nCarte; i++) {//resetta l array
+    for (let i = 0; i < nCarte; i++) {//resetto anche l array
       arrayTemp[i] = false;
     }
   }
@@ -478,56 +476,21 @@ function mydumbPlay(hand) {
   }
   return carteDaGiocare;
 }
+var nTurni = 6;
 //bottoni per vittoria/sconfitta
 function registratiButtonAction() {
-  window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/test.php';//andrea
-  // //gabriel
-  inviaDataInscriversi();
+  localStorage.setItem("nTurni", nTurni);
+  //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php';//andrea
+  window.location.href = 'http://localhost:3000/server/inscriversi.php';//gabriel
 }
 function menuButtonAction() {
   window.location.href = 'menu.html';
 }
 function accediButtonAction() {
-  window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/accedi.php';//andrea
-  // //gabriel
-  inviaDataAccedi();
+  localStorage.setItem("nTurni", nTurni);
+  //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/accedi.php';//andrea
+  window.location.href = 'http://localhost:3000/server/accedi.php';//gabriel
 }
 function rigiocaButtonAction() {
   location.reload();
-}
-
-function inviaDataInscriversi() {
-  let nTurn = 5;
-  fetch('http://localhost:3000/Downloads/Gioco-di-carte-main/server/test.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ data: nTurn })
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-}
-function inviaDataAccedi() {
-  let nTurn = getTurni();
-  console.log(nTurn);
-  fetch('http://localhost:3000/Downloads/Gioco-di-carte-main/server/accedi.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ data: nTurn })
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    })
 }

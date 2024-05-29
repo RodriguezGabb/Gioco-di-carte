@@ -14,7 +14,7 @@ class carta {//id num serve per differenziare le carte dello stesso tipo con un 
     //forza
     //lv1
     CreaTaglio(idNum) {//valore off piu alto ma parata del avversario vale di piu?
-        this.generaCarta("taglio", "attacco", "str", 1, "taglio.png", 1, 3, idNum, 2);
+        this.generaCarta("taglio", "attacco", "str", 1, "taglio.png", 1, 300, idNum, 2);
     }
     CreaToccata(idNum) {
         this.generaCarta("Toccata", "penetrante", "str", 1, "toccata.png", 1, 3, idNum, 2);//no idea

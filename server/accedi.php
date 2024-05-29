@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
+
 // Connessione al database
 require 'db_connection.php';
 
@@ -14,28 +15,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $playerName = $_POST['playerName'];
     $playerPassword = $_POST['playerPassword'];
 
-    if (check($playerName, $playerPassword)) {
-        $data = ["turn" => $nTurni];
-        $condition = ["playername" => $playerName];
-        $result = pg_update($db, "classifica", $data, $condition);
+    if (check($playerName, $playerPassword, $db)) {
+        $result = pg_prepare($db, "update_classifica", 'UPDATE classifica SET turn = $1 WHERE playername = $2');
+        $result = pg_execute($db, "update_classifica", array($nTurni, $playerName));//contro sql injection
+        
         if ($result) {
-            $insertMessage .= "Dati inseriti nella tabella 'player' con successo!<br>";
+            $insertMessage .= "Dati aggiornati nella tabella 'classifica' con successo!<br>";
         } else {
-            $insertMessage .= "Errore nell'inserimento dei dati nella tabella 'player'.<br>";
+            $insertMessage .= "Errore nell'aggiornamento dei dati nella tabella 'classifica'.<br>";
         }
     } else {
-        $insertMessage .= "Nome utente o password errati";
+        $insertMessage .= "Nome utente o password errati.";
     }
 }
 
-function check($playerName, $playerPassword)
+function check($playerName, $playerPassword, $db)
 {
-    $querry = 'SELECT * FROM player';
-    $result = pg_query($querry);
-    while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-        if ($line['playername'] == $playerName && $line['playerpassword'] == $playerPassword) {
-            return true;
-        }
+    $query = 'SELECT * FROM player WHERE playername = $1 AND playerpassword = $2';
+    $result = pg_prepare($db, "check_user", $query);//contro sql injection
+    $result = pg_execute($db, "check_user", array($playerName, $playerPassword));
+    
+    if (pg_fetch_array($result, null, PGSQL_ASSOC)) {
+        return true;
     }
     return false;
 }
@@ -139,7 +140,7 @@ function check($playerName, $playerPassword)
                 <label for="playerName">Nome Giocatore:</label><br>
                 <input type="text" id="playerName" name="playerName" required><br>
                 <label for="playerPassword">Password:</label><br>
-                <input type="Password" id="playerPassword" name="playerPassword" required><br><br>
+                <input type="password" id="playerPassword" name="playerPassword" required><br><br>
 
                 <input id="bottoneAccedi" type="submit" value="Accedi">
             </form>
@@ -159,7 +160,7 @@ function check($playerName, $playerPassword)
             const form = document.getElementById("formAccedi");
             form.addEventListener("click", function (event) { event.preventDefault() });
             let temp = localStorage.getItem("nTurni");
-            document.getElementById("turni").value = Math.floor(temp);//floor serve a rendere temp un intero.
+            document.getElementById("turni").value = Math.floor(temp); //floor serve a rendere temp un intero.
             temp = Math.floor(temp);
 
             alert(temp);
@@ -170,22 +171,21 @@ function check($playerName, $playerPassword)
         bottoneAccedi.addEventListener("click", mySubmit);
 
         function goIscriviti() {
-            window.location.href = 'http://localhost:3000/server/inscriversi.php'//gabriel
-            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php';//andrea
+            window.location.href = 'http://localhost:3000/server/inscriversi.php'; //gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/inscriversi.php'; //andrea
         }
         function goMenu() {
-            window.location.href = 'http://localhost:3000/menu.html'//gabriel
-            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/menu.html';//andrea
+            window.location.href = 'http://localhost:3000/menu.html'; //gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/menu.html'; //andrea
         }
         function showLeaderboard() {
-            window.location.href = 'http://localhost:3000/server/display_data.php'//gabriel
-            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/display_data.php';//andrea
+            window.location.href = 'http://localhost:3000/server/display_data.php'; //gabriel
+            //window.location.href = 'http://localhost:3000/Downloads/Gioco-di-carte-main/server/display_data.php'; //andrea
         }
     </script>
     <?php if (!empty($insertMessage)) {
         echo "<p>$insertMessage</p>";
-    }
-    ?>
+    } ?>
 </body>
 
 </html>

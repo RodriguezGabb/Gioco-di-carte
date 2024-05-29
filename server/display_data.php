@@ -12,17 +12,33 @@ require 'db_connection.php';
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+            background: url('/../images/sfondo\ menu.png') no-repeat center center fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             margin: 0;
-            padding: 20px;
+            color: #333;
         }
 
-        h2 {/*modifica titolo*/
-            color: #555;
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
             border: 1px solid black;
             background-color: darkgrey;
+            padding: 10px;
+            border-radius: 5px;
         }
 
         table {
@@ -36,8 +52,8 @@ require 'db_connection.php';
         }
 
         th, td {
-            padding: 8px;
-            text-align: left;
+            padding: 12px;
+            text-align: center;
         }
 
         th {
@@ -55,22 +71,24 @@ require 'db_connection.php';
 </head>
 
 <body>
-    <h2>Classifica</h2>
-    <?php
-    $query = 'SELECT * FROM classifica ORDER BY "turn" ASC';
-    $result = pg_query($query);
-    echo "<table>\n";
-    echo "<tr><th>Username</th><th>Punteggio</th></tr>\n"; 
-    while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-        echo "\t<tr>\n";
-        foreach ($line as $col_value) {
-            echo "\t\t<td>$col_value</td>";
+    <div class="container">
+        <h2>Classifica</h2>
+        <?php
+        $query = 'SELECT * FROM classifica ORDER BY "turn" ASC';
+        $result = pg_query($query);
+        echo "<table>\n";
+        echo "<tr><th>Username</th><th>Punteggio</th></tr>\n"; 
+        while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+            echo "\t<tr>\n";
+            foreach ($line as $col_value) {
+                echo "\t\t<td>$col_value</td>";
+            }
+            echo "\t</tr>\n";
         }
-        echo "\t</tr>\n";
-    }
-    echo "</table>\n";
-    pg_free_result($result);
-    ?>
+        echo "</table>\n";
+        pg_free_result($result);
+        ?>
+    </div>
 </body>
 
 </html>

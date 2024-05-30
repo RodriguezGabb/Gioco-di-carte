@@ -2,8 +2,6 @@ body {
     height: 90%;
     width: 100%;
     background-image: url('images/sfondoGioco.png');
-    overflow-x: hidden;
-    overflow-y: hidden;
     transform: scale(0.96);
 }
 
